@@ -32,14 +32,15 @@ export default function Index() {
   // Detectar móvil al cargar la página
   useEffect(() => {
     const checkMobile = () => {
-      const mobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent,
-      ) || window.innerWidth <= 768;
+      const mobile =
+        /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent,
+        ) || window.innerWidth <= 768;
       setIsMobile(mobile);
     };
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const handleVideoLoad = useCallback(() => {
@@ -131,12 +132,15 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10" translate="no">
+    <div
+      className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10"
+      translate="no"
+    >
       {/* Hero Section */}
       <section className="relative overflow-hidden h-screen">
         <video
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-            videoLoaded ? 'opacity-100' : 'opacity-0'
+            videoLoaded ? "opacity-100" : "opacity-0"
           }`}
           src="https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2"
           autoPlay
@@ -150,7 +154,9 @@ export default function Index() {
         />
         {!videoLoaded && (
           <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
-            <div className="animate-pulse text-primary text-lg font-medium">Cargando...</div>
+            <div className="animate-pulse text-primary text-lg font-medium">
+              Cargando...
+            </div>
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
