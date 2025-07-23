@@ -13,6 +13,44 @@ import {
 } from "lucide-react";
 
 export default function Index() {
+  const handleShare = async () => {
+    const shareData = {
+      title: 'HUNTERX - Música Urbana Cristiana',
+      text: 'Descubre la música urbana con propósito de HUNTERX. Llevando esperanza y fe a las calles.',
+      url: window.location.href,
+    };
+
+    try {
+      // Detectar si el dispositivo soporta Web Share API (móviles)
+      if (navigator.share && /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        await navigator.share(shareData);
+      } else {
+        // Para PC usar la API de Clipboard o fallback
+        if (navigator.clipboard) {
+          await navigator.clipboard.writeText(window.location.href);
+          alert('¡Enlace copiado al portapapeles! Compártelo donde quieras.');
+        } else {
+          // Fallback para navegadores más antiguos
+          const textArea = document.createElement('textarea');
+          textArea.value = window.location.href;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          alert('¡Enlace copiado al portapapeles! Compártelo donde quieras.');
+        }
+      }
+    } catch (error) {
+      // Si falla, copiar al portapapeles como fallback
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        alert('¡Enlace copiado al portapapeles!');
+      } catch (err) {
+        console.log('Error al compartir:', err);
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10">
       {/* Hero Section */}
