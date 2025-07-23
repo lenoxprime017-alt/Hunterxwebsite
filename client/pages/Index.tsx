@@ -59,14 +59,14 @@ export default function Index() {
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {/* Main Featured Video */}
+            {/* Main Featured Video - Latest Song */}
             <Card className="md:col-span-2 overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
               <CardContent className="p-0">
                 <div className="relative aspect-video">
                   <iframe
                     className="w-full h-full rounded-lg"
-                    src="https://www.youtube.com/embed/tsPldB4iXpE"
-                    title="HUNTERX - Video Principal"
+                    src="https://www.youtube.com/embed/4kHW5ZkYHIQ"
+                    title="HUNTERX - Última Canción"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
@@ -114,7 +114,7 @@ export default function Index() {
                 <div className="relative aspect-video">
                   <iframe
                     className="w-full h-full rounded-lg"
-                    src="https://www.youtube.com/embed/4kHW5ZkYHIQ"
+                    src="https://www.youtube.com/embed/tsPldB4iXpE"
                     title="HUNTERX - Video 4"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
