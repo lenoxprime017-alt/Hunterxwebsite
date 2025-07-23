@@ -3,7 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello world project</title>
+
+    <!-- Evitar que Samsung Internet y otros navegadores cambien colores automáticamente -->
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#f59e0b" />
+    <meta
+      name="theme-color"
+      content="#f59e0b"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#fbbf24"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    <!-- Samsung Internet específico -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <!-- Evitar que el navegador fuerce modo oscuro -->
+    <meta name="supported-color-schemes" content="dark light" />
+
+    <title>HUNTERX - Música Urbana Cristiana</title>
   </head>
 
   <body>
