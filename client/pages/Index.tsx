@@ -68,6 +68,40 @@ export default function Index() {
     if (isMobile && "share" in navigator) {
       try {
         await navigator.share(shareData);
+
+        // Prevenir efectos de blur/filtros después de compartir
+        const preventBlur = () => {
+          document.body.style.filter = 'none';
+          document.body.style.webkitFilter = 'none';
+          document.documentElement.style.filter = 'none';
+          document.documentElement.style.webkitFilter = 'none';
+        };
+
+        // Aplicar inmediatamente y después de eventos
+        preventBlur();
+        setTimeout(preventBlur, 100);
+        setTimeout(preventBlur, 500);
+
+        // Event listeners para cuando la página recupera el foco
+        const handleVisibilityChange = () => {
+          if (!document.hidden) {
+            preventBlur();
+          }
+        };
+
+        const handleFocus = () => {
+          preventBlur();
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        window.addEventListener('focus', handleFocus);
+
+        // Limpiar listeners después de 5 segundos
+        setTimeout(() => {
+          document.removeEventListener('visibilitychange', handleVisibilityChange);
+          window.removeEventListener('focus', handleFocus);
+        }, 5000);
+
         return; // Salir exitosamente, no abrir modal
       } catch (error) {
         // Si el usuario cancela o hay error, continuar para abrir el modal
