@@ -546,22 +546,20 @@ export default function Index() {
             </Button>
 
             <Dialog open={isShareModalOpen} onOpenChange={setIsShareModalOpen}>
-              <DialogTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full justify-start h-16 group hover:bg-primary hover:text-primary-foreground"
-                  onClick={handleShare}
-                >
-                  <Share2 className="mr-4 h-6 w-6 group-hover:text-current" />
-                  <div className="flex-1 text-left">
-                    <div className="font-semibold">Compartir</div>
-                    <div className="text-sm opacity-70">
-                      Comparte mi música con otros
-                    </div>
+              <Button
+                variant="outline"
+                size="lg"
+                className="w-full justify-start h-16 group hover:bg-primary hover:text-primary-foreground"
+                onClick={handleShare}
+              >
+                <Share2 className="mr-4 h-6 w-6 group-hover:text-current" />
+                <div className="flex-1 text-left">
+                  <div className="font-semibold">Compartir</div>
+                  <div className="text-sm opacity-70">
+                    Comparte mi música con otros
                   </div>
-                </Button>
-              </DialogTrigger>
+                </div>
+              </Button>
               <DialogContent className="sm:max-w-[460px] max-w-[95vw] bg-gradient-to-br from-card/95 via-background/95 to-card/95 backdrop-blur-xl border border-border/30 shadow-3xl rounded-2xl">
                 {/* Efectos de fondo decorativos */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 rounded-2xl blur-sm opacity-75"></div>
