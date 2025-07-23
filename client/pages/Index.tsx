@@ -607,7 +607,7 @@ export default function Index() {
                       <Button
                         variant="outline"
                         onClick={() => shareToSocial("twitter")}
-                        className="flex items-center justify-center space-x-3 h-14 border-2 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200"
+                        className="flex items-center justify-center space-x-2 sm:space-x-3 h-12 sm:h-14 border-2 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200"
                       >
                         <svg
                           className="w-6 h-6"
