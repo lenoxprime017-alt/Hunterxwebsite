@@ -170,11 +170,7 @@ export default function Index() {
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] filter brightness-90 contrast-110 saturate-110"
-                      style={{
-                        filter: 'brightness(0.85) contrast(1.1) saturate(1.1) hue-rotate(5deg)',
-                        mixBlendMode: 'multiply'
-                      }}
+                      className="w-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                     />
                   </div>
