@@ -178,151 +178,115 @@ export default function Index() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
-            {/* Instagram Post 1 */}
+            {/* Video 1 */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-primary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
-                  <div className="relative aspect-square overflow-hidden bg-background rounded-xl">
-                    <iframe
-                      src="https://www.instagram.com/p/DL5CtHzt0Zd/embed/"
-                      width="400"
-                      height="480"
-                      frameBorder="0"
-                      scrolling="no"
-                      allowTransparency
-                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
-                      loading="lazy"
-                      style={{
-                        transform: "scale(1.1) translateY(10px)",
-                        transformOrigin: "center center"
-                      }}
-                    />
+                  <div className="relative aspect-square overflow-hidden bg-black rounded-xl">
+                    <video
+                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.05]"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      poster="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop&crop=center"
+                    >
+                      <source src="https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2" type="video/mp4" />
+                    </video>
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Instagram Post 2 */}
+            {/* Image 1 */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-orange-500 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-secondary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
                   <div className="relative aspect-square overflow-hidden bg-background rounded-xl">
-                    <iframe
-                      src="https://www.instagram.com/p/DL5yywlOrvk/embed/"
-                      width="400"
-                      height="480"
-                      frameBorder="0"
-                      scrolling="no"
-                      allowTransparency
-                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
+                    <img
+                      src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop&crop=center"
+                      alt="HUNTERX Music"
+                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.05]"
                       loading="lazy"
-                      style={{
-                        transform: "scale(1.1) translateY(10px)",
-                        transformOrigin: "center center"
-                      }}
                     />
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Instagram Post 3 */}
+            {/* Video 2 */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-accent/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
-                  <div className="relative aspect-square overflow-hidden bg-background rounded-xl">
-                    <iframe
-                      src="https://www.instagram.com/p/DCzzvj0vzTv/embed/"
-                      width="400"
-                      height="480"
-                      frameBorder="0"
-                      scrolling="no"
-                      allowTransparency
-                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
-                      loading="lazy"
-                      style={{
-                        transform: "scale(1.1) translateY(10px)",
-                        transformOrigin: "center center"
-                      }}
-                    />
+                  <div className="relative aspect-square overflow-hidden bg-black rounded-xl">
+                    <video
+                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.05]"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      poster="https://images.unsplash.com/photo-1571974599782-87624638275b?w=600&h=600&fit=crop&crop=center"
+                    >
+                      <source src="https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2" type="video/mp4" />
+                    </video>
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Instagram Post 4 */}
+            {/* Image 2 */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-orange-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-primary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
                   <div className="relative aspect-square overflow-hidden bg-background rounded-xl">
-                    <iframe
-                      src="https://www.instagram.com/p/DMNv9T8tjAC/embed/"
-                      width="400"
-                      height="480"
-                      frameBorder="0"
-                      scrolling="no"
-                      allowTransparency
-                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
+                    <img
+                      src="https://images.unsplash.com/photo-1571974599782-87624638275b?w=600&h=600&fit=crop&crop=center"
+                      alt="HUNTERX Performance"
+                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.05]"
                       loading="lazy"
-                      style={{
-                        transform: "scale(1.1) translateY(10px)",
-                        transformOrigin: "center center"
-                      }}
                     />
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Instagram Post 5 */}
+            {/* Image 3 */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-secondary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
                   <div className="relative aspect-square overflow-hidden bg-background rounded-xl">
-                    <iframe
-                      src="https://www.instagram.com/p/DMGnYA-PnYD/embed/"
-                      width="400"
-                      height="480"
-                      frameBorder="0"
-                      scrolling="no"
-                      allowTransparency
-                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
+                    <img
+                      src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop&crop=center"
+                      alt="HUNTERX Studio"
+                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.05]"
                       loading="lazy"
-                      style={{
-                        transform: "scale(1.1) translateY(10px)",
-                        transformOrigin: "center center"
-                      }}
                     />
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Instagram Post 6 */}
+            {/* Video 3 */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 via-purple-500 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-accent/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
-                  <div className="relative aspect-square overflow-hidden bg-background rounded-xl">
-                    <iframe
-                      src="https://www.instagram.com/p/DMBdwi4OLaR/embed/"
-                      width="400"
-                      height="480"
-                      frameBorder="0"
-                      scrolling="no"
-                      allowTransparency
-                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
-                      loading="lazy"
-                      style={{
-                        transform: "scale(1.1) translateY(10px)",
-                        transformOrigin: "center center"
-                      }}
-                    />
+                  <div className="relative aspect-square overflow-hidden bg-black rounded-xl">
+                    <video
+                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.05]"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      poster="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop&crop=center"
+                    >
+                      <source src="https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2" type="video/mp4" />
+                    </video>
                   </div>
                 </CardContent>
               </Card>
