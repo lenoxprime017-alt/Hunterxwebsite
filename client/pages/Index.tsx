@@ -178,7 +178,7 @@ export default function Index() {
 
           <div className="max-w-2xl mx-auto space-y-4">
             <Button variant="outline" size="lg" className="w-full justify-start h-16 group hover:bg-primary hover:text-primary-foreground">
-              <Spotify className="mr-4 h-6 w-6 text-green-500 group-hover:text-current" />
+              <Music2 className="mr-4 h-6 w-6 text-green-500 group-hover:text-current" />
               <div className="flex-1 text-left">
                 <div className="font-semibold">Spotify</div>
                 <div className="text-sm opacity-70">Escucha mi música completa</div>
