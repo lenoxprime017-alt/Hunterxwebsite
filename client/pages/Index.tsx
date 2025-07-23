@@ -17,39 +17,45 @@ export default function Index() {
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 opacity-50" />
-        <div className="relative container mx-auto px-4 py-20 lg:py-32">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          src="https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2"
+          autoPlay
+          loop
+          muted={true}
+          playsInline
+          volume={0}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40" />
+        <div className="relative container mx-auto px-4 py-16 sm:py-20 lg:py-32">
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
             <div className="flex-1 text-center lg:text-left">
               <Badge variant="secondary" className="mb-4 text-sm font-semibold">
                 Música Urbana Cristiana
               </Badge>
-              <h1 className="text-5xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent leading-tight">
                 HUNTERX
               </h1>
-              <p className="text-xl lg:text-2xl text-muted-foreground mb-8 max-w-lg">
+              <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-6 sm:mb-8 max-w-lg leading-relaxed">
                 Música urbana con propósito. Llevando esperanza y fe a las
                 calles través de letras que transforman vidas.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button size="lg" className="group">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  className="group w-full sm:w-auto h-12 sm:h-auto text-base sm:text-lg"
+                >
                   <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                   Escuchar Ahora
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full sm:w-auto h-12 sm:h-auto text-base sm:text-lg"
+                >
                   <Heart className="mr-2 h-5 w-5" />
                   Seguir
                 </Button>
-              </div>
-            </div>
-            <div className="flex-1 max-w-md">
-              <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-primary to-secondary rounded-full opacity-30 blur-xl animate-pulse" />
-                <div className="relative bg-card border-2 border-primary/30 rounded-full aspect-square flex items-center justify-center">
-                  <div className="w-3/4 h-3/4 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
-                    <Music className="w-16 h-16 text-primary-foreground" />
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -57,20 +63,20 @@ export default function Index() {
       </section>
 
       {/* Featured Video Section */}
-      <section className="py-16 lg:py-24">
+      <section className="py-12 sm:py-16 lg:py-24">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-5xl font-bold mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-3 sm:mb-4 leading-tight">
               Últimos Videos
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto px-4 sm:px-0">
               Descubre la música que está impactando vidas y llevando esperanza
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid gap-6 sm:gap-8 max-w-6xl mx-auto">
             {/* Main Featured Video - Latest Song */}
-            <Card className="md:col-span-2 overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+            <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
               <CardContent className="p-0">
                 <div className="relative aspect-video">
                   <iframe
@@ -85,75 +91,74 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            {/* Secondary Videos */}
-            <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
-              <CardContent className="p-0">
-                <div className="relative aspect-video">
-                  <iframe
-                    className="w-full h-full rounded-lg"
-                    src="https://www.youtube.com/embed/JTwL53RpQls"
-                    title="HUNTERX - Video 2"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              </CardContent>
-            </Card>
+            {/* Secondary Videos Grid */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
+              <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+                <CardContent className="p-0">
+                  <div className="relative aspect-video">
+                    <iframe
+                      className="w-full h-full rounded-lg"
+                      src="https://www.youtube.com/embed/JTwL53RpQls"
+                      title="HUNTERX - Video 2"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                </CardContent>
+              </Card>
 
-            <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
-              <CardContent className="p-0">
-                <div className="relative aspect-video">
-                  <iframe
-                    className="w-full h-full rounded-lg"
-                    src="https://www.youtube.com/embed/BzivzcIRpOM"
-                    title="HUNTERX - Video 3"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+              <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+                <CardContent className="p-0">
+                  <div className="relative aspect-video">
+                    <iframe
+                      className="w-full h-full rounded-lg"
+                      src="https://www.youtube.com/embed/BzivzcIRpOM"
+                      title="HUNTERX - Video 3"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                </CardContent>
+              </Card>
 
-          {/* Fourth Video - Additional Row */}
-          <div className="mt-8 max-w-3xl mx-auto">
-            <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
-              <CardContent className="p-0">
-                <div className="relative aspect-video">
-                  <iframe
-                    className="w-full h-full rounded-lg"
-                    src="https://www.youtube.com/embed/tsPldB4iXpE"
-                    title="HUNTERX - Video 4"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              </CardContent>
-            </Card>
+              <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300 sm:col-span-2 lg:col-span-1">
+                <CardContent className="p-0">
+                  <div className="relative aspect-video">
+                    <iframe
+                      className="w-full h-full rounded-lg"
+                      src="https://www.youtube.com/embed/tsPldB4iXpE"
+                      title="HUNTERX - Video 4"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Instagram Posts Section */}
-      <section className="py-20 lg:py-32 relative overflow-hidden">
+      <section className="py-16 sm:py-20 lg:py-32 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card/50" />
         <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-secondary/5" />
 
         <div className="container mx-auto px-4 relative">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 sm:mb-16">
             <div className="inline-flex items-center gap-2 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
-                <Instagram className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                <Instagram className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <h2 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 bg-clip-text text-transparent">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 bg-clip-text text-transparent">
                 Instagram
               </h2>
             </div>
-            <p className="text-muted-foreground text-xl max-w-3xl mx-auto mb-8">
+            <p className="text-muted-foreground text-lg sm:text-xl max-w-3xl mx-auto mb-6 sm:mb-8 px-4 sm:px-0">
               Sígueme para contenido exclusivo, detrás de cámaras y las últimas
               noticias
             </p>
@@ -172,7 +177,7 @@ export default function Index() {
             </Button>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
             {/* Instagram Post 1 */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
