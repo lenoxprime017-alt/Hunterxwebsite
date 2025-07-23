@@ -357,28 +357,28 @@ export default function Index() {
       </section>
 
       {/* Links Section */}
-      <section className="py-16 lg:py-24">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-5xl font-bold mb-4">
+      <section className="py-20 sm:py-24 lg:py-32">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16 sm:mb-20">
+            <h2 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold mb-6 sm:mb-8 tracking-tight">
               Conecta Conmigo
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-xl sm:text-2xl lg:text-3xl max-w-4xl mx-auto px-4 sm:px-0 leading-relaxed">
               Sígueme en todas las plataformas y mantente al día con mi música
             </p>
           </div>
 
-          <div className="max-w-2xl mx-auto space-y-4">
+          <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
             <Button
               variant="outline"
               size="lg"
-              className="w-full justify-start h-16 group hover:bg-green-600 hover:text-white"
+              className="w-full justify-start h-20 sm:h-24 group hover:bg-green-600 hover:text-white transition-all duration-300 border-2 hover:border-green-600 hover:shadow-xl"
               onClick={() => alert('Busca "HUNTERX" en Spotify')}
             >
-              <Music2 className="mr-4 h-6 w-6 text-green-500 group-hover:text-current" />
+              <Music2 className="mr-6 h-8 w-8 sm:h-10 sm:w-10 text-green-500 group-hover:text-current transition-colors" />
               <div className="flex-1 text-left">
-                <div className="font-semibold">Spotify</div>
-                <div className="text-sm opacity-70">
+                <div className="font-bold text-lg sm:text-xl lg:text-2xl">Spotify</div>
+                <div className="text-base sm:text-lg opacity-70">
                   Escucha mi música completa
                 </div>
               </div>
@@ -387,13 +387,13 @@ export default function Index() {
             <Button
               variant="outline"
               size="lg"
-              className="w-full justify-start h-16 group hover:bg-gray-600 hover:text-white"
+              className="w-full justify-start h-20 sm:h-24 group hover:bg-gray-600 hover:text-white transition-all duration-300 border-2 hover:border-gray-600 hover:shadow-xl"
               onClick={() => alert('Busca "HUNTERX" en Apple Music')}
             >
-              <Headphones className="mr-4 h-6 w-6 text-gray-500 group-hover:text-current" />
+              <Headphones className="mr-6 h-8 w-8 sm:h-10 sm:w-10 text-gray-500 group-hover:text-current transition-colors" />
               <div className="flex-1 text-left">
-                <div className="font-semibold">Apple Music</div>
-                <div className="text-sm opacity-70">
+                <div className="font-bold text-lg sm:text-xl lg:text-2xl">Apple Music</div>
+                <div className="text-base sm:text-lg opacity-70">
                   Disponible en Apple Music
                 </div>
               </div>
@@ -402,15 +402,15 @@ export default function Index() {
             <Button
               variant="outline"
               size="lg"
-              className="w-full justify-start h-16 group hover:bg-red-600 hover:text-white"
+              className="w-full justify-start h-20 sm:h-24 group hover:bg-red-600 hover:text-white transition-all duration-300 border-2 hover:border-red-600 hover:shadow-xl"
               onClick={() =>
                 window.open("https://www.youtube.com/@EHUNTERX", "_blank")
               }
             >
-              <Youtube className="mr-4 h-6 w-6 text-red-500 group-hover:text-current" />
+              <Youtube className="mr-6 h-8 w-8 sm:h-10 sm:w-10 text-red-500 group-hover:text-current transition-colors" />
               <div className="flex-1 text-left">
-                <div className="font-semibold">YouTube - @EHUNTERX</div>
-                <div className="text-sm opacity-70">
+                <div className="font-bold text-lg sm:text-xl lg:text-2xl">YouTube - @EHUNTERX</div>
+                <div className="text-base sm:text-lg opacity-70">
                   Videos y contenido exclusivo
                 </div>
               </div>
@@ -419,7 +419,7 @@ export default function Index() {
             <Button
               variant="outline"
               size="lg"
-              className="w-full justify-start h-16 group hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:text-white"
+              className="w-full justify-start h-20 sm:h-24 group hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:text-white transition-all duration-300 border-2 hover:border-pink-500 hover:shadow-xl"
               onClick={() =>
                 window.open(
                   "https://www.instagram.com/hunterxoficial/",
@@ -427,10 +427,10 @@ export default function Index() {
                 )
               }
             >
-              <Instagram className="mr-4 h-6 w-6 text-pink-500 group-hover:text-current" />
+              <Instagram className="mr-6 h-8 w-8 sm:h-10 sm:w-10 text-pink-500 group-hover:text-current transition-colors" />
               <div className="flex-1 text-left">
-                <div className="font-semibold">Instagram - @hunterxoficial</div>
-                <div className="text-sm opacity-70">
+                <div className="font-bold text-lg sm:text-xl lg:text-2xl">Instagram - @hunterxoficial</div>
+                <div className="text-base sm:text-lg opacity-70">
                   Detrás de cámaras y más
                 </div>
               </div>
@@ -439,12 +439,12 @@ export default function Index() {
             <Button
               variant="outline"
               size="lg"
-              className="w-full justify-start h-16 group hover:bg-primary hover:text-primary-foreground"
+              className="w-full justify-start h-20 sm:h-24 group hover:bg-primary hover:text-primary-foreground transition-all duration-300 border-2 hover:border-primary hover:shadow-xl"
             >
-              <Share2 className="mr-4 h-6 w-6 group-hover:text-current" />
+              <Share2 className="mr-6 h-8 w-8 sm:h-10 sm:w-10 group-hover:text-current transition-colors" />
               <div className="flex-1 text-left">
-                <div className="font-semibold">Compartir</div>
-                <div className="text-sm opacity-70">
+                <div className="font-bold text-lg sm:text-xl lg:text-2xl">Compartir</div>
+                <div className="text-base sm:text-lg opacity-70">
                   Comparte mi música con otros
                 </div>
               </div>
