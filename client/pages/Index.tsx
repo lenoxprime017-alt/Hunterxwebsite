@@ -110,7 +110,6 @@ export default function Index() {
           loop
           muted={true}
           playsInline
-          volume={0}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
         <div className="relative h-full flex items-center">
