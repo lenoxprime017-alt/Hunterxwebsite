@@ -186,7 +186,7 @@ export default function Index() {
             </Button>
 
             <Button variant="outline" size="lg" className="w-full justify-start h-16 group hover:bg-primary hover:text-primary-foreground">
-              <Apple className="mr-4 h-6 w-6 text-gray-500 group-hover:text-current" />
+              <Headphones className="mr-4 h-6 w-6 text-gray-500 group-hover:text-current" />
               <div className="flex-1 text-left">
                 <div className="font-semibold">Apple Music</div>
                 <div className="text-sm opacity-70">Disponible en Apple Music</div>
