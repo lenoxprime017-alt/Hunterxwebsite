@@ -68,6 +68,43 @@ export default function Index() {
     if (isMobile && "share" in navigator) {
       try {
         await navigator.share(shareData);
+
+        // Prevenir efectos de blur/filtros después de compartir
+        const preventBlur = () => {
+          document.body.style.filter = "none";
+          document.body.style.webkitFilter = "none";
+          document.documentElement.style.filter = "none";
+          document.documentElement.style.webkitFilter = "none";
+        };
+
+        // Aplicar inmediatamente y después de eventos
+        preventBlur();
+        setTimeout(preventBlur, 100);
+        setTimeout(preventBlur, 500);
+
+        // Event listeners para cuando la página recupera el foco
+        const handleVisibilityChange = () => {
+          if (!document.hidden) {
+            preventBlur();
+          }
+        };
+
+        const handleFocus = () => {
+          preventBlur();
+        };
+
+        document.addEventListener("visibilitychange", handleVisibilityChange);
+        window.addEventListener("focus", handleFocus);
+
+        // Limpiar listeners después de 5 segundos
+        setTimeout(() => {
+          document.removeEventListener(
+            "visibilitychange",
+            handleVisibilityChange,
+          );
+          window.removeEventListener("focus", handleFocus);
+        }, 5000);
+
         return; // Salir exitosamente, no abrir modal
       } catch (error) {
         // Si el usuario cancela o hay error, continuar para abrir el modal
@@ -487,14 +524,14 @@ export default function Index() {
 
           {/* Call to Action */}
           <div className="text-center mt-20 sm:mt-24">
-            <div className="inline-flex items-center gap-6 bg-gradient-to-r from-card/80 to-card/60 backdrop-blur-sm border border-border/50 rounded-full px-10 py-6 shadow-xl">
-              <div className="flex -space-x-3">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full border-3 border-background"></div>
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-orange-500 rounded-full border-3 border-background"></div>
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-orange-500 to-pink-500 rounded-full border-3 border-background"></div>
+            <div className="inline-flex items-center gap-4 sm:gap-6 bg-gradient-to-r from-card/80 to-card/60 backdrop-blur-sm border border-border/50 rounded-full px-6 sm:px-10 py-4 sm:py-6 shadow-xl">
+              <div className="flex -space-x-2 sm:-space-x-3">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full border-4 border-background shadow-lg"></div>
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-purple-500 to-orange-500 rounded-full border-4 border-background shadow-lg"></div>
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-orange-500 to-pink-500 rounded-full border-4 border-background shadow-lg"></div>
               </div>
-              <p className="text-muted-foreground text-lg sm:text-xl">
-                <span className="text-foreground font-semibold text-xl sm:text-2xl">
+              <p className="text-muted-foreground text-base sm:text-lg lg:text-xl">
+                <span className="text-foreground font-semibold text-lg sm:text-xl lg:text-2xl">
                   Miles de seguidores
                 </span>{" "}
                 ya forman parte de la comunidad
