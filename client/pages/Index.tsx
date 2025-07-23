@@ -675,7 +675,9 @@ export default function Index() {
                         <Button
                           variant="outline"
                           onClick={() => shareToSocial("twitter")}
-                          className="group flex items-center justify-center gap-2 h-12 bg-card/50 border-border/50 backdrop-blur-sm hover:bg-blue-500/10 hover:border-blue-500/50 hover:text-blue-400 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+                          className={`group flex items-center justify-center gap-2 h-12 bg-card/50 border-border/50 hover:bg-blue-500/10 hover:border-blue-500/50 hover:text-blue-400 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg ${
+                            !isMobile ? "backdrop-blur-sm" : ""
+                          }`}
                         >
                           <X className="w-4 h-4 group-hover:scale-110 transition-transform" />
                           <span className="font-medium text-sm">Twitter</span>
