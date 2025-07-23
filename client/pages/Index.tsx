@@ -50,16 +50,7 @@ export default function Index() {
                 </Button>
               </div>
             </div>
-            <div className="flex-1 max-w-xs">
-              <div className="relative ml-auto mr-8">
-                <div className="absolute -inset-2 bg-gradient-to-r from-primary to-secondary rounded-full opacity-30 blur-lg animate-pulse" />
-                <div className="relative border-4 border-primary/40 rounded-full aspect-square flex items-center justify-center w-32 h-32 bg-black/20 backdrop-blur-sm">
-                  <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
-                    <Music className="w-6 h-6 text-primary-foreground" />
-                  </div>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </section>
