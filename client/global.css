@@ -129,9 +129,52 @@
 }
 
 @layer utilities {
-  /* Smooth scrolling for better UX */
+  /* Optimizaciones de rendimiento para móviles */
   html {
     scroll-behavior: smooth;
+    /* Forzar aceleración por hardware */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    /* Optimizar el rendering */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  /* Acelerar animaciones y transiciones */
+  * {
+    /* Promover capas de composición cuando hay transformaciones */
+    will-change: auto;
+  }
+
+  /* Optimizar elementos animados */
+  .group:hover,
+  [class*="hover:"],
+  [class*="group-hover:"] {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  /* Optimizar imágenes y videos para móviles */
+  img, video {
+    /* Mejorar calidad de interpolación */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    /* Acelerar decodificación */
+    content-visibility: auto;
+  }
+
+  /* Optimizar iframes */
+  iframe {
+    /* Acelerar rendering */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    /* Mejorar scroll dentro de iframe */
+    -webkit-overflow-scrolling: touch;
+    /* Acelerar contenido */
+    content-visibility: auto;
+    contain-intrinsic-size: 560px 315px;
   }
 
   /* Instagram container styling */
@@ -154,6 +197,22 @@
     border: none !important;
     filter: brightness(1.05) contrast(1.02) saturate(1.05);
     transition: all 0.3s ease;
+    /* Optimizar para móviles */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* Optimizar YouTube iframes */
+  iframe[src*="youtube.com"],
+  iframe[src*="youtu.be"] {
+    /* Acelerar rendering */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
+    /* Mejorar loading */
+    content-visibility: auto;
+    contain-intrinsic-size: 560px 315px;
   }
 
   /* Better mobile touch targets */
@@ -178,6 +237,71 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Optimizaciones específicas para móviles */
+  @media (max-width: 768px) {
+    /* Reducir complejidad visual en móviles */
+    .group:hover .group-hover\:scale-\[1\.01\] {
+      transform: none !important;
+    }
+
+    /* Simplificar gradientes complejos en móviles */
+    .bg-gradient-to-br {
+      background: var(--background) !important;
+    }
+
+    /* Reducir blur effects en móviles */
+    .backdrop-blur-sm,
+    .backdrop-blur-xl {
+      backdrop-filter: none !important;
+      background: rgba(var(--card), 0.95) !important;
+    }
+
+    /* Optimizar sombras para móviles */
+    .shadow-3xl,
+    .shadow-2xl,
+    .shadow-xl {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+    }
+  }
+
+  /* Prevenir zoom en inputs en iOS */
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    select, input, textarea {
+      font-size: 16px !important;
+    }
+  }
+
+  /* Optimizar para conexiones lentas */
+  @media (prefers-reduced-data: reduce) {
+    video {
+      preload: none !important;
+    }
+
+    iframe {
+      loading: lazy !important;
+    }
+
+    /* Simplificar animaciones */
+    * {
+      animation-duration: 0.01s !important;
+      transition-duration: 0.01s !important;
+    }
+  }
+
+  /* Optimizar para dispositivos con batería baja */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01s !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01s !important;
+      scroll-behavior: auto !important;
+    }
+
+    video {
+      autoplay: false !important;
+    }
+  }
+
   /* Estilos específicos para Samsung Internet para evitar cambios automáticos de color */
   @media screen and (-webkit-min-device-pixel-ratio: 0) {
     html {
@@ -189,6 +313,15 @@
       /* Mantener colores originales */
       -webkit-filter: none !important;
       filter: none !important;
+      /* Añadir traducción prevention */
+      translate: no;
+    }
+
+    /* Prevenir traducción automática */
+    [translate="no"],
+    .notranslate {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
     }
   }
 
