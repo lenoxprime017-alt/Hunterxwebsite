@@ -139,7 +139,7 @@ export default function Index() {
       {/* Hero Section */}
       <section className="relative overflow-hidden h-screen">
         <video
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
             videoLoaded ? "opacity-100" : "opacity-0"
           }`}
           src="https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2"
@@ -147,9 +147,9 @@ export default function Index() {
           loop
           muted={true}
           playsInline
-          preload={isMobile ? "metadata" : "auto"}
+          preload="auto"
+          onLoadStart={handleVideoLoad}
           onLoadedData={handleVideoLoad}
-          onCanPlayThrough={handleVideoLoad}
           poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080'%3E%3Crect width='100%25' height='100%25' fill='%23111827'/%3E%3C/svg%3E"
         />
         {!videoLoaded && (
@@ -609,9 +609,17 @@ export default function Index() {
                   </div>
                 </div>
               </Button>
-              <DialogContent className="sm:max-w-[460px] max-w-[95vw] bg-gradient-to-br from-card/95 via-background/95 to-card/95 backdrop-blur-xl border border-border/30 shadow-3xl rounded-2xl">
-                {/* Efectos de fondo decorativos */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 rounded-2xl blur-sm opacity-75"></div>
+              <DialogContent
+                className={`sm:max-w-[460px] max-w-[95vw] border border-border/30 shadow-3xl rounded-2xl ${
+                  isMobile
+                    ? "bg-background border-border"
+                    : "bg-gradient-to-br from-card/95 via-background/95 to-card/95 backdrop-blur-xl"
+                }`}
+              >
+                {/* Efectos de fondo decorativos - solo en desktop */}
+                {!isMobile && (
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 rounded-2xl blur-sm opacity-75"></div>
+                )}
                 <div className="relative">
                   <DialogHeader className="space-y-4 pb-6">
                     <DialogTitle className="text-center text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -630,7 +638,11 @@ export default function Index() {
                         Copiar enlace
                       </h3>
                       <div className="flex items-center gap-3">
-                        <div className="flex-1 p-3 bg-muted/50 border border-border/50 rounded-xl text-xs font-mono text-foreground/80 truncate backdrop-blur-sm">
+                        <div
+                          className={`flex-1 p-3 bg-muted/50 border border-border/50 rounded-xl text-xs font-mono text-foreground/80 truncate ${
+                            !isMobile ? "backdrop-blur-sm" : ""
+                          }`}
+                        >
                           hunterx.fly.dev
                         </div>
                         <Button
@@ -667,7 +679,9 @@ export default function Index() {
                         <Button
                           variant="outline"
                           onClick={() => shareToSocial("twitter")}
-                          className="group flex items-center justify-center gap-2 h-12 bg-card/50 border-border/50 backdrop-blur-sm hover:bg-blue-500/10 hover:border-blue-500/50 hover:text-blue-400 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+                          className={`group flex items-center justify-center gap-2 h-12 bg-card/50 border-border/50 hover:bg-blue-500/10 hover:border-blue-500/50 hover:text-blue-400 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg ${
+                            !isMobile ? "backdrop-blur-sm" : ""
+                          }`}
                         >
                           <X className="w-4 h-4 group-hover:scale-110 transition-transform" />
                           <span className="font-medium text-sm">Twitter</span>
@@ -676,7 +690,9 @@ export default function Index() {
                         <Button
                           variant="outline"
                           onClick={() => shareToSocial("facebook")}
-                          className="group flex items-center justify-center gap-2 h-12 bg-card/50 border-border/50 backdrop-blur-sm hover:bg-blue-600/10 hover:border-blue-600/50 hover:text-blue-300 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+                          className={`group flex items-center justify-center gap-2 h-12 bg-card/50 border-border/50 hover:bg-blue-600/10 hover:border-blue-600/50 hover:text-blue-300 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg ${
+                            !isMobile ? "backdrop-blur-sm" : ""
+                          }`}
                         >
                           <svg
                             className="w-4 h-4 group-hover:scale-110 transition-transform"
@@ -691,7 +707,9 @@ export default function Index() {
                         <Button
                           variant="outline"
                           onClick={() => shareToSocial("whatsapp")}
-                          className="group flex items-center justify-center gap-2 h-12 bg-card/50 border-border/50 backdrop-blur-sm hover:bg-green-500/10 hover:border-green-500/50 hover:text-green-400 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+                          className={`group flex items-center justify-center gap-2 h-12 bg-card/50 border-border/50 hover:bg-green-500/10 hover:border-green-500/50 hover:text-green-400 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg ${
+                            !isMobile ? "backdrop-blur-sm" : ""
+                          }`}
                         >
                           <svg
                             className="w-4 h-4 group-hover:scale-110 transition-transform"
@@ -706,7 +724,9 @@ export default function Index() {
                         <Button
                           variant="outline"
                           onClick={() => shareToSocial("telegram")}
-                          className="group flex items-center justify-center gap-2 h-12 bg-card/50 border-border/50 backdrop-blur-sm hover:bg-blue-400/10 hover:border-blue-400/50 hover:text-blue-400 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+                          className={`group flex items-center justify-center gap-2 h-12 bg-card/50 border-border/50 hover:bg-blue-400/10 hover:border-blue-400/50 hover:text-blue-400 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg ${
+                            !isMobile ? "backdrop-blur-sm" : ""
+                          }`}
                         >
                           <svg
                             className="w-4 h-4 group-hover:scale-110 transition-transform"
