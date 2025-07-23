@@ -44,6 +44,7 @@ export default function Index() {
                 <Button
                   size="lg"
                   className="group w-full sm:w-auto h-14 sm:h-16 text-base sm:text-lg lg:text-xl px-8 sm:px-10"
+                  onClick={() => window.open("https://www.youtube.com/watch?v=4kHW5ZkYHIQ", "_blank")}
                 >
                   <Play className="mr-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform" />
                   Escuchar Ahora
@@ -52,6 +53,7 @@ export default function Index() {
                   variant="outline"
                   size="lg"
                   className="w-full sm:w-auto h-14 sm:h-16 text-base sm:text-lg lg:text-xl px-8 sm:px-10"
+                  onClick={() => window.open("https://www.instagram.com/hunterxoficial/", "_blank")}
                 >
                   <Heart className="mr-3 h-5 w-5 sm:h-6 sm:w-6" />
                   Seguir
