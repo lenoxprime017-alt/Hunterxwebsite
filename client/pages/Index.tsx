@@ -615,7 +615,7 @@ export default function Index() {
               onClick={() => {
                 // En móviles con Web Share API, usar función nativa
                 if (isMobile && "share" in navigator) {
-                  handleMobileShare({} as React.MouseEvent);
+                  handleMobileShare();
                 } else {
                   // En PC, abrir modal
                   setIsShareModalOpen(true);
