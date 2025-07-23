@@ -57,20 +57,20 @@ export default function Index() {
       </section>
 
       {/* Featured Video Section */}
-      <section className="py-16 lg:py-24">
+      <section className="py-12 sm:py-16 lg:py-24">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-5xl font-bold mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-3 sm:mb-4 leading-tight">
               Últimos Videos
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto px-4 sm:px-0">
               Descubre la música que está impactando vidas y llevando esperanza
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid gap-6 sm:gap-8 max-w-6xl mx-auto">
             {/* Main Featured Video - Latest Song */}
-            <Card className="md:col-span-2 overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+            <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
               <CardContent className="p-0">
                 <div className="relative aspect-video">
                   <iframe
