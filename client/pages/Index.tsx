@@ -181,17 +181,17 @@ export default function Index() {
             {/* Instagram Post 2 */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-orange-500 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
-              <Card className="relative overflow-hidden rounded-2xl border-2 border-transparent bg-gradient-to-br from-card to-card/80 backdrop-blur-sm group-hover:border-secondary/20 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
-                <CardContent className="p-0">
-                  <div className="relative overflow-hidden rounded-2xl">
+              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-secondary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
+                <CardContent className="p-4">
+                  <div className="relative overflow-hidden rounded-xl bg-background">
                     <iframe
                       src="https://www.instagram.com/p/DL5yywlOrvk/embed/"
                       width="100%"
-                      height="580"
+                      height="500"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                     />
                   </div>
@@ -202,17 +202,17 @@ export default function Index() {
             {/* Instagram Post 3 */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
-              <Card className="relative overflow-hidden rounded-2xl border-2 border-transparent bg-gradient-to-br from-card to-card/80 backdrop-blur-sm group-hover:border-accent/20 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
-                <CardContent className="p-0">
-                  <div className="relative overflow-hidden rounded-2xl">
+              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-accent/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
+                <CardContent className="p-4">
+                  <div className="relative overflow-hidden rounded-xl bg-background">
                     <iframe
                       src="https://www.instagram.com/p/DCzzvj0vzTv/embed/"
                       width="100%"
-                      height="580"
+                      height="500"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                     />
                   </div>
@@ -223,17 +223,17 @@ export default function Index() {
             {/* Instagram Post 4 */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-orange-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
-              <Card className="relative overflow-hidden rounded-2xl border-2 border-transparent bg-gradient-to-br from-card to-card/80 backdrop-blur-sm group-hover:border-primary/20 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
-                <CardContent className="p-0">
-                  <div className="relative overflow-hidden rounded-2xl">
+              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-primary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
+                <CardContent className="p-4">
+                  <div className="relative overflow-hidden rounded-xl bg-background">
                     <iframe
                       src="https://www.instagram.com/p/DMNv9T8tjAC/embed/"
                       width="100%"
-                      height="580"
+                      height="500"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                     />
                   </div>
@@ -244,17 +244,17 @@ export default function Index() {
             {/* Instagram Post 5 */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
-              <Card className="relative overflow-hidden rounded-2xl border-2 border-transparent bg-gradient-to-br from-card to-card/80 backdrop-blur-sm group-hover:border-secondary/20 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
-                <CardContent className="p-0">
-                  <div className="relative overflow-hidden rounded-2xl">
+              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-secondary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
+                <CardContent className="p-4">
+                  <div className="relative overflow-hidden rounded-xl bg-background">
                     <iframe
                       src="https://www.instagram.com/p/DMGnYA-PnYD/embed/"
                       width="100%"
-                      height="580"
+                      height="500"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                     />
                   </div>
@@ -265,17 +265,17 @@ export default function Index() {
             {/* Instagram Post 6 */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 via-purple-500 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
-              <Card className="relative overflow-hidden rounded-2xl border-2 border-transparent bg-gradient-to-br from-card to-card/80 backdrop-blur-sm group-hover:border-accent/20 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
-                <CardContent className="p-0">
-                  <div className="relative overflow-hidden rounded-2xl">
+              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-accent/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
+                <CardContent className="p-4">
+                  <div className="relative overflow-hidden rounded-xl bg-background">
                     <iframe
                       src="https://www.instagram.com/p/DMBdwi4OLaR/embed/"
                       width="100%"
-                      height="580"
+                      height="500"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                     />
                   </div>
