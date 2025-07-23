@@ -47,7 +47,7 @@ export default function Index() {
     setVideoLoaded(true);
   }, []);
 
-  const handleShare = async () => {
+  const handleShare = async (e: React.MouseEvent) => {
     const shareData = {
       title: "HUNTERX - Música Urbana Cristiana",
       text: "Descubre la música urbana con propósito de HUNTERX. Llevando esperanza y fe a las calles.",
@@ -55,7 +55,7 @@ export default function Index() {
     };
 
     // Detectar si es móvil con múltiples métodos para mayor precisión
-    const isMobile =
+    const isMobileDevice =
       /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
         navigator.userAgent,
       ) ||
@@ -65,7 +65,9 @@ export default function Index() {
       navigator.maxTouchPoints > 0;
 
     // En móviles con soporte nativo, usar Web Share API
-    if (isMobile && "share" in navigator) {
+    if (isMobileDevice && "share" in navigator) {
+      e.preventDefault(); // Prevenir que se abra el modal
+
       try {
         await navigator.share(shareData);
 
@@ -114,8 +116,8 @@ export default function Index() {
       }
     }
 
-    // En PC o si falló/no está disponible la API nativa, abrir modal
-    setIsShareModalOpen(true);
+    // En PC o si falló/no está disponible la API nativa, permitir que DialogTrigger abra el modal
+    // No hacemos e.preventDefault() aquí para que el DialogTrigger funcione
   };
 
   const copyToClipboard = async () => {
