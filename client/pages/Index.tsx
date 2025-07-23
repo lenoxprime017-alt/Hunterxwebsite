@@ -45,10 +45,15 @@ export default function Index() {
             <div className="flex-1 max-w-md">
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-primary to-secondary rounded-full opacity-30 blur-xl animate-pulse" />
-                <div className="relative bg-card border-2 border-primary/30 rounded-full aspect-square flex items-center justify-center">
-                  <div className="w-3/4 h-3/4 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
-                    <Music className="w-16 h-16 text-primary-foreground" />
-                  </div>
+                <div className="relative bg-card border-2 border-primary/30 rounded-full aspect-square overflow-hidden">
+                  <video
+                    className="w-full h-full object-cover rounded-full"
+                    src="https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
                 </div>
               </div>
             </div>
