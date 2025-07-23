@@ -85,54 +85,53 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            {/* Secondary Videos */}
-            <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
-              <CardContent className="p-0">
-                <div className="relative aspect-video">
-                  <iframe
-                    className="w-full h-full rounded-lg"
-                    src="https://www.youtube.com/embed/JTwL53RpQls"
-                    title="HUNTERX - Video 2"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              </CardContent>
-            </Card>
+            {/* Secondary Videos Grid */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
+              <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+                <CardContent className="p-0">
+                  <div className="relative aspect-video">
+                    <iframe
+                      className="w-full h-full rounded-lg"
+                      src="https://www.youtube.com/embed/JTwL53RpQls"
+                      title="HUNTERX - Video 2"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                </CardContent>
+              </Card>
 
-            <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
-              <CardContent className="p-0">
-                <div className="relative aspect-video">
-                  <iframe
-                    className="w-full h-full rounded-lg"
-                    src="https://www.youtube.com/embed/BzivzcIRpOM"
-                    title="HUNTERX - Video 3"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+              <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+                <CardContent className="p-0">
+                  <div className="relative aspect-video">
+                    <iframe
+                      className="w-full h-full rounded-lg"
+                      src="https://www.youtube.com/embed/BzivzcIRpOM"
+                      title="HUNTERX - Video 3"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                </CardContent>
+              </Card>
 
-          {/* Fourth Video - Additional Row */}
-          <div className="mt-8 max-w-3xl mx-auto">
-            <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
-              <CardContent className="p-0">
-                <div className="relative aspect-video">
-                  <iframe
-                    className="w-full h-full rounded-lg"
-                    src="https://www.youtube.com/embed/tsPldB4iXpE"
-                    title="HUNTERX - Video 4"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              </CardContent>
-            </Card>
+              <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300 sm:col-span-2 lg:col-span-1">
+                <CardContent className="p-0">
+                  <div className="relative aspect-video">
+                    <iframe
+                      className="w-full h-full rounded-lg"
+                      src="https://www.youtube.com/embed/tsPldB4iXpE"
+                      title="HUNTERX - Video 4"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
