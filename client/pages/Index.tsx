@@ -196,6 +196,10 @@ export default function Index() {
                       scrolling="no"
                       allowTransparency
                       className="w-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
+                      style={{
+                        filter: 'brightness(0.85) contrast(1.1) saturate(1.1) hue-rotate(5deg)',
+                        mixBlendMode: 'multiply'
+                      }}
                       loading="lazy"
                     />
                   </div>
