@@ -149,134 +149,92 @@ export default function Index() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* Instagram Post 1 */}
-            <Card className="group hover:scale-[1.02] transition-all duration-300 overflow-hidden cursor-pointer" onClick={() => window.open('https://www.instagram.com/hunterxoficial/', '_blank')}>
+            <Card className="overflow-hidden">
               <CardContent className="p-0">
-                <div className="aspect-square bg-gradient-to-br from-primary to-secondary relative">
-                  <div className="absolute inset-0 bg-black/20" />
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
-                        <Music className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-white font-semibold text-sm">hunterxoficial</span>
-                    </div>
-                    <Instagram className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                    <p className="text-sm mb-2">"Nuevo video disponible! 🔥 #MusicaCristiana #Urbano"</p>
-                    <p className="text-xs text-gray-300">hace 2 días</p>
-                  </div>
-                </div>
+                <iframe
+                  src="https://www.instagram.com/p/DL5CtHzt0Zd/embed/"
+                  width="100%"
+                  height="500"
+                  frameBorder="0"
+                  scrolling="no"
+                  allowTransparency
+                  className="w-full"
+                />
               </CardContent>
             </Card>
 
             {/* Instagram Post 2 */}
-            <Card className="group hover:scale-[1.02] transition-all duration-300 overflow-hidden cursor-pointer" onClick={() => window.open('https://www.instagram.com/hunterxoficial/', '_blank')}>
+            <Card className="overflow-hidden">
               <CardContent className="p-0">
-                <div className="aspect-square bg-gradient-to-br from-secondary to-accent relative">
-                  <div className="absolute inset-0 bg-black/20" />
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 bg-gradient-to-br from-secondary to-accent rounded-full flex items-center justify-center">
-                        <Heart className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-white font-semibold text-sm">hunterxoficial</span>
-                    </div>
-                    <Instagram className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                    <p className="text-sm mb-2">"En el estudio trabajando en nuevos proyectos 🎵 #StudioLife"</p>
-                    <p className="text-xs text-gray-300">hace 4 días</p>
-                  </div>
-                </div>
+                <iframe
+                  src="https://www.instagram.com/p/DL5yywlOrvk/embed/"
+                  width="100%"
+                  height="500"
+                  frameBorder="0"
+                  scrolling="no"
+                  allowTransparency
+                  className="w-full"
+                />
               </CardContent>
             </Card>
 
             {/* Instagram Post 3 */}
-            <Card className="group hover:scale-[1.02] transition-all duration-300 overflow-hidden cursor-pointer" onClick={() => window.open('https://www.instagram.com/hunterxoficial/', '_blank')}>
+            <Card className="overflow-hidden">
               <CardContent className="p-0">
-                <div className="aspect-square bg-gradient-to-br from-accent to-primary relative">
-                  <div className="absolute inset-0 bg-black/20" />
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center">
-                        <Play className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-white font-semibold text-sm">hunterxoficial</span>
-                    </div>
-                    <Instagram className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                    <p className="text-sm mb-2">"Gracias por todo el apoyo! 🙏 #Bendecido #Fe"</p>
-                    <p className="text-xs text-gray-300">hace 1 semana</p>
-                  </div>
-                </div>
+                <iframe
+                  src="https://www.instagram.com/p/DCzzvj0vzTv/embed/"
+                  width="100%"
+                  height="500"
+                  frameBorder="0"
+                  scrolling="no"
+                  allowTransparency
+                  className="w-full"
+                />
               </CardContent>
             </Card>
 
             {/* Instagram Post 4 */}
-            <Card className="group hover:scale-[1.02] transition-all duration-300 overflow-hidden cursor-pointer" onClick={() => window.open('https://www.instagram.com/hunterxoficial/', '_blank')}>
+            <Card className="overflow-hidden">
               <CardContent className="p-0">
-                <div className="aspect-square bg-gradient-to-br from-primary/80 to-secondary/80 relative">
-                  <div className="absolute inset-0 bg-black/20" />
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
-                        <Music2 className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-white font-semibold text-sm">hunterxoficial</span>
-                    </div>
-                    <Instagram className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                    <p className="text-sm mb-2">"Live session coming soon! Stay tuned 🎤 #LiveMusic"</p>
-                    <p className="text-xs text-gray-300">hace 1 semana</p>
-                  </div>
-                </div>
+                <iframe
+                  src="https://www.instagram.com/p/DMNv9T8tjAC/embed/"
+                  width="100%"
+                  height="500"
+                  frameBorder="0"
+                  scrolling="no"
+                  allowTransparency
+                  className="w-full"
+                />
               </CardContent>
             </Card>
 
             {/* Instagram Post 5 */}
-            <Card className="group hover:scale-[1.02] transition-all duration-300 overflow-hidden cursor-pointer" onClick={() => window.open('https://www.instagram.com/hunterxoficial/', '_blank')}>
+            <Card className="overflow-hidden">
               <CardContent className="p-0">
-                <div className="aspect-square bg-gradient-to-br from-secondary/80 to-accent/80 relative">
-                  <div className="absolute inset-0 bg-black/20" />
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 bg-gradient-to-br from-secondary to-accent rounded-full flex items-center justify-center">
-                        <Headphones className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-white font-semibold text-sm">hunterxoficial</span>
-                    </div>
-                    <Instagram className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                    <p className="text-sm mb-2">"Behind the scenes del último video 🎬 #BTS"</p>
-                    <p className="text-xs text-gray-300">hace 2 semanas</p>
-                  </div>
-                </div>
+                <iframe
+                  src="https://www.instagram.com/p/DMGnYA-PnYD/embed/"
+                  width="100%"
+                  height="500"
+                  frameBorder="0"
+                  scrolling="no"
+                  allowTransparency
+                  className="w-full"
+                />
               </CardContent>
             </Card>
 
             {/* Instagram Post 6 */}
-            <Card className="group hover:scale-[1.02] transition-all duration-300 overflow-hidden cursor-pointer" onClick={() => window.open('https://www.instagram.com/hunterxoficial/', '_blank')}>
+            <Card className="overflow-hidden">
               <CardContent className="p-0">
-                <div className="aspect-square bg-gradient-to-br from-accent/80 to-primary/80 relative">
-                  <div className="absolute inset-0 bg-black/20" />
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center">
-                        <Share2 className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-white font-semibold text-sm">hunterxoficial</span>
-                    </div>
-                    <Instagram className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                    <p className="text-sm mb-2">"Colaboración especial próximamente! 🤝 #Collaboration"</p>
-                    <p className="text-xs text-gray-300">hace 2 semanas</p>
-                  </div>
-                </div>
+                <iframe
+                  src="https://www.instagram.com/p/DMBdwi4OLaR/embed/"
+                  width="100%"
+                  height="500"
+                  frameBorder="0"
+                  scrolling="no"
+                  allowTransparency
+                  className="w-full"
+                />
               </CardContent>
             </Card>
           </div>
