@@ -657,29 +657,64 @@ export default function Index() {
               </div>
             </Button>
 
-            <Dialog open={isShareModalOpen} onOpenChange={setIsShareModalOpen}>
-              <DialogContent className="bg-background border border-border">
-                <div>
-                  <DialogHeader>
-                    <DialogTitle>
-                      Compartir HUNTERX
-                    </DialogTitle>
-                  </DialogHeader>
+            {/* Custom Modal - Sin Radix UI */}
+            {isShareModalOpen && (
+              <div
+                className="fixed inset-0 z-[300] flex items-center justify-center"
+                onClick={() => setIsShareModalOpen(false)}
+              >
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
 
+                {/* Modal Content */}
+                <div
+                  className="relative bg-background border border-border rounded-lg p-6 m-4 max-w-md w-full shadow-2xl"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* Close button */}
+                  <button
+                    className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
+                    onClick={() => setIsShareModalOpen(false)}
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+
+                  {/* Header */}
+                  <div className="mb-6">
+                    <h2 className="text-xl font-bold">Compartir HUNTERX</h2>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      Comparte mi música con tus amigos
+                    </p>
+                  </div>
+
+                  {/* Content */}
                   <div className="space-y-4">
-                    <p>¡Modal funcionando!</p>
                     <div className="flex gap-2">
-                      <Button onClick={copyToClipboard}>
-                        Copiar enlace
+                      <Button onClick={copyToClipboard} className="flex-1">
+                        <Copy className="h-4 w-4 mr-2" />
+                        {copySuccess ? "¡Copiado!" : "Copiar enlace"}
                       </Button>
-                      <Button onClick={() => shareToSocial("twitter")}>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2">
+                      <Button variant="outline" onClick={() => shareToSocial("twitter")}>
+                        <X className="h-4 w-4 mr-2" />
                         Twitter
+                      </Button>
+                      <Button variant="outline" onClick={() => shareToSocial("facebook")}>
+                        Facebook
+                      </Button>
+                      <Button variant="outline" onClick={() => shareToSocial("whatsapp")}>
+                        WhatsApp
+                      </Button>
+                      <Button variant="outline" onClick={() => shareToSocial("telegram")}>
+                        Telegram
                       </Button>
                     </div>
                   </div>
                 </div>
-              </DialogContent>
-            </Dialog>
+              </div>
+            )}
           </div>
         </div>
       </section>
