@@ -632,20 +632,22 @@ export default function Index() {
             </Button>
 
             <Dialog open={isShareModalOpen} onOpenChange={setIsShareModalOpen}>
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full justify-start h-16 group hover:bg-primary hover:text-primary-foreground"
-                onClick={handleShare}
-              >
-                <Share2 className="mr-4 h-6 w-6 group-hover:text-current" />
-                <div className="flex-1 text-left">
-                  <div className="font-semibold">Compartir</div>
-                  <div className="text-sm opacity-70">
-                    Comparte mi música con otros
+              <DialogTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full justify-start h-16 group hover:bg-primary hover:text-primary-foreground"
+                  onClick={handleShare}
+                >
+                  <Share2 className="mr-4 h-6 w-6 group-hover:text-current" />
+                  <div className="flex-1 text-left">
+                    <div className="font-semibold">Compartir</div>
+                    <div className="text-sm opacity-70">
+                      Comparte mi música con otros
+                    </div>
                   </div>
-                </div>
-              </Button>
+                </Button>
+              </DialogTrigger>
               <DialogContent
                 className={`sm:max-w-[460px] max-w-[95vw] border border-border/30 shadow-3xl rounded-2xl ${
                   isMobile
