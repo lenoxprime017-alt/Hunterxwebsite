@@ -54,8 +54,8 @@ export default function Index() {
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-primary to-secondary rounded-full opacity-30 blur-xl animate-pulse" />
                 <div className="relative bg-card border-2 border-primary/30 rounded-full aspect-square flex items-center justify-center">
-                  <div className="w-3/4 h-3/4 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
-                    <Music className="w-16 h-16 text-primary-foreground" />
+                  <div className="w-1/2 h-1/2 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+                    <Music className="w-8 h-8 text-primary-foreground" />
                   </div>
                 </div>
               </div>
