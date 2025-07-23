@@ -73,14 +73,13 @@ export default function Index() {
             <Card className="md:col-span-2 overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
               <CardContent className="p-0">
                 <div className="relative aspect-video">
-                  <video
-                    className="w-full h-full rounded-lg object-cover"
-                    src="https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    controls
+                  <iframe
+                    className="w-full h-full rounded-lg"
+                    src="https://www.youtube.com/embed/4kHW5ZkYHIQ"
+                    title="HUNTERX - Última Canción"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
                   />
                 </div>
               </CardContent>
