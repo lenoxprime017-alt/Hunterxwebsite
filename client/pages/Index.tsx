@@ -47,10 +47,7 @@ export default function Index() {
     setVideoLoaded(true);
   }, []);
 
-  const handleMobileShare = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
+  const handleMobileShare = async () => {
     const shareData = {
       title: "HUNTERX - Música Urbana Cristiana",
       text: "Descubre la música urbana con propósito de HUNTERX. Llevando esperanza y fe a las calles.",
