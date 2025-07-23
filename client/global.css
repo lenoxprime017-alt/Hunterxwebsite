@@ -177,4 +177,26 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  /* Estilos específicos para Samsung Internet para evitar cambios automáticos de color */
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    html {
+      /* Evitar modo oscuro forzado en Samsung Internet */
+      -webkit-color-scheme: dark light;
+    }
+
+    body {
+      /* Mantener colores originales */
+      -webkit-filter: none !important;
+      filter: none !important;
+    }
+  }
+
+  /* Media query específica para Samsung Internet */
+  @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) {
+    * {
+      -webkit-filter: none !important;
+      filter: none !important;
+    }
+  }
 }
