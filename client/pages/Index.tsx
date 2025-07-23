@@ -16,7 +16,7 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10">
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden h-screen">
         <video
           className="absolute inset-0 w-full h-full object-cover"
           src="https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2"
@@ -26,34 +26,34 @@ export default function Index() {
           playsInline
           volume={0}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40" />
-        <div className="relative container mx-auto px-4 py-16 sm:py-20 lg:py-32">
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-            <div className="flex-1 text-center lg:text-left">
-              <Badge variant="secondary" className="mb-4 text-sm font-semibold">
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
+        <div className="relative h-full flex items-center">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+              <Badge variant="secondary" className="mb-4 sm:mb-6 text-xs sm:text-sm font-semibold px-3 py-1">
                 Música Urbana Cristiana
               </Badge>
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent leading-tight">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-4 sm:mb-6 lg:mb-8 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent leading-tight tracking-tight">
                 HUNTERX
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-6 sm:mb-8 max-w-lg leading-relaxed">
+              <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-muted-foreground mb-8 sm:mb-10 lg:mb-12 max-w-3xl leading-relaxed px-4">
                 Música urbana con propósito. Llevando esperanza y fe a las
                 calles través de letras que transforman vidas.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto max-w-md sm:max-w-none">
                 <Button
                   size="lg"
-                  className="group w-full sm:w-auto h-12 sm:h-auto text-base sm:text-lg"
+                  className="group w-full sm:w-auto h-14 sm:h-16 text-base sm:text-lg lg:text-xl px-8 sm:px-10"
                 >
-                  <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                  <Play className="mr-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform" />
                   Escuchar Ahora
                 </Button>
                 <Button
                   variant="outline"
                   size="lg"
-                  className="w-full sm:w-auto h-12 sm:h-auto text-base sm:text-lg"
+                  className="w-full sm:w-auto h-14 sm:h-16 text-base sm:text-lg lg:text-xl px-8 sm:px-10"
                 >
-                  <Heart className="mr-2 h-5 w-5" />
+                  <Heart className="mr-3 h-5 w-5 sm:h-6 sm:w-6" />
                   Seguir
                 </Button>
               </div>
