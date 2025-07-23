@@ -341,7 +341,7 @@ export default function Index() {
               variant="outline"
               size="lg"
               className="w-full justify-start h-16 group hover:bg-green-600 hover:text-white transition-all duration-300"
-              onClick={() => alert('Busca "HUNTERX" en Spotify')}
+              onClick={() => window.open("https://open.spotify.com/artist/0S8UiJTjzt86hM9wolenDG", "_blank")}
             >
               <Music2 className="mr-4 h-6 w-6 text-green-500 group-hover:text-current transition-colors" />
               <div className="flex-1 text-left">
