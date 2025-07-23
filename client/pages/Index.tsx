@@ -150,15 +150,15 @@ export default function Index() {
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-16 sm:mb-20 lg:mb-24">
-            <div className="inline-flex items-center gap-3 sm:gap-4 mb-8">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center shadow-xl">
-                <Instagram className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-white" />
+            <div className="inline-flex items-center gap-2 sm:gap-3 mb-6">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                <Instagram className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <h2 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 bg-clip-text text-transparent tracking-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 bg-clip-text text-transparent">
                 Instagram
               </h2>
             </div>
-            <p className="text-muted-foreground text-xl sm:text-2xl lg:text-3xl max-w-4xl mx-auto mb-8 sm:mb-12 px-4 sm:px-0 leading-relaxed">
+            <p className="text-muted-foreground text-lg sm:text-xl max-w-3xl mx-auto mb-6 sm:mb-8 px-4 sm:px-0">
               Sígueme para contenido exclusivo, detrás de cámaras y las últimas
               noticias
             </p>
@@ -445,7 +445,7 @@ export default function Index() {
               <div className="flex-1 text-left">
                 <div className="font-bold text-lg sm:text-xl lg:text-2xl">Compartir</div>
                 <div className="text-base sm:text-lg opacity-70">
-                  Comparte mi música con otros
+                  Comparte mi m��sica con otros
                 </div>
               </div>
             </Button>
