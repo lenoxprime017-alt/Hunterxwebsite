@@ -142,8 +142,8 @@ export default function Index() {
                 <div className="aspect-square bg-gradient-to-br from-secondary to-accent relative">
                   <div className="absolute inset-0 bg-black/20" />
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                    <h3 className="text-xl font-bold mb-2">EP: Esperanza</h3>
-                    <p className="text-gray-200">5 canciones de fe y esperanza</p>
+                    <h3 className="text-xl font-bold mb-2">Singles</h3>
+                    <p className="text-gray-200">Impactando con cada canción</p>
                   </div>
                 </div>
               </CardContent>
