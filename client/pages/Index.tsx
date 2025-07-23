@@ -63,20 +63,20 @@ export default function Index() {
       </section>
 
       {/* Featured Video Section */}
-      <section className="py-12 sm:py-16 lg:py-24">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-3 sm:mb-4 leading-tight">
+      <section className="py-16 sm:py-20 lg:py-32">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
               Últimos Videos
             </h2>
-            <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto px-4 sm:px-0">
+            <p className="text-muted-foreground text-lg sm:text-xl lg:text-2xl max-w-4xl mx-auto px-4 sm:px-0 leading-relaxed">
               Descubre la música que está impactando vidas y llevando esperanza
             </p>
           </div>
 
-          <div className="grid gap-6 sm:gap-8 max-w-6xl mx-auto">
+          <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
             {/* Main Featured Video - Latest Song */}
-            <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+            <Card className="overflow-hidden group hover:scale-[1.01] transition-all duration-500 shadow-2xl hover:shadow-3xl">
               <CardContent className="p-0">
                 <div className="relative aspect-video">
                   <iframe
@@ -92,8 +92,8 @@ export default function Index() {
             </Card>
 
             {/* Secondary Videos Grid */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
-              <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
+              <Card className="overflow-hidden group hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl">
                 <CardContent className="p-0">
                   <div className="relative aspect-video">
                     <iframe
@@ -108,7 +108,7 @@ export default function Index() {
                 </CardContent>
               </Card>
 
-              <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+              <Card className="overflow-hidden group hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl">
                 <CardContent className="p-0">
                   <div className="relative aspect-video">
                     <iframe
@@ -123,7 +123,7 @@ export default function Index() {
                 </CardContent>
               </Card>
 
-              <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300 sm:col-span-2 lg:col-span-1">
+              <Card className="overflow-hidden group hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl md:col-span-2 xl:col-span-1">
                 <CardContent className="p-0">
                   <div className="relative aspect-video">
                     <iframe
