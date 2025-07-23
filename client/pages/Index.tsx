@@ -34,31 +34,28 @@ export default function Index() {
       url: window.location.href,
     };
 
-    // Detectar si es móvil y si soporta Web Share API
-    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    ) || /Mobi|Android/i.test(navigator.userAgent) || window.innerWidth <= 768;
-
-    const supportsWebShare = 'share' in navigator && navigator.canShare && navigator.canShare(shareData);
-
-    console.log('Es móvil:', isMobile);
-    console.log('Soporta Web Share:', supportsWebShare);
-    console.log('Navigator.share existe:', 'share' in navigator);
+    // Detectar si es móvil con múltiples métodos para mayor precisión
+    const isMobile =
+      /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+      /Mobi|Android/i.test(navigator.userAgent) ||
+      window.innerWidth <= 768 ||
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0;
 
     // En móviles con soporte nativo, usar Web Share API
     if (isMobile && 'share' in navigator) {
       try {
         await navigator.share(shareData);
-        console.log('Compartido con éxito usando Web Share API');
-        return; // Salir de la función para no abrir el modal
+        return; // Salir exitosamente, no abrir modal
       } catch (error) {
-        console.log("Error al compartir con Web Share API:", error);
-        // Si falla, continuar para abrir el modal
+        // Si el usuario cancela o hay error, continuar para abrir el modal
+        if (error.name !== 'AbortError') {
+          console.log("Error al compartir:", error);
+        }
       }
     }
 
-    // En PC o si falló la API nativa, abrir modal personalizado
-    console.log('Abriendo modal de compartir');
+    // En PC o si falló/no está disponible la API nativa, abrir modal
     setIsShareModalOpen(true);
   };
 
