@@ -1,7 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Play, Music, Heart, Share2, Instagram, Youtube, Music2, Headphones } from "lucide-react";
+import {
+  Play,
+  Music,
+  Heart,
+  Share2,
+  Instagram,
+  Youtube,
+  Music2,
+  Headphones,
+} from "lucide-react";
 
 export default function Index() {
   return (
@@ -19,7 +28,8 @@ export default function Index() {
                 HUNTERX
               </h1>
               <p className="text-xl lg:text-2xl text-muted-foreground mb-8 max-w-lg">
-                Música urbana con propósito. Llevando esperanza y fe a las calles través de letras que transforman vidas.
+                Música urbana con propósito. Llevando esperanza y fe a las
+                calles través de letras que transforman vidas.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button size="lg" className="group">
@@ -57,7 +67,7 @@ export default function Index() {
               Descubre la música que está impactando vidas y llevando esperanza
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Main Featured Video - Latest Song */}
             <Card className="md:col-span-2 overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
@@ -144,12 +154,18 @@ export default function Index() {
               </h2>
             </div>
             <p className="text-muted-foreground text-xl max-w-3xl mx-auto mb-8">
-              Sígueme para contenido exclusivo, detrás de cámaras y las últimas noticias
+              Sígueme para contenido exclusivo, detrás de cámaras y las últimas
+              noticias
             </p>
             <Button
               size="lg"
               className="group bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 hover:from-pink-600 hover:via-purple-600 hover:to-orange-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
-              onClick={() => window.open('https://www.instagram.com/hunterxoficial/', '_blank')}
+              onClick={() =>
+                window.open(
+                  "https://www.instagram.com/hunterxoficial/",
+                  "_blank",
+                )
+              }
             >
               <Instagram className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform" />
               @hunterxoficial
@@ -293,7 +309,10 @@ export default function Index() {
                 <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-pink-500 rounded-full border-2 border-background"></div>
               </div>
               <p className="text-muted-foreground">
-                <span className="text-foreground font-semibold">Miles de seguidores</span> ya forman parte de la comunidad
+                <span className="text-foreground font-semibold">
+                  Miles de seguidores
+                </span>{" "}
+                ya forman parte de la comunidad
               </p>
             </div>
           </div>
@@ -322,7 +341,9 @@ export default function Index() {
               <Music2 className="mr-4 h-6 w-6 text-green-500 group-hover:text-current" />
               <div className="flex-1 text-left">
                 <div className="font-semibold">Spotify</div>
-                <div className="text-sm opacity-70">Escucha mi música completa</div>
+                <div className="text-sm opacity-70">
+                  Escucha mi música completa
+                </div>
               </div>
             </Button>
 
@@ -335,7 +356,9 @@ export default function Index() {
               <Headphones className="mr-4 h-6 w-6 text-gray-500 group-hover:text-current" />
               <div className="flex-1 text-left">
                 <div className="font-semibold">Apple Music</div>
-                <div className="text-sm opacity-70">Disponible en Apple Music</div>
+                <div className="text-sm opacity-70">
+                  Disponible en Apple Music
+                </div>
               </div>
             </Button>
 
@@ -343,12 +366,16 @@ export default function Index() {
               variant="outline"
               size="lg"
               className="w-full justify-start h-16 group hover:bg-red-600 hover:text-white"
-              onClick={() => window.open('https://www.youtube.com/@EHUNTERX', '_blank')}
+              onClick={() =>
+                window.open("https://www.youtube.com/@EHUNTERX", "_blank")
+              }
             >
               <Youtube className="mr-4 h-6 w-6 text-red-500 group-hover:text-current" />
               <div className="flex-1 text-left">
                 <div className="font-semibold">YouTube - @EHUNTERX</div>
-                <div className="text-sm opacity-70">Videos y contenido exclusivo</div>
+                <div className="text-sm opacity-70">
+                  Videos y contenido exclusivo
+                </div>
               </div>
             </Button>
 
@@ -356,20 +383,33 @@ export default function Index() {
               variant="outline"
               size="lg"
               className="w-full justify-start h-16 group hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:text-white"
-              onClick={() => window.open('https://www.instagram.com/hunterxoficial/', '_blank')}
+              onClick={() =>
+                window.open(
+                  "https://www.instagram.com/hunterxoficial/",
+                  "_blank",
+                )
+              }
             >
               <Instagram className="mr-4 h-6 w-6 text-pink-500 group-hover:text-current" />
               <div className="flex-1 text-left">
                 <div className="font-semibold">Instagram - @hunterxoficial</div>
-                <div className="text-sm opacity-70">Detrás de cámaras y más</div>
+                <div className="text-sm opacity-70">
+                  Detrás de cámaras y más
+                </div>
               </div>
             </Button>
 
-            <Button variant="outline" size="lg" className="w-full justify-start h-16 group hover:bg-primary hover:text-primary-foreground">
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full justify-start h-16 group hover:bg-primary hover:text-primary-foreground"
+            >
               <Share2 className="mr-4 h-6 w-6 group-hover:text-current" />
               <div className="flex-1 text-left">
                 <div className="font-semibold">Compartir</div>
-                <div className="text-sm opacity-70">Comparte mi música con otros</div>
+                <div className="text-sm opacity-70">
+                  Comparte mi música con otros
+                </div>
               </div>
             </Button>
           </div>
