@@ -454,14 +454,14 @@ export default function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t py-12">
-        <div className="container mx-auto px-4">
+      <footer className="border-t border-border/50 py-16 sm:py-20 lg:py-24 bg-gradient-to-t from-card/30 to-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h3 className="text-2xl font-bold mb-4">HUNTERX</h3>
-            <p className="text-muted-foreground mb-6">
+            <h3 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-6 sm:mb-8 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">HUNTERX</h3>
+            <p className="text-muted-foreground text-lg sm:text-xl lg:text-2xl mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
               Llevando el mensaje de Cristo a través de la música urbana
             </p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-base sm:text-lg text-muted-foreground">
               © 2024 HUNTERX. Todos los derechos reservados.
             </p>
           </div>
