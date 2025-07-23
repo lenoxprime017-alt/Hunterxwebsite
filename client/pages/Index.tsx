@@ -66,10 +66,10 @@ export default function Index() {
       <section className="py-16 sm:py-20 lg:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-            <h2 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
               Últimos Videos
             </h2>
-            <p className="text-muted-foreground text-lg sm:text-xl lg:text-2xl max-w-4xl mx-auto px-4 sm:px-0 leading-relaxed">
+            <p className="text-muted-foreground text-base sm:text-lg lg:text-xl max-w-4xl mx-auto px-4 sm:px-0 leading-relaxed">
               Descubre la música que está impactando vidas y llevando esperanza
             </p>
           </div>
