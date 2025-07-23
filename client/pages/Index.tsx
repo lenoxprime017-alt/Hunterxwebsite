@@ -69,8 +69,8 @@ export default function Index() {
                     </div>
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                    <h3 className="text-xl font-bold text-white mb-2">Nuevo Single: "Fe Inquebrantable"</h3>
-                    <p className="text-gray-200">El himno que está moviendo corazones en toda Latinoamérica</p>
+                    <h3 className="text-xl font-bold text-white mb-2">Último Video Oficial</h3>
+                    <p className="text-gray-200">Música urbana cristiana que impacta corazones</p>
                   </div>
                 </div>
               </CardContent>
