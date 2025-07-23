@@ -41,17 +41,23 @@ export default function Index() {
                 calles través de letras que transforman vidas.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start w-full sm:w-auto">
-                <Button size="lg" className="group w-full sm:w-auto h-12 sm:h-auto text-base sm:text-lg">
+                <Button
+                  size="lg"
+                  className="group w-full sm:w-auto h-12 sm:h-auto text-base sm:text-lg"
+                >
                   <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                   Escuchar Ahora
                 </Button>
-                <Button variant="outline" size="lg" className="w-full sm:w-auto h-12 sm:h-auto text-base sm:text-lg">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full sm:w-auto h-12 sm:h-auto text-base sm:text-lg"
+                >
                   <Heart className="mr-2 h-5 w-5" />
                   Seguir
                 </Button>
               </div>
             </div>
-
           </div>
         </div>
       </section>
