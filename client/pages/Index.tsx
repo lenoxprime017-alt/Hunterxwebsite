@@ -28,34 +28,63 @@ export default function Index() {
       url: window.location.href,
     };
 
-    try {
-      // Detectar si el dispositivo soporta Web Share API (móviles)
-      if (navigator.share && /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        await navigator.share(shareData);
-      } else {
-        // Para PC usar la API de Clipboard o fallback
-        if (navigator.clipboard) {
-          await navigator.clipboard.writeText(window.location.href);
-          alert('¡Enlace copiado al portapapeles! Compártelo donde quieras.');
-        } else {
-          // Fallback para navegadores más antiguos
-          const textArea = document.createElement('textarea');
-          textArea.value = window.location.href;
-          document.body.appendChild(textArea);
-          textArea.select();
-          document.execCommand('copy');
-          document.body.removeChild(textArea);
-          alert('¡Enlace copiado al portapapeles! Compártelo donde quieras.');
-        }
-      }
-    } catch (error) {
-      // Si falla, copiar al portapapeles como fallback
+    // Detectar si es móvil
+    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    if (isMobile && navigator.share) {
+      // En móviles usar Web Share API nativa
       try {
-        await navigator.clipboard.writeText(window.location.href);
-        alert('¡Enlace copiado al portapapeles!');
-      } catch (err) {
-        console.log('Error al compartir:', err);
+        await navigator.share(shareData);
+      } catch (error) {
+        console.log('Error al compartir:', error);
       }
+    } else {
+      // En PC abrir modal personalizado
+      setIsShareModalOpen(true);
+    }
+  };
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 2000);
+    } catch (error) {
+      // Fallback para navegadores más antiguos
+      const textArea = document.createElement('textarea');
+      textArea.value = window.location.href;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 2000);
+    }
+  };
+
+  const shareToSocial = (platform: string) => {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent('¡Descubre la música urbana con propósito de HUNTERX! 🎵✨');
+
+    let shareUrl = '';
+
+    switch (platform) {
+      case 'twitter':
+        shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+        break;
+      case 'facebook':
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+        break;
+      case 'whatsapp':
+        shareUrl = `https://wa.me/?text=${text} ${url}`;
+        break;
+      case 'telegram':
+        shareUrl = `https://t.me/share/url?url=${url}&text=${text}`;
+        break;
+    }
+
+    if (shareUrl) {
+      window.open(shareUrl, '_blank', 'width=600,height=400');
     }
   };
 
