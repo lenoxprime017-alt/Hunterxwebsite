@@ -1,8 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="es" translate="no">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google" content="notranslate" />
+    <meta name="format-detection" content="telephone=no" />
 
     <!-- Evitar que Samsung Internet y otros navegadores cambien colores automáticamente -->
     <meta name="color-scheme" content="dark light" />
@@ -29,11 +31,19 @@
     <!-- Evitar que el navegador fuerce modo oscuro -->
     <meta name="supported-color-schemes" content="dark light" />
 
+    <!-- Preconnect para acelerar carga de recursos externos -->
+    <link rel="preconnect" href="https://www.youtube.com" />
+    <link rel="preconnect" href="https://www.instagram.com" />
+    <link rel="preconnect" href="https://cdn.builder.io" />
+    <link rel="dns-prefetch" href="//www.youtube.com" />
+    <link rel="dns-prefetch" href="//www.instagram.com" />
+    <link rel="dns-prefetch" href="//cdn.builder.io" />
+
     <title>HUNTERX - Música Urbana Cristiana</title>
   </head>
 
-  <body>
-    <div id="root"></div>
+  <body translate="no">
+    <div id="root" translate="no"></div>
 
     <script type="module" src="/client/App.tsx"></script>
   </body>
