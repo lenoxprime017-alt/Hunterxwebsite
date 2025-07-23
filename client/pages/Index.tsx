@@ -669,6 +669,47 @@ export default function Index() {
           </div>
         </div>
       </footer>
+
+      {/* MODAL DE PRUEBA EXTREMADAMENTE SIMPLE - FUERA DE TODOS LOS CONTENEDORES */}
+      {isShareModalOpen && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.8)',
+          zIndex: 9999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <div style={{
+            backgroundColor: 'white',
+            padding: '20px',
+            borderRadius: '8px',
+            maxWidth: '400px',
+            width: '90%',
+            color: 'black'
+          }}>
+            <h2>¡MODAL FUNCIONA!</h2>
+            <p>Este es el modal de compartir</p>
+            <button
+              onClick={() => setIsShareModalOpen(false)}
+              style={{
+                padding: '10px 20px',
+                backgroundColor: '#007bff',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
