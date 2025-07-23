@@ -564,14 +564,14 @@ export default function Index() {
                     <h3 className="text-base font-semibold text-foreground">
                       Copiar enlace
                     </h3>
-                    <div className="flex items-center space-x-3">
-                      <div className="flex-1 p-4 bg-muted/50 border rounded-lg text-sm font-mono truncate">
+                    <div className="flex items-center space-x-2">
+                      <div className="flex-1 p-3 bg-muted/50 border rounded-lg text-sm font-mono truncate">
                         {window.location.href}
                       </div>
                       <Button
-                        size="default"
+                        size="sm"
                         onClick={copyToClipboard}
-                        className={`px-4 py-2 transition-all duration-300 ${
+                        className={`px-3 py-2 transition-all duration-300 shrink-0 ${
                           copySuccess
                             ? "bg-green-600 hover:bg-green-700 text-white"
                             : "bg-primary hover:bg-primary/90"
@@ -579,13 +579,13 @@ export default function Index() {
                       >
                         {copySuccess ? (
                           <>
-                            <Check className="h-4 w-4 mr-2" />
-                            Copiado
+                            <Check className="h-4 w-4 sm:mr-2" />
+                            <span className="hidden sm:inline">Copiado</span>
                           </>
                         ) : (
                           <>
-                            <Copy className="h-4 w-4 mr-2" />
-                            Copiar
+                            <Copy className="h-4 w-4 sm:mr-2" />
+                            <span className="hidden sm:inline">Copiar</span>
                           </>
                         )}
                       </Button>
