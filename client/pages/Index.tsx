@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import {
   Play,
   Music,
@@ -10,7 +11,11 @@ import {
   Youtube,
   Music2,
   Headphones,
+  Copy,
+  Check,
+  X,
 } from "lucide-react";
+import { useState } from "react";
 
 export default function Index() {
   const handleShare = async () => {
