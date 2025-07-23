@@ -126,6 +126,14 @@
     -webkit-filter: none !important;
     filter: none !important;
   }
+
+  /* Prevenir efectos después de usar Web Share API */
+  html:focus-within,
+  body:focus-within {
+    -webkit-filter: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
 }
 
 @layer utilities {
