@@ -25,6 +25,11 @@ import { useState, useEffect, useCallback } from "react";
 
 export default function Index() {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+
+  // Debug logging for modal state
+  useEffect(() => {
+    console.log("Modal state changed:", isShareModalOpen);
+  }, [isShareModalOpen]);
   const [copySuccess, setCopySuccess] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
