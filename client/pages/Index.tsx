@@ -34,23 +34,32 @@ export default function Index() {
       url: window.location.href,
     };
 
-    // Detectar si es móvil
-    const isMobile =
-      /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent,
-      );
+    // Detectar si es móvil y si soporta Web Share API
+    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    ) || /Mobi|Android/i.test(navigator.userAgent) || window.innerWidth <= 768;
 
-    if (isMobile && navigator.share) {
-      // En móviles usar Web Share API nativa
+    const supportsWebShare = 'share' in navigator && navigator.canShare && navigator.canShare(shareData);
+
+    console.log('Es móvil:', isMobile);
+    console.log('Soporta Web Share:', supportsWebShare);
+    console.log('Navigator.share existe:', 'share' in navigator);
+
+    // En móviles con soporte nativo, usar Web Share API
+    if (isMobile && 'share' in navigator) {
       try {
         await navigator.share(shareData);
+        console.log('Compartido con éxito usando Web Share API');
+        return; // Salir de la función para no abrir el modal
       } catch (error) {
-        console.log("Error al compartir:", error);
+        console.log("Error al compartir con Web Share API:", error);
+        // Si falla, continuar para abrir el modal
       }
-    } else {
-      // En PC abrir modal personalizado
-      setIsShareModalOpen(true);
     }
+
+    // En PC o si falló la API nativa, abrir modal personalizado
+    console.log('Abriendo modal de compartir');
+    setIsShareModalOpen(true);
   };
 
   const copyToClipboard = async () => {
