@@ -609,11 +609,13 @@ export default function Index() {
                   </div>
                 </div>
               </Button>
-              <DialogContent className={`sm:max-w-[460px] max-w-[95vw] border border-border/30 shadow-3xl rounded-2xl ${
-                isMobile
-                  ? "bg-background border-border"
-                  : "bg-gradient-to-br from-card/95 via-background/95 to-card/95 backdrop-blur-xl"
-              }`}>
+              <DialogContent
+                className={`sm:max-w-[460px] max-w-[95vw] border border-border/30 shadow-3xl rounded-2xl ${
+                  isMobile
+                    ? "bg-background border-border"
+                    : "bg-gradient-to-br from-card/95 via-background/95 to-card/95 backdrop-blur-xl"
+                }`}
+              >
                 {/* Efectos de fondo decorativos - solo en desktop */}
                 {!isMobile && (
                   <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 rounded-2xl blur-sm opacity-75"></div>
@@ -636,9 +638,11 @@ export default function Index() {
                         Copiar enlace
                       </h3>
                       <div className="flex items-center gap-3">
-                        <div className={`flex-1 p-3 bg-muted/50 border border-border/50 rounded-xl text-xs font-mono text-foreground/80 truncate ${
-                          !isMobile ? "backdrop-blur-sm" : ""
-                        }`}>
+                        <div
+                          className={`flex-1 p-3 bg-muted/50 border border-border/50 rounded-xl text-xs font-mono text-foreground/80 truncate ${
+                            !isMobile ? "backdrop-blur-sm" : ""
+                          }`}
+                        >
                           hunterx.fly.dev
                         </div>
                         <Button
