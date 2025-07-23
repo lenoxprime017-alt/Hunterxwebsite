@@ -117,44 +117,20 @@
     overflow: hidden;
   }
 
-  /* Custom styles for Instagram embeds - hide unwanted elements */
+  /* Custom styles for Instagram embeds - clean and well designed */
   .instagram-embed {
     border-radius: 16px !important;
     overflow: hidden !important;
-    transform: scale(1.15) translateY(-30px) !important;
-    transform-origin: center top !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 
-  /* Hide Instagram branding and unwanted elements */
+  /* Enhanced Instagram embeds styling */
   iframe[src*="instagram.com"] {
     border-radius: 16px !important;
-    overflow: hidden !important;
-    filter: brightness(1.1) contrast(1.05) saturate(1.1);
-  }
-
-  /* Hide specific Instagram UI elements via CSS */
-  .instagram-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 25px;
-    background: var(--background);
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  .instagram-container::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 25px;
-    background: var(--background);
-    z-index: 1;
-    pointer-events: none;
+    border: none !important;
+    filter: brightness(1.05) contrast(1.02) saturate(1.05);
+    transition: all 0.3s ease;
   }
 
   /* Better mobile touch targets */
