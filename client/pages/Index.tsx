@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Play, Music, Heart, Share2, Instagram, Youtube, Spotify, Apple } from "lucide-react";
+import { Play, Music, Heart, Share2, Instagram, Youtube, Music2, Headphones } from "lucide-react";
 
 export default function Index() {
   return (
