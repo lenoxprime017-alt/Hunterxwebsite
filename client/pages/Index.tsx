@@ -670,31 +670,192 @@ export default function Index() {
         </div>
       </footer>
 
-      {/* MODAL SUPER BÁSICO SIN EVENT HANDLERS */}
+      {/* MODAL DE COMPARTIR FUNCIONAL */}
       {isShareModalOpen && (
         <div
           style={{
             position: 'fixed',
-            top: '50px',
-            left: '50px',
-            right: '50px',
-            bottom: '50px',
-            backgroundColor: 'red',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0,0,0,0.75)',
             zIndex: 99999,
-            border: '5px solid blue',
-            display: 'block'
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px'
           }}
         >
           <div style={{
-            backgroundColor: 'white',
-            padding: '20px',
-            color: 'black',
-            fontSize: '24px',
-            fontWeight: 'bold'
+            backgroundColor: 'hsl(var(--background))',
+            border: '1px solid hsl(var(--border))',
+            borderRadius: '12px',
+            padding: '24px',
+            maxWidth: '400px',
+            width: '100%',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+            color: 'hsl(var(--foreground))'
           }}>
-            <h1>MODAL ESTÁ AQUÍ!</h1>
-            <h2>¡FUNCIONA!</h2>
-            <p>Estado: {isShareModalOpen ? 'ABIERTO' : 'CERRADO'}</p>
+            {/* Header */}
+            <div style={{ marginBottom: '20px', textAlign: 'center' }}>
+              <h2 style={{
+                fontSize: '24px',
+                fontWeight: 'bold',
+                marginBottom: '8px',
+                background: 'linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)))',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>
+                Compartir HUNTERX
+              </h2>
+              <p style={{ color: 'hsl(var(--muted-foreground))', fontSize: '14px' }}>
+                Comparte mi música con tus amigos y familiares
+              </p>
+            </div>
+
+            {/* Botón Copiar Enlace */}
+            <div style={{ marginBottom: '20px' }}>
+              <button
+                onClick={copyToClipboard}
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  backgroundColor: copySuccess ? '#22c55e' : 'hsl(var(--primary))',
+                  color: copySuccess ? 'white' : 'hsl(var(--primary-foreground))',
+                  border: 'none',
+                  borderRadius: '8px',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px'
+                }}
+              >
+                {copySuccess ? (
+                  <>
+                    <Check className="h-4 w-4" />
+                    ¡Enlace copiado!
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-4 w-4" />
+                    Copiar enlace
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* Redes Sociales */}
+            <div style={{ marginBottom: '20px' }}>
+              <p style={{
+                fontSize: '14px',
+                fontWeight: '600',
+                marginBottom: '12px',
+                color: 'hsl(var(--foreground))'
+              }}>
+                Compartir en redes sociales
+              </p>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '8px'
+              }}>
+                <button
+                  onClick={() => shareToSocial("twitter")}
+                  style={{
+                    padding: '10px',
+                    backgroundColor: 'transparent',
+                    border: '1px solid hsl(var(--border))',
+                    borderRadius: '6px',
+                    fontSize: '12px',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px',
+                    color: 'hsl(var(--foreground))'
+                  }}
+                >
+                  <X className="w-3 h-3" />
+                  Twitter
+                </button>
+                <button
+                  onClick={() => shareToSocial("facebook")}
+                  style={{
+                    padding: '10px',
+                    backgroundColor: 'transparent',
+                    border: '1px solid hsl(var(--border))',
+                    borderRadius: '6px',
+                    fontSize: '12px',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px',
+                    color: 'hsl(var(--foreground))'
+                  }}
+                >
+                  Facebook
+                </button>
+                <button
+                  onClick={() => shareToSocial("whatsapp")}
+                  style={{
+                    padding: '10px',
+                    backgroundColor: 'transparent',
+                    border: '1px solid hsl(var(--border))',
+                    borderRadius: '6px',
+                    fontSize: '12px',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px',
+                    color: 'hsl(var(--foreground))'
+                  }}
+                >
+                  WhatsApp
+                </button>
+                <button
+                  onClick={() => shareToSocial("telegram")}
+                  style={{
+                    padding: '10px',
+                    backgroundColor: 'transparent',
+                    border: '1px solid hsl(var(--border))',
+                    borderRadius: '6px',
+                    fontSize: '12px',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px',
+                    color: 'hsl(var(--foreground))'
+                  }}
+                >
+                  Telegram
+                </button>
+              </div>
+            </div>
+
+            {/* Botón Cerrar */}
+            <button
+              onClick={() => setIsShareModalOpen(false)}
+              style={{
+                width: '100%',
+                padding: '10px',
+                backgroundColor: 'transparent',
+                border: '1px solid hsl(var(--border))',
+                borderRadius: '6px',
+                fontSize: '14px',
+                cursor: 'pointer',
+                color: 'hsl(var(--muted-foreground))'
+              }}
+            >
+              Cerrar
+            </button>
           </div>
         </div>
       )}
