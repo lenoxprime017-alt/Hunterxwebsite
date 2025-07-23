@@ -613,11 +613,14 @@ export default function Index() {
               size="lg"
               className="w-full justify-start h-16 group hover:bg-primary hover:text-primary-foreground"
               onClick={() => {
+                console.log("Share button clicked!", { isMobile, hasWebShare: "share" in navigator });
                 // En móviles con Web Share API, usar función nativa
                 if (isMobile && "share" in navigator) {
+                  console.log("Using mobile Web Share API");
                   handleMobileShare();
                 } else {
                   // En PC, abrir modal
+                  console.log("Opening modal on PC");
                   setIsShareModalOpen(true);
                 }
               }}
