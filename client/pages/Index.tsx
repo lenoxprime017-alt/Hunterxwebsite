@@ -360,17 +360,17 @@ export default function Index() {
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
+          <div className="max-w-2xl mx-auto space-y-4">
             <Button
               variant="outline"
               size="lg"
-              className="w-full justify-start h-20 sm:h-24 group hover:bg-green-600 hover:text-white transition-all duration-300 border-2 hover:border-green-600 hover:shadow-xl"
+              className="w-full justify-start h-16 group hover:bg-green-600 hover:text-white transition-all duration-300"
               onClick={() => alert('Busca "HUNTERX" en Spotify')}
             >
-              <Music2 className="mr-6 h-8 w-8 sm:h-10 sm:w-10 text-green-500 group-hover:text-current transition-colors" />
+              <Music2 className="mr-4 h-6 w-6 text-green-500 group-hover:text-current transition-colors" />
               <div className="flex-1 text-left">
-                <div className="font-bold text-lg sm:text-xl lg:text-2xl">Spotify</div>
-                <div className="text-base sm:text-lg opacity-70">
+                <div className="font-semibold">Spotify</div>
+                <div className="text-sm opacity-70">
                   Escucha mi música completa
                 </div>
               </div>
