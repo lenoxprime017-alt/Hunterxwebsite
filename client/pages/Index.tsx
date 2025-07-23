@@ -21,11 +21,30 @@ import {
   Check,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export default function Index() {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  // Detectar móvil al cargar la página
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent,
+      ) || window.innerWidth <= 768;
+      setIsMobile(mobile);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const handleVideoLoad = useCallback(() => {
+    setVideoLoaded(true);
+  }, []);
 
   const handleShare = async () => {
     const shareData = {
@@ -112,17 +131,28 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10" translate="no">
       {/* Hero Section */}
       <section className="relative overflow-hidden h-screen">
         <video
-          className="absolute inset-0 w-full h-full object-cover"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+            videoLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
           src="https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2"
           autoPlay
           loop
           muted={true}
           playsInline
+          preload={isMobile ? "metadata" : "auto"}
+          onLoadedData={handleVideoLoad}
+          onCanPlayThrough={handleVideoLoad}
+          poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080'%3E%3Crect width='100%25' height='100%25' fill='%23111827'/%3E%3C/svg%3E"
         />
+        {!videoLoaded && (
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
+            <div className="animate-pulse text-primary text-lg font-medium">Cargando...</div>
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
         <div className="relative h-full flex items-center">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -193,11 +223,13 @@ export default function Index() {
                 <div className="relative aspect-video">
                   <iframe
                     className="w-full h-full rounded-lg"
-                    src="https://www.youtube.com/embed/4kHW5ZkYHIQ"
+                    src="https://www.youtube.com/embed/4kHW5ZkYHIQ?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1&origin=https://hunterx.fly.dev"
                     title="HUNTERX - Última Canción"
                     frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
+                    loading="lazy"
+                    importance="high"
                   />
                 </div>
               </CardContent>
@@ -210,11 +242,12 @@ export default function Index() {
                   <div className="relative aspect-video">
                     <iframe
                       className="w-full h-full rounded-lg"
-                      src="https://www.youtube.com/embed/JTwL53RpQls"
+                      src="https://www.youtube.com/embed/JTwL53RpQls?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1&origin=https://hunterx.fly.dev"
                       title="HUNTERX - Video 2"
                       frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
+                      loading="lazy"
                     />
                   </div>
                 </CardContent>
@@ -225,11 +258,12 @@ export default function Index() {
                   <div className="relative aspect-video">
                     <iframe
                       className="w-full h-full rounded-lg"
-                      src="https://www.youtube.com/embed/BzivzcIRpOM"
+                      src="https://www.youtube.com/embed/BzivzcIRpOM?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1&origin=https://hunterx.fly.dev"
                       title="HUNTERX - Video 3"
                       frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
+                      loading="lazy"
                     />
                   </div>
                 </CardContent>
@@ -240,11 +274,12 @@ export default function Index() {
                   <div className="relative aspect-video">
                     <iframe
                       className="w-full h-full rounded-lg"
-                      src="https://www.youtube.com/embed/tsPldB4iXpE"
+                      src="https://www.youtube.com/embed/tsPldB4iXpE?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1&origin=https://hunterx.fly.dev"
                       title="HUNTERX - Video 4"
                       frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
+                      loading="lazy"
                     />
                   </div>
                 </CardContent>
@@ -311,6 +346,7 @@ export default function Index() {
                       allowTransparency
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
                       loading="lazy"
+                      importance="low"
                     />
                   </div>
                 </CardContent>
@@ -335,6 +371,7 @@ export default function Index() {
                       allowTransparency
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
                       loading="lazy"
+                      importance="low"
                     />
                   </div>
                 </CardContent>
@@ -359,6 +396,7 @@ export default function Index() {
                       allowTransparency
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
                       loading="lazy"
+                      importance="low"
                     />
                   </div>
                 </CardContent>
@@ -383,6 +421,7 @@ export default function Index() {
                       allowTransparency
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
                       loading="lazy"
+                      importance="low"
                     />
                   </div>
                 </CardContent>
@@ -407,6 +446,7 @@ export default function Index() {
                       allowTransparency
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
                       loading="lazy"
+                      importance="low"
                     />
                   </div>
                 </CardContent>
@@ -431,6 +471,7 @@ export default function Index() {
                       allowTransparency
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
                       loading="lazy"
+                      importance="low"
                     />
                   </div>
                 </CardContent>
