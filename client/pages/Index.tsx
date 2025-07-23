@@ -636,7 +636,9 @@ export default function Index() {
                         Copiar enlace
                       </h3>
                       <div className="flex items-center gap-3">
-                        <div className="flex-1 p-3 bg-muted/50 border border-border/50 rounded-xl text-xs font-mono text-foreground/80 truncate backdrop-blur-sm">
+                        <div className={`flex-1 p-3 bg-muted/50 border border-border/50 rounded-xl text-xs font-mono text-foreground/80 truncate ${
+                          !isMobile ? "backdrop-blur-sm" : ""
+                        }`}>
                           hunterx.fly.dev
                         </div>
                         <Button
