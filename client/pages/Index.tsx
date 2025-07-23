@@ -62,16 +62,15 @@ export default function Index() {
             {/* Main Featured Video */}
             <Card className="md:col-span-2 overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
               <CardContent className="p-0">
-                <div className="relative aspect-video bg-gradient-to-br from-primary/20 to-secondary/20">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-primary/90 backdrop-blur-sm rounded-full p-6 group-hover:scale-110 transition-transform cursor-pointer">
-                      <Play className="w-12 h-12 text-primary-foreground fill-current" />
-                    </div>
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                    <h3 className="text-xl font-bold text-white mb-2">Último Video Oficial</h3>
-                    <p className="text-gray-200">Música urbana cristiana que impacta corazones</p>
-                  </div>
+                <div className="relative aspect-video">
+                  <iframe
+                    className="w-full h-full rounded-lg"
+                    src="https://www.youtube.com/embed/tsPldB4iXpE"
+                    title="HUNTERX - Video Principal"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
                 </div>
               </CardContent>
             </Card>
@@ -79,32 +78,48 @@ export default function Index() {
             {/* Secondary Videos */}
             <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
               <CardContent className="p-0">
-                <div className="relative aspect-video bg-gradient-to-br from-secondary/20 to-accent/20">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-secondary/90 backdrop-blur-sm rounded-full p-4 group-hover:scale-110 transition-transform cursor-pointer">
-                      <Play className="w-8 h-8 text-secondary-foreground fill-current" />
-                    </div>
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                    <h4 className="text-lg font-bold text-white mb-1">Testimonio</h4>
-                    <p className="text-gray-200 text-sm">Mi historia de transformación</p>
-                  </div>
+                <div className="relative aspect-video">
+                  <iframe
+                    className="w-full h-full rounded-lg"
+                    src="https://www.youtube.com/embed/JTwL53RpQls"
+                    title="HUNTERX - Video 2"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
                 </div>
               </CardContent>
             </Card>
 
             <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
               <CardContent className="p-0">
-                <div className="relative aspect-video bg-gradient-to-br from-accent/20 to-primary/20">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-accent/90 backdrop-blur-sm rounded-full p-4 group-hover:scale-110 transition-transform cursor-pointer">
-                      <Play className="w-8 h-8 text-accent-foreground fill-current" />
-                    </div>
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                    <h4 className="text-lg font-bold text-white mb-1">Live Session</h4>
-                    <p className="text-gray-200 text-sm">Acústico desde el estudio</p>
-                  </div>
+                <div className="relative aspect-video">
+                  <iframe
+                    className="w-full h-full rounded-lg"
+                    src="https://www.youtube.com/embed/BzivzcIRpOM"
+                    title="HUNTERX - Video 3"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Fourth Video - Additional Row */}
+          <div className="mt-8 max-w-3xl mx-auto">
+            <Card className="overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+              <CardContent className="p-0">
+                <div className="relative aspect-video">
+                  <iframe
+                    className="w-full h-full rounded-lg"
+                    src="https://www.youtube.com/embed/4kHW5ZkYHIQ"
+                    title="HUNTERX - Video 4"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
                 </div>
               </CardContent>
             </Card>
