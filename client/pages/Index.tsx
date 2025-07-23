@@ -19,7 +19,7 @@ export default function Index() {
                 HUNTERX
               </h1>
               <p className="text-xl lg:text-2xl text-muted-foreground mb-8 max-w-lg">
-                Llevando el mensaje de Cristo a través de beats urbanos que transforman corazones
+                Música urbana con propósito. Llevando esperanza y fe a las calles través de letras que transforman vidas.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button size="lg" className="group">
