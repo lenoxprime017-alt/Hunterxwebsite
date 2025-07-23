@@ -651,61 +651,43 @@ export default function Index() {
               </div>
             </Button>
 
-            {/* Custom Modal - Sin Radix UI */}
+            {/* MODAL DE PRUEBA EXTREMADAMENTE SIMPLE */}
             {isShareModalOpen && (
-              <div
-                className="fixed inset-0 z-[300] flex items-center justify-center"
-                onClick={() => setIsShareModalOpen(false)}
-              >
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-
-                {/* Modal Content */}
-                <div
-                  className="relative bg-background border border-border rounded-lg p-6 m-4 max-w-md w-full shadow-2xl"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  {/* Close button */}
+              <div style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                zIndex: 9999,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{
+                  backgroundColor: 'white',
+                  padding: '20px',
+                  borderRadius: '8px',
+                  maxWidth: '400px',
+                  width: '90%',
+                  color: 'black'
+                }}>
+                  <h2>¡MODAL FUNCIONA!</h2>
+                  <p>Este es el modal de compartir</p>
                   <button
-                    className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
                     onClick={() => setIsShareModalOpen(false)}
+                    style={{
+                      padding: '10px 20px',
+                      backgroundColor: '#007bff',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '4px',
+                      cursor: 'pointer'
+                    }}
                   >
-                    <X className="h-4 w-4" />
+                    Cerrar
                   </button>
-
-                  {/* Header */}
-                  <div className="mb-6">
-                    <h2 className="text-xl font-bold">Compartir HUNTERX</h2>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      Comparte mi música con tus amigos
-                    </p>
-                  </div>
-
-                  {/* Content */}
-                  <div className="space-y-4">
-                    <div className="flex gap-2">
-                      <Button onClick={copyToClipboard} className="flex-1">
-                        <Copy className="h-4 w-4 mr-2" />
-                        {copySuccess ? "¡Copiado!" : "Copiar enlace"}
-                      </Button>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-2">
-                      <Button variant="outline" onClick={() => shareToSocial("twitter")}>
-                        <X className="h-4 w-4 mr-2" />
-                        Twitter
-                      </Button>
-                      <Button variant="outline" onClick={() => shareToSocial("facebook")}>
-                        Facebook
-                      </Button>
-                      <Button variant="outline" onClick={() => shareToSocial("whatsapp")}>
-                        WhatsApp
-                      </Button>
-                      <Button variant="outline" onClick={() => shareToSocial("telegram")}>
-                        Telegram
-                      </Button>
-                    </div>
-                  </div>
                 </div>
               </div>
             )}
