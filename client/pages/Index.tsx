@@ -658,18 +658,8 @@ export default function Index() {
             </Button>
 
             <Dialog open={isShareModalOpen} onOpenChange={setIsShareModalOpen}>
-              <DialogContent
-                className={`sm:max-w-[460px] max-w-[95vw] border border-border/30 shadow-3xl rounded-2xl ${
-                  isMobile
-                    ? "bg-background border-border"
-                    : "bg-gradient-to-br from-card/95 via-background/95 to-card/95 backdrop-blur-xl"
-                }`}
-              >
-                {/* Efectos de fondo decorativos - solo en desktop */}
-                {!isMobile && (
-                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 rounded-2xl blur-sm opacity-75"></div>
-                )}
-                <div className="relative">
+              <DialogContent className="bg-background border border-border">
+                <div>
                   <DialogHeader className="space-y-4 pb-6">
                     <DialogTitle className="text-center text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                       Compartir HUNTERX
