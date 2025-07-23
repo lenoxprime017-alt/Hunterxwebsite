@@ -558,7 +558,7 @@ export default function Index() {
                     Compartir HUNTERX
                   </DialogTitle>
                 </DialogHeader>
-                <div className="space-y-8 py-6">
+                <div className="space-y-6 py-4">
                   {/* Copiar enlace */}
                   <div className="space-y-4">
                     <h3 className="text-base font-semibold text-foreground">
