@@ -137,22 +137,22 @@ export default function Index() {
       </section>
 
       {/* Instagram Posts Section */}
-      <section className="py-20 lg:py-32 relative overflow-hidden">
+      <section className="py-16 sm:py-20 lg:py-32 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card/50" />
         <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-secondary/5" />
 
         <div className="container mx-auto px-4 relative">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 sm:mb-16">
             <div className="inline-flex items-center gap-2 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
-                <Instagram className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                <Instagram className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <h2 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 bg-clip-text text-transparent">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 bg-clip-text text-transparent">
                 Instagram
               </h2>
             </div>
-            <p className="text-muted-foreground text-xl max-w-3xl mx-auto mb-8">
+            <p className="text-muted-foreground text-lg sm:text-xl max-w-3xl mx-auto mb-6 sm:mb-8 px-4 sm:px-0">
               Sígueme para contenido exclusivo, detrás de cámaras y las últimas
               noticias
             </p>
@@ -171,7 +171,7 @@ export default function Index() {
             </Button>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
             {/* Instagram Post 1 */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
