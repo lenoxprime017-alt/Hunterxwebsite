@@ -177,35 +177,27 @@ export default function Index() {
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 max-w-8xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
             {/* Instagram Post 1 */}
             <div className="group relative">
-              <div className="absolute -inset-3 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+              <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-primary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
-                  <div className="relative overflow-hidden bg-background">
+                  <div className="relative aspect-square overflow-hidden bg-background rounded-xl">
                     <iframe
-                      src="https://www.instagram.com/p/DL5CtHzt0Zd/embed/captioned/?cr=1&v=14&wp=540&rd=https%3A%2F%2Fbuilder.io&rp=%2F#%7B%22ci%22%3A0%2C%22os%22%3A780%7D"
-                      width="100%"
-                      height="640"
+                      src="https://www.instagram.com/p/DL5CtHzt0Zd/embed/"
+                      width="400"
+                      height="480"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                       style={{
-                        filter: "brightness(1.1) contrast(1.05)",
-                        aspectRatio: "1/1"
+                        transform: "scale(1.2) translateY(-50px)",
+                        transformOrigin: "center center"
                       }}
                     />
-                    <style jsx>{`
-                      iframe {
-                        border-radius: 16px;
-                      }
-                      iframe::-webkit-scrollbar {
-                        display: none;
-                      }
-                    `}</style>
                   </div>
                 </CardContent>
               </Card>
@@ -213,22 +205,22 @@ export default function Index() {
 
             {/* Instagram Post 2 */}
             <div className="group relative">
-              <div className="absolute -inset-3 bg-gradient-to-r from-purple-500 via-orange-500 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+              <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-orange-500 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-secondary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
-                  <div className="relative overflow-hidden bg-background">
+                  <div className="relative aspect-square overflow-hidden bg-background rounded-xl">
                     <iframe
-                      src="https://www.instagram.com/p/DL5yywlOrvk/embed/captioned/?cr=1&v=14&wp=540&rd=https%3A%2F%2Fbuilder.io&rp=%2F#%7B%22ci%22%3A0%2C%22os%22%3A780%7D"
-                      width="100%"
-                      height="640"
+                      src="https://www.instagram.com/p/DL5yywlOrvk/embed/"
+                      width="400"
+                      height="480"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                       style={{
-                        filter: "brightness(1.1) contrast(1.05)",
-                        aspectRatio: "1/1"
+                        transform: "scale(1.2) translateY(-50px)",
+                        transformOrigin: "center center"
                       }}
                     />
                   </div>
@@ -238,22 +230,22 @@ export default function Index() {
 
             {/* Instagram Post 3 */}
             <div className="group relative">
-              <div className="absolute -inset-3 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+              <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-accent/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
-                  <div className="relative overflow-hidden bg-background">
+                  <div className="relative aspect-square overflow-hidden bg-background rounded-xl">
                     <iframe
-                      src="https://www.instagram.com/p/DCzzvj0vzTv/embed/captioned/?cr=1&v=14&wp=540&rd=https%3A%2F%2Fbuilder.io&rp=%2F#%7B%22ci%22%3A0%2C%22os%22%3A780%7D"
-                      width="100%"
-                      height="640"
+                      src="https://www.instagram.com/p/DCzzvj0vzTv/embed/"
+                      width="400"
+                      height="480"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                       style={{
-                        filter: "brightness(1.1) contrast(1.05)",
-                        aspectRatio: "1/1"
+                        transform: "scale(1.2) translateY(-50px)",
+                        transformOrigin: "center center"
                       }}
                     />
                   </div>
@@ -263,22 +255,22 @@ export default function Index() {
 
             {/* Instagram Post 4 */}
             <div className="group relative">
-              <div className="absolute -inset-3 bg-gradient-to-r from-pink-500 via-orange-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+              <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-orange-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-primary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
-                  <div className="relative overflow-hidden bg-background">
+                  <div className="relative aspect-square overflow-hidden bg-background rounded-xl">
                     <iframe
-                      src="https://www.instagram.com/p/DMNv9T8tjAC/embed/captioned/?cr=1&v=14&wp=540&rd=https%3A%2F%2Fbuilder.io&rp=%2F#%7B%22ci%22%3A0%2C%22os%22%3A780%7D"
-                      width="100%"
-                      height="640"
+                      src="https://www.instagram.com/p/DMNv9T8tjAC/embed/"
+                      width="400"
+                      height="480"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                       style={{
-                        filter: "brightness(1.1) contrast(1.05)",
-                        aspectRatio: "1/1"
+                        transform: "scale(1.2) translateY(-50px)",
+                        transformOrigin: "center center"
                       }}
                     />
                   </div>
@@ -288,22 +280,22 @@ export default function Index() {
 
             {/* Instagram Post 5 */}
             <div className="group relative">
-              <div className="absolute -inset-3 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+              <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-secondary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
-                  <div className="relative overflow-hidden bg-background">
+                  <div className="relative aspect-square overflow-hidden bg-background rounded-xl">
                     <iframe
-                      src="https://www.instagram.com/p/DMGnYA-PnYD/embed/captioned/?cr=1&v=14&wp=540&rd=https%3A%2F%2Fbuilder.io&rp=%2F#%7B%22ci%22%3A0%2C%22os%22%3A780%7D"
-                      width="100%"
-                      height="640"
+                      src="https://www.instagram.com/p/DMGnYA-PnYD/embed/"
+                      width="400"
+                      height="480"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                       style={{
-                        filter: "brightness(1.1) contrast(1.05)",
-                        aspectRatio: "1/1"
+                        transform: "scale(1.2) translateY(-50px)",
+                        transformOrigin: "center center"
                       }}
                     />
                   </div>
@@ -313,22 +305,22 @@ export default function Index() {
 
             {/* Instagram Post 6 */}
             <div className="group relative">
-              <div className="absolute -inset-3 bg-gradient-to-r from-orange-500 via-purple-500 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+              <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 via-purple-500 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-accent/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
-                  <div className="relative overflow-hidden bg-background">
+                  <div className="relative aspect-square overflow-hidden bg-background rounded-xl">
                     <iframe
-                      src="https://www.instagram.com/p/DMBdwi4OLaR/embed/captioned/?cr=1&v=14&wp=540&rd=https%3A%2F%2Fbuilder.io&rp=%2F#%7B%22ci%22%3A0%2C%22os%22%3A780%7D"
-                      width="100%"
-                      height="640"
+                      src="https://www.instagram.com/p/DMBdwi4OLaR/embed/"
+                      width="400"
+                      height="480"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                       style={{
-                        filter: "brightness(1.1) contrast(1.05)",
-                        aspectRatio: "1/1"
+                        transform: "scale(1.2) translateY(-50px)",
+                        transformOrigin: "center center"
                       }}
                     />
                   </div>
@@ -445,7 +437,7 @@ export default function Index() {
               <div className="flex-1 text-left">
                 <div className="font-bold text-lg sm:text-xl lg:text-2xl">Compartir</div>
                 <div className="text-base sm:text-lg opacity-70">
-                  Comparte mi m��sica con otros
+                  Comparte mi música con otros
                 </div>
               </div>
             </Button>
