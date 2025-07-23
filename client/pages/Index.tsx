@@ -27,25 +27,25 @@ export default function Index() {
           volume={0}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40" />
-        <div className="relative container mx-auto px-4 py-20 lg:py-32">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
+        <div className="relative container mx-auto px-4 py-16 sm:py-20 lg:py-32">
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
             <div className="flex-1 text-center lg:text-left">
               <Badge variant="secondary" className="mb-4 text-sm font-semibold">
                 Música Urbana Cristiana
               </Badge>
-              <h1 className="text-5xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent leading-tight">
                 HUNTERX
               </h1>
-              <p className="text-xl lg:text-2xl text-muted-foreground mb-8 max-w-lg">
+              <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-6 sm:mb-8 max-w-lg leading-relaxed">
                 Música urbana con propósito. Llevando esperanza y fe a las
                 calles través de letras que transforman vidas.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button size="lg" className="group">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start w-full sm:w-auto">
+                <Button size="lg" className="group w-full sm:w-auto h-12 sm:h-auto text-base sm:text-lg">
                   <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                   Escuchar Ahora
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto h-12 sm:h-auto text-base sm:text-lg">
                   <Heart className="mr-2 h-5 w-5" />
                   Seguir
                 </Button>
