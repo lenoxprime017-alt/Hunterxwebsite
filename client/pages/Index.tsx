@@ -660,13 +660,10 @@ export default function Index() {
             <Dialog open={isShareModalOpen} onOpenChange={setIsShareModalOpen}>
               <DialogContent className="bg-background border border-border">
                 <div>
-                  <DialogHeader className="space-y-4 pb-6">
-                    <DialogTitle className="text-center text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  <DialogHeader>
+                    <DialogTitle>
                       Compartir HUNTERX
                     </DialogTitle>
-                    <p className="text-center text-muted-foreground text-sm">
-                      Comparte mi música con tus amigos y familiares
-                    </p>
                   </DialogHeader>
 
                   <div className="space-y-6">
