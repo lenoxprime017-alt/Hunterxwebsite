@@ -47,77 +47,55 @@ export default function Index() {
     setVideoLoaded(true);
   }, []);
 
-  const handleShare = async (e: React.MouseEvent) => {
+  const handleMobileShare = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     const shareData = {
       title: "HUNTERX - Música Urbana Cristiana",
       text: "Descubre la música urbana con propósito de HUNTERX. Llevando esperanza y fe a las calles.",
       url: window.location.href,
     };
 
-    // Detectar si es móvil con múltiples métodos para mayor precisión
-    const isMobileDevice =
-      /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent,
-      ) ||
-      /Mobi|Android/i.test(navigator.userAgent) ||
-      window.innerWidth <= 768 ||
-      "ontouchstart" in window ||
-      navigator.maxTouchPoints > 0;
+    try {
+      await navigator.share(shareData);
 
-    // En móviles con soporte nativo, usar Web Share API
-    if (isMobileDevice && "share" in navigator) {
-      e.preventDefault(); // Prevenir que se abra el modal
+      // Prevenir efectos de blur/filtros después de compartir
+      const preventBlur = () => {
+        document.body.style.filter = "none";
+        document.body.style.webkitFilter = "none";
+        document.documentElement.style.filter = "none";
+        document.documentElement.style.webkitFilter = "none";
+      };
 
-      try {
-        await navigator.share(shareData);
+      preventBlur();
+      setTimeout(preventBlur, 100);
+      setTimeout(preventBlur, 500);
 
-        // Prevenir efectos de blur/filtros después de compartir
-        const preventBlur = () => {
-          document.body.style.filter = "none";
-          document.body.style.webkitFilter = "none";
-          document.documentElement.style.filter = "none";
-          document.documentElement.style.webkitFilter = "none";
-        };
-
-        // Aplicar inmediatamente y después de eventos
-        preventBlur();
-        setTimeout(preventBlur, 100);
-        setTimeout(preventBlur, 500);
-
-        // Event listeners para cuando la página recupera el foco
-        const handleVisibilityChange = () => {
-          if (!document.hidden) {
-            preventBlur();
-          }
-        };
-
-        const handleFocus = () => {
+      const handleVisibilityChange = () => {
+        if (!document.hidden) {
           preventBlur();
-        };
-
-        document.addEventListener("visibilitychange", handleVisibilityChange);
-        window.addEventListener("focus", handleFocus);
-
-        // Limpiar listeners después de 5 segundos
-        setTimeout(() => {
-          document.removeEventListener(
-            "visibilitychange",
-            handleVisibilityChange,
-          );
-          window.removeEventListener("focus", handleFocus);
-        }, 5000);
-
-        return; // Salir exitosamente, no abrir modal
-      } catch (error) {
-        // Si el usuario cancela o hay error, continuar para abrir el modal
-        if (error.name !== "AbortError") {
-          console.log("Error al compartir:", error);
         }
-      }
-    }
+      };
 
-    // En PC o si falló/no está disponible la API nativa, permitir que DialogTrigger abra el modal
-    // No hacemos e.preventDefault() aquí para que el DialogTrigger funcione
+      const handleFocus = () => {
+        preventBlur();
+      };
+
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+      window.addEventListener("focus", handleFocus);
+
+      setTimeout(() => {
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
+        window.removeEventListener("focus", handleFocus);
+      }, 5000);
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        console.log("Error al compartir:", error);
+      }
+      // Si falla, abrir modal
+      setIsShareModalOpen(true);
+    }
   };
 
   const copyToClipboard = async () => {
