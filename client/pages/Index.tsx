@@ -670,61 +670,31 @@ export default function Index() {
         </div>
       </footer>
 
-      {/* MODAL DE PRUEBA EXTREMADAMENTE SIMPLE - FUERA DE TODOS LOS CONTENEDORES */}
+      {/* MODAL SUPER BÁSICO SIN EVENT HANDLERS */}
       {isShareModalOpen && (
         <div
           style={{
             position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0,0,0,0.8)',
-            zIndex: 9999,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-          onClick={(e) => {
-            console.log('Overlay clicked, should close modal');
-            e.stopPropagation();
-            setIsShareModalOpen(false);
+            top: '50px',
+            left: '50px',
+            right: '50px',
+            bottom: '50px',
+            backgroundColor: 'red',
+            zIndex: 99999,
+            border: '5px solid blue',
+            display: 'block'
           }}
         >
-          <div
-            style={{
-              backgroundColor: 'white',
-              padding: '20px',
-              borderRadius: '8px',
-              maxWidth: '400px',
-              width: '90%',
-              color: 'black'
-            }}
-            onClick={(e) => {
-              console.log('Modal content clicked, should NOT close');
-              e.stopPropagation();
-            }}
-          >
-            <h2>¡MODAL FUNCIONA!</h2>
-            <p>Este es el modal de compartir</p>
-            <p>Estado modal: {isShareModalOpen ? 'ABIERTO' : 'CERRADO'}</p>
-            <button
-              onClick={(e) => {
-                console.log('Close button clicked');
-                e.stopPropagation();
-                setIsShareModalOpen(false);
-              }}
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#007bff',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer'
-              }}
-            >
-              Cerrar
-            </button>
+          <div style={{
+            backgroundColor: 'white',
+            padding: '20px',
+            color: 'black',
+            fontSize: '24px',
+            fontWeight: 'bold'
+          }}>
+            <h1>MODAL ESTÁ AQUÍ!</h1>
+            <h2>¡FUNCIONA!</h2>
+            <p>Estado: {isShareModalOpen ? 'ABIERTO' : 'CERRADO'}</p>
           </div>
         </div>
       )}
