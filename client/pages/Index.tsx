@@ -71,10 +71,10 @@ export default function Index() {
 
         // Prevenir efectos de blur/filtros después de compartir
         const preventBlur = () => {
-          document.body.style.filter = 'none';
-          document.body.style.webkitFilter = 'none';
-          document.documentElement.style.filter = 'none';
-          document.documentElement.style.webkitFilter = 'none';
+          document.body.style.filter = "none";
+          document.body.style.webkitFilter = "none";
+          document.documentElement.style.filter = "none";
+          document.documentElement.style.webkitFilter = "none";
         };
 
         // Aplicar inmediatamente y después de eventos
@@ -93,13 +93,16 @@ export default function Index() {
           preventBlur();
         };
 
-        document.addEventListener('visibilitychange', handleVisibilityChange);
-        window.addEventListener('focus', handleFocus);
+        document.addEventListener("visibilitychange", handleVisibilityChange);
+        window.addEventListener("focus", handleFocus);
 
         // Limpiar listeners después de 5 segundos
         setTimeout(() => {
-          document.removeEventListener('visibilitychange', handleVisibilityChange);
-          window.removeEventListener('focus', handleFocus);
+          document.removeEventListener(
+            "visibilitychange",
+            handleVisibilityChange,
+          );
+          window.removeEventListener("focus", handleFocus);
         }, 5000);
 
         return; // Salir exitosamente, no abrir modal
