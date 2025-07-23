@@ -603,7 +603,7 @@ export default function Index() {
                     <h3 className="text-base font-semibold text-foreground">
                       Compartir en redes sociales
                     </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
                       <Button
                         variant="outline"
                         onClick={() => shareToSocial("twitter")}
