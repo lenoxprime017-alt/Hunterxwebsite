@@ -143,28 +143,28 @@ export default function Index() {
       </section>
 
       {/* Instagram Posts Section */}
-      <section className="py-16 sm:py-20 lg:py-32 relative overflow-hidden">
+      <section className="py-20 sm:py-24 lg:py-32 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card/50" />
         <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-secondary/5" />
 
-        <div className="container mx-auto px-4 relative">
-          <div className="text-center mb-12 sm:mb-16">
-            <div className="inline-flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
-                <Instagram className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-16 sm:mb-20 lg:mb-24">
+            <div className="inline-flex items-center gap-3 sm:gap-4 mb-8">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center shadow-xl">
+                <Instagram className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-white" />
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 bg-clip-text text-transparent">
+              <h2 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 bg-clip-text text-transparent tracking-tight">
                 Instagram
               </h2>
             </div>
-            <p className="text-muted-foreground text-lg sm:text-xl max-w-3xl mx-auto mb-6 sm:mb-8 px-4 sm:px-0">
+            <p className="text-muted-foreground text-xl sm:text-2xl lg:text-3xl max-w-4xl mx-auto mb-8 sm:mb-12 px-4 sm:px-0 leading-relaxed">
               Sígueme para contenido exclusivo, detrás de cámaras y las últimas
               noticias
             </p>
             <Button
               size="lg"
-              className="group bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 hover:from-pink-600 hover:via-purple-600 hover:to-orange-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="group bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 hover:from-pink-600 hover:via-purple-600 hover:to-orange-600 text-white border-0 shadow-xl hover:shadow-2xl transition-all duration-300 h-14 sm:h-16 px-8 sm:px-12 text-lg sm:text-xl"
               onClick={() =>
                 window.open(
                   "https://www.instagram.com/hunterxoficial/",
@@ -172,28 +172,40 @@ export default function Index() {
                 )
               }
             >
-              <Instagram className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform" />
+              <Instagram className="mr-4 h-6 w-6 sm:h-7 sm:w-7 group-hover:scale-110 transition-transform" />
               @hunterxoficial
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 max-w-8xl mx-auto">
             {/* Instagram Post 1 */}
             <div className="group relative">
-              <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+              <div className="absolute -inset-3 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-primary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
-                <CardContent className="p-4">
-                  <div className="relative overflow-hidden rounded-xl bg-background">
+                <CardContent className="p-0">
+                  <div className="relative overflow-hidden bg-background">
                     <iframe
-                      src="https://www.instagram.com/p/DL5CtHzt0Zd/embed/"
+                      src="https://www.instagram.com/p/DL5CtHzt0Zd/embed/captioned/?cr=1&v=14&wp=540&rd=https%3A%2F%2Fbuilder.io&rp=%2F#%7B%22ci%22%3A0%2C%22os%22%3A780%7D"
                       width="100%"
-                      height="500"
+                      height="640"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
+                      style={{
+                        filter: "brightness(1.1) contrast(1.05)",
+                        aspectRatio: "1/1"
+                      }}
                     />
+                    <style jsx>{`
+                      iframe {
+                        border-radius: 16px;
+                      }
+                      iframe::-webkit-scrollbar {
+                        display: none;
+                      }
+                    `}</style>
                   </div>
                 </CardContent>
               </Card>
@@ -201,19 +213,23 @@ export default function Index() {
 
             {/* Instagram Post 2 */}
             <div className="group relative">
-              <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-orange-500 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+              <div className="absolute -inset-3 bg-gradient-to-r from-purple-500 via-orange-500 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-secondary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
-                <CardContent className="p-4">
-                  <div className="relative overflow-hidden rounded-xl bg-background">
+                <CardContent className="p-0">
+                  <div className="relative overflow-hidden bg-background">
                     <iframe
-                      src="https://www.instagram.com/p/DL5yywlOrvk/embed/"
+                      src="https://www.instagram.com/p/DL5yywlOrvk/embed/captioned/?cr=1&v=14&wp=540&rd=https%3A%2F%2Fbuilder.io&rp=%2F#%7B%22ci%22%3A0%2C%22os%22%3A780%7D"
                       width="100%"
-                      height="500"
+                      height="640"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
+                      style={{
+                        filter: "brightness(1.1) contrast(1.05)",
+                        aspectRatio: "1/1"
+                      }}
                     />
                   </div>
                 </CardContent>
@@ -222,19 +238,23 @@ export default function Index() {
 
             {/* Instagram Post 3 */}
             <div className="group relative">
-              <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+              <div className="absolute -inset-3 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-accent/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
-                <CardContent className="p-4">
-                  <div className="relative overflow-hidden rounded-xl bg-background">
+                <CardContent className="p-0">
+                  <div className="relative overflow-hidden bg-background">
                     <iframe
-                      src="https://www.instagram.com/p/DCzzvj0vzTv/embed/"
+                      src="https://www.instagram.com/p/DCzzvj0vzTv/embed/captioned/?cr=1&v=14&wp=540&rd=https%3A%2F%2Fbuilder.io&rp=%2F#%7B%22ci%22%3A0%2C%22os%22%3A780%7D"
                       width="100%"
-                      height="500"
+                      height="640"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
+                      style={{
+                        filter: "brightness(1.1) contrast(1.05)",
+                        aspectRatio: "1/1"
+                      }}
                     />
                   </div>
                 </CardContent>
@@ -243,19 +263,23 @@ export default function Index() {
 
             {/* Instagram Post 4 */}
             <div className="group relative">
-              <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-orange-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+              <div className="absolute -inset-3 bg-gradient-to-r from-pink-500 via-orange-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-primary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
-                <CardContent className="p-4">
-                  <div className="relative overflow-hidden rounded-xl bg-background">
+                <CardContent className="p-0">
+                  <div className="relative overflow-hidden bg-background">
                     <iframe
-                      src="https://www.instagram.com/p/DMNv9T8tjAC/embed/"
+                      src="https://www.instagram.com/p/DMNv9T8tjAC/embed/captioned/?cr=1&v=14&wp=540&rd=https%3A%2F%2Fbuilder.io&rp=%2F#%7B%22ci%22%3A0%2C%22os%22%3A780%7D"
                       width="100%"
-                      height="500"
+                      height="640"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
+                      style={{
+                        filter: "brightness(1.1) contrast(1.05)",
+                        aspectRatio: "1/1"
+                      }}
                     />
                   </div>
                 </CardContent>
@@ -264,19 +288,23 @@ export default function Index() {
 
             {/* Instagram Post 5 */}
             <div className="group relative">
-              <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+              <div className="absolute -inset-3 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-secondary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
-                <CardContent className="p-4">
-                  <div className="relative overflow-hidden rounded-xl bg-background">
+                <CardContent className="p-0">
+                  <div className="relative overflow-hidden bg-background">
                     <iframe
-                      src="https://www.instagram.com/p/DMGnYA-PnYD/embed/"
+                      src="https://www.instagram.com/p/DMGnYA-PnYD/embed/captioned/?cr=1&v=14&wp=540&rd=https%3A%2F%2Fbuilder.io&rp=%2F#%7B%22ci%22%3A0%2C%22os%22%3A780%7D"
                       width="100%"
-                      height="500"
+                      height="640"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
+                      style={{
+                        filter: "brightness(1.1) contrast(1.05)",
+                        aspectRatio: "1/1"
+                      }}
                     />
                   </div>
                 </CardContent>
@@ -285,19 +313,23 @@ export default function Index() {
 
             {/* Instagram Post 6 */}
             <div className="group relative">
-              <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 via-purple-500 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+              <div className="absolute -inset-3 bg-gradient-to-r from-orange-500 via-purple-500 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-accent/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
-                <CardContent className="p-4">
-                  <div className="relative overflow-hidden rounded-xl bg-background">
+                <CardContent className="p-0">
+                  <div className="relative overflow-hidden bg-background">
                     <iframe
-                      src="https://www.instagram.com/p/DMBdwi4OLaR/embed/"
+                      src="https://www.instagram.com/p/DMBdwi4OLaR/embed/captioned/?cr=1&v=14&wp=540&rd=https%3A%2F%2Fbuilder.io&rp=%2F#%7B%22ci%22%3A0%2C%22os%22%3A780%7D"
                       width="100%"
-                      height="500"
+                      height="640"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
-                      className="w-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
+                      className="w-full transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
+                      style={{
+                        filter: "brightness(1.1) contrast(1.05)",
+                        aspectRatio: "1/1"
+                      }}
                     />
                   </div>
                 </CardContent>
@@ -306,15 +338,15 @@ export default function Index() {
           </div>
 
           {/* Call to Action */}
-          <div className="text-center mt-16">
-            <div className="inline-flex items-center gap-4 bg-gradient-to-r from-card/80 to-card/60 backdrop-blur-sm border border-border/50 rounded-full px-8 py-4 shadow-lg">
-              <div className="flex -space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full border-2 border-background"></div>
-                <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-orange-500 rounded-full border-2 border-background"></div>
-                <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-pink-500 rounded-full border-2 border-background"></div>
+          <div className="text-center mt-20 sm:mt-24">
+            <div className="inline-flex items-center gap-6 bg-gradient-to-r from-card/80 to-card/60 backdrop-blur-sm border border-border/50 rounded-full px-10 py-6 shadow-xl">
+              <div className="flex -space-x-3">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full border-3 border-background"></div>
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-orange-500 rounded-full border-3 border-background"></div>
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-orange-500 to-pink-500 rounded-full border-3 border-background"></div>
               </div>
-              <p className="text-muted-foreground">
-                <span className="text-foreground font-semibold">
+              <p className="text-muted-foreground text-lg sm:text-xl">
+                <span className="text-foreground font-semibold text-xl sm:text-2xl">
                   Miles de seguidores
                 </span>{" "}
                 ya forman parte de la comunidad
