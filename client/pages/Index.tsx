@@ -127,50 +127,154 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Projects Section */}
+      {/* Instagram Posts Section */}
       <section className="py-16 lg:py-24 bg-card/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-5xl font-bold mb-4">
-              Proyectos
+              Últimas Publicaciones
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Cada proyecto es una oportunidad de llevar luz a través de la música
+              Sígueme en Instagram @hunterxoficial para más contenido exclusivo
             </p>
+            <Button
+              variant="outline"
+              className="mt-4 group hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:text-white"
+              onClick={() => window.open('https://www.instagram.com/hunterxoficial/', '_blank')}
+            >
+              <Instagram className="mr-2 h-5 w-5 text-pink-500 group-hover:text-current" />
+              Ver en Instagram
+            </Button>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <Card className="group hover:scale-[1.02] transition-all duration-300 overflow-hidden">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {/* Instagram Post 1 */}
+            <Card className="group hover:scale-[1.02] transition-all duration-300 overflow-hidden cursor-pointer" onClick={() => window.open('https://www.instagram.com/hunterxoficial/', '_blank')}>
               <CardContent className="p-0">
                 <div className="aspect-square bg-gradient-to-br from-primary to-secondary relative">
                   <div className="absolute inset-0 bg-black/20" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                    <h3 className="text-xl font-bold mb-2">Últimos Tracks</h3>
-                    <p className="text-gray-200">Música urbana con mensaje</p>
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+                        <Music className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-white font-semibold text-sm">hunterxoficial</span>
+                    </div>
+                    <Instagram className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                    <p className="text-sm mb-2">"Nuevo video disponible! 🔥 #MusicaCristiana #Urbano"</p>
+                    <p className="text-xs text-gray-300">hace 2 días</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="group hover:scale-[1.02] transition-all duration-300 overflow-hidden">
+            {/* Instagram Post 2 */}
+            <Card className="group hover:scale-[1.02] transition-all duration-300 overflow-hidden cursor-pointer" onClick={() => window.open('https://www.instagram.com/hunterxoficial/', '_blank')}>
               <CardContent className="p-0">
                 <div className="aspect-square bg-gradient-to-br from-secondary to-accent relative">
                   <div className="absolute inset-0 bg-black/20" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                    <h3 className="text-xl font-bold mb-2">Singles</h3>
-                    <p className="text-gray-200">Impactando con cada canción</p>
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-gradient-to-br from-secondary to-accent rounded-full flex items-center justify-center">
+                        <Heart className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-white font-semibold text-sm">hunterxoficial</span>
+                    </div>
+                    <Instagram className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                    <p className="text-sm mb-2">"En el estudio trabajando en nuevos proyectos 🎵 #StudioLife"</p>
+                    <p className="text-xs text-gray-300">hace 4 días</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="group hover:scale-[1.02] transition-all duration-300 overflow-hidden">
+            {/* Instagram Post 3 */}
+            <Card className="group hover:scale-[1.02] transition-all duration-300 overflow-hidden cursor-pointer" onClick={() => window.open('https://www.instagram.com/hunterxoficial/', '_blank')}>
               <CardContent className="p-0">
                 <div className="aspect-square bg-gradient-to-br from-accent to-primary relative">
                   <div className="absolute inset-0 bg-black/20" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                    <h3 className="text-xl font-bold mb-2">Colaboraciones</h3>
-                    <p className="text-gray-200">Uniendo voces por Cristo</p>
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center">
+                        <Play className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-white font-semibold text-sm">hunterxoficial</span>
+                    </div>
+                    <Instagram className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                    <p className="text-sm mb-2">"Gracias por todo el apoyo! 🙏 #Bendecido #Fe"</p>
+                    <p className="text-xs text-gray-300">hace 1 semana</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Instagram Post 4 */}
+            <Card className="group hover:scale-[1.02] transition-all duration-300 overflow-hidden cursor-pointer" onClick={() => window.open('https://www.instagram.com/hunterxoficial/', '_blank')}>
+              <CardContent className="p-0">
+                <div className="aspect-square bg-gradient-to-br from-primary/80 to-secondary/80 relative">
+                  <div className="absolute inset-0 bg-black/20" />
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+                        <Music2 className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-white font-semibold text-sm">hunterxoficial</span>
+                    </div>
+                    <Instagram className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                    <p className="text-sm mb-2">"Live session coming soon! Stay tuned 🎤 #LiveMusic"</p>
+                    <p className="text-xs text-gray-300">hace 1 semana</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Instagram Post 5 */}
+            <Card className="group hover:scale-[1.02] transition-all duration-300 overflow-hidden cursor-pointer" onClick={() => window.open('https://www.instagram.com/hunterxoficial/', '_blank')}>
+              <CardContent className="p-0">
+                <div className="aspect-square bg-gradient-to-br from-secondary/80 to-accent/80 relative">
+                  <div className="absolute inset-0 bg-black/20" />
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-gradient-to-br from-secondary to-accent rounded-full flex items-center justify-center">
+                        <Headphones className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-white font-semibold text-sm">hunterxoficial</span>
+                    </div>
+                    <Instagram className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                    <p className="text-sm mb-2">"Behind the scenes del último video 🎬 #BTS"</p>
+                    <p className="text-xs text-gray-300">hace 2 semanas</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Instagram Post 6 */}
+            <Card className="group hover:scale-[1.02] transition-all duration-300 overflow-hidden cursor-pointer" onClick={() => window.open('https://www.instagram.com/hunterxoficial/', '_blank')}>
+              <CardContent className="p-0">
+                <div className="aspect-square bg-gradient-to-br from-accent/80 to-primary/80 relative">
+                  <div className="absolute inset-0 bg-black/20" />
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center">
+                        <Share2 className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-white font-semibold text-sm">hunterxoficial</span>
+                    </div>
+                    <Instagram className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                    <p className="text-sm mb-2">"Colaboración especial próximamente! 🤝 #Collaboration"</p>
+                    <p className="text-xs text-gray-300">hace 2 semanas</p>
                   </div>
                 </div>
               </CardContent>
