@@ -194,7 +194,7 @@ export default function Index() {
                       className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                       style={{
-                        transform: "scale(1.05) translateY(-20px)",
+                        transform: "scale(1.1) translateY(10px)",
                         transformOrigin: "center center"
                       }}
                     />
@@ -219,7 +219,7 @@ export default function Index() {
                       className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                       style={{
-                        transform: "scale(1.05) translateY(-20px)",
+                        transform: "scale(1.1) translateY(10px)",
                         transformOrigin: "center center"
                       }}
                     />
@@ -244,7 +244,7 @@ export default function Index() {
                       className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                       style={{
-                        transform: "scale(1.05) translateY(-20px)",
+                        transform: "scale(1.1) translateY(10px)",
                         transformOrigin: "center center"
                       }}
                     />
@@ -269,7 +269,7 @@ export default function Index() {
                       className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                       style={{
-                        transform: "scale(1.05) translateY(-20px)",
+                        transform: "scale(1.1) translateY(10px)",
                         transformOrigin: "center center"
                       }}
                     />
@@ -294,7 +294,7 @@ export default function Index() {
                       className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                       style={{
-                        transform: "scale(1.05) translateY(-20px)",
+                        transform: "scale(1.1) translateY(10px)",
                         transformOrigin: "center center"
                       }}
                     />
@@ -319,7 +319,7 @@ export default function Index() {
                       className="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
                       loading="lazy"
                       style={{
-                        transform: "scale(1.05) translateY(-20px)",
+                        transform: "scale(1.1) translateY(10px)",
                         transformOrigin: "center center"
                       }}
                     />
