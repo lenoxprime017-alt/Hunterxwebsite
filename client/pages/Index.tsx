@@ -204,11 +204,11 @@ export default function Index() {
               <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-orange-500 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-secondary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
-                  <div className="relative aspect-square overflow-hidden bg-background rounded-xl instagram-container">
+                  <div className="relative overflow-hidden bg-background rounded-xl instagram-container" style={{ height: '500px' }}>
                     <iframe
                       src="https://www.instagram.com/p/DL5yywlOrvk/embed/?utm_source=ig_embed&ig_rid=null"
-                      width="400"
-                      height="400"
+                      width="100%"
+                      height="500"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
@@ -225,11 +225,11 @@ export default function Index() {
               <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-accent/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
-                  <div className="relative aspect-square overflow-hidden bg-background rounded-xl instagram-container">
+                  <div className="relative overflow-hidden bg-background rounded-xl instagram-container" style={{ height: '500px' }}>
                     <iframe
                       src="https://www.instagram.com/p/DCzzvj0vzTv/embed/?utm_source=ig_embed&ig_rid=null"
-                      width="400"
-                      height="400"
+                      width="100%"
+                      height="500"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
@@ -246,11 +246,11 @@ export default function Index() {
               <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-orange-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-primary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
-                  <div className="relative aspect-square overflow-hidden bg-background rounded-xl instagram-container">
+                  <div className="relative overflow-hidden bg-background rounded-xl instagram-container" style={{ height: '500px' }}>
                     <iframe
                       src="https://www.instagram.com/p/DMNv9T8tjAC/embed/?utm_source=ig_embed&ig_rid=null"
-                      width="400"
-                      height="400"
+                      width="100%"
+                      height="500"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
@@ -267,11 +267,11 @@ export default function Index() {
               <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-secondary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
-                  <div className="relative aspect-square overflow-hidden bg-background rounded-xl instagram-container">
+                  <div className="relative overflow-hidden bg-background rounded-xl instagram-container" style={{ height: '500px' }}>
                     <iframe
                       src="https://www.instagram.com/p/DMGnYA-PnYD/embed/?utm_source=ig_embed&ig_rid=null"
-                      width="400"
-                      height="400"
+                      width="100%"
+                      height="500"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
@@ -288,11 +288,11 @@ export default function Index() {
               <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 via-purple-500 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-accent/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
                 <CardContent className="p-0">
-                  <div className="relative aspect-square overflow-hidden bg-background rounded-xl instagram-container">
+                  <div className="relative overflow-hidden bg-background rounded-xl instagram-container" style={{ height: '500px' }}>
                     <iframe
                       src="https://www.instagram.com/p/DMBdwi4OLaR/embed/?utm_source=ig_embed&ig_rid=null"
-                      width="400"
-                      height="400"
+                      width="100%"
+                      height="500"
                       frameBorder="0"
                       scrolling="no"
                       allowTransparency
