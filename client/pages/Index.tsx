@@ -552,7 +552,7 @@ export default function Index() {
                   </div>
                 </Button>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-lg w-full mx-4">
+              <DialogContent className="sm:max-w-[480px] max-w-[95vw]">
                 <DialogHeader className="space-y-3">
                   <DialogTitle className="text-center text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                     Compartir HUNTERX
