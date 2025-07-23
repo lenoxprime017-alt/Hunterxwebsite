@@ -104,3 +104,54 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  /* Smooth scrolling for better UX */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Instagram container styling */
+  .instagram-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Custom styles for Instagram embeds - clean and well designed */
+  .instagram-embed {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Enhanced Instagram embeds styling */
+  iframe[src*="instagram.com"] {
+    border-radius: 16px !important;
+    border: none !important;
+    filter: brightness(1.05) contrast(1.02) saturate(1.05);
+    transition: all 0.3s ease;
+  }
+
+  /* Better mobile touch targets */
+  @media (max-width: 768px) {
+    button,
+    a,
+    [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+
+  /* Custom shadow utilities */
+  .shadow-3xl {
+    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Improved text rendering */
+  .text-rendering-optimized {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
