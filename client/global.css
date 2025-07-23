@@ -245,8 +245,8 @@
       transform: none !important;
     }
 
-    /* Simplificar gradientes complejos en móviles */
-    .bg-gradient-to-br {
+    /* Simplificar gradientes complejos en móviles (excepto avatares) */
+    .bg-gradient-to-br:not(.flex > *) {
       background: var(--background) !important;
     }
 
