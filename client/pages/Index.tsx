@@ -356,7 +356,7 @@ export default function Index() {
               variant="outline"
               size="lg"
               className="w-full justify-start h-16 group hover:bg-gray-600 hover:text-white"
-              onClick={() => alert('Busca "HUNTERX" en Apple Music')}
+              onClick={() => window.open("https://music.apple.com/do/artist/hunterx/1458292118", "_blank")}
             >
               <Headphones className="mr-4 h-6 w-6 text-gray-500 group-hover:text-current" />
               <div className="flex-1 text-left">
