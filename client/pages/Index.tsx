@@ -193,10 +193,15 @@ export default function Index() {
               </div>
             </Button>
 
-            <Button variant="outline" size="lg" className="w-full justify-start h-16 group hover:bg-red-600 hover:text-white">
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full justify-start h-16 group hover:bg-red-600 hover:text-white"
+              onClick={() => window.open('https://www.youtube.com/@EHUNTERX', '_blank')}
+            >
               <Youtube className="mr-4 h-6 w-6 text-red-500 group-hover:text-current" />
               <div className="flex-1 text-left">
-                <div className="font-semibold">YouTube</div>
+                <div className="font-semibold">YouTube - @EHUNTERX</div>
                 <div className="text-sm opacity-70">Videos y contenido exclusivo</div>
               </div>
             </Button>
