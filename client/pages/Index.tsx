@@ -18,6 +18,9 @@ import {
 import { useState } from "react";
 
 export default function Index() {
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
+
   const handleShare = async () => {
     const shareData = {
       title: 'HUNTERX - Música Urbana Cristiana',
