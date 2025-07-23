@@ -33,10 +33,10 @@ export default function Index() {
               <Badge variant="secondary" className="mb-4 sm:mb-6 text-xs sm:text-sm font-semibold px-3 py-1">
                 Música Urbana Cristiana
               </Badge>
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-4 sm:mb-6 lg:mb-8 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent leading-tight tracking-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 lg:mb-8 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent leading-tight tracking-tight">
                 HUNTERX
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-muted-foreground mb-8 sm:mb-10 lg:mb-12 max-w-3xl leading-relaxed px-4">
+              <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 lg:mb-12 max-w-3xl leading-relaxed px-4">
                 Música urbana con propósito. Llevando esperanza y fe a las
                 calles través de letras que transforman vidas.
               </p>
