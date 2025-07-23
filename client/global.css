@@ -111,10 +111,18 @@
     scroll-behavior: smooth;
   }
 
-  /* Custom styles for Instagram embeds */
+  /* Instagram container styling */
+  .instagram-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Custom styles for Instagram embeds - hide unwanted elements */
   .instagram-embed {
     border-radius: 16px !important;
     overflow: hidden !important;
+    transform: scale(1.3) translateY(-60px) !important;
+    transform-origin: center top !important;
   }
 
   /* Hide Instagram branding and unwanted elements */
@@ -122,6 +130,31 @@
     border-radius: 16px !important;
     overflow: hidden !important;
     filter: brightness(1.1) contrast(1.05) saturate(1.1);
+  }
+
+  /* Hide specific Instagram UI elements via CSS */
+  .instagram-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: var(--background);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .instagram-container::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: var(--background);
+    z-index: 1;
+    pointer-events: none;
   }
 
   /* Better mobile touch targets */
