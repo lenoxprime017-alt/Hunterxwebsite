@@ -686,7 +686,9 @@ export default function Index() {
                         <Button
                           variant="outline"
                           onClick={() => shareToSocial("facebook")}
-                          className="group flex items-center justify-center gap-2 h-12 bg-card/50 border-border/50 backdrop-blur-sm hover:bg-blue-600/10 hover:border-blue-600/50 hover:text-blue-300 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+                          className={`group flex items-center justify-center gap-2 h-12 bg-card/50 border-border/50 hover:bg-blue-600/10 hover:border-blue-600/50 hover:text-blue-300 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg ${
+                            !isMobile ? "backdrop-blur-sm" : ""
+                          }`}
                         >
                           <svg
                             className="w-4 h-4 group-hover:scale-110 transition-transform"
