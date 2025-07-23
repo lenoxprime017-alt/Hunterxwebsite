@@ -54,14 +54,15 @@ export default function Index() {
   };
 
   const copyToClipboard = async () => {
+    const urlToCopy = typeof window !== 'undefined' ? window.location.href : 'https://hunterx.fly.dev';
     try {
-      await navigator.clipboard.writeText(window.location.href);
+      await navigator.clipboard.writeText(urlToCopy);
       setCopySuccess(true);
       setTimeout(() => setCopySuccess(false), 2000);
     } catch (error) {
       // Fallback para navegadores más antiguos
       const textArea = document.createElement("textarea");
-      textArea.value = window.location.href;
+      textArea.value = urlToCopy;
       document.body.appendChild(textArea);
       textArea.select();
       document.execCommand("copy");
