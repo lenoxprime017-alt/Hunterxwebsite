@@ -617,7 +617,7 @@ export default function Index() {
                   variant="outline"
                   size="lg"
                   className="w-full justify-start h-16 group hover:bg-primary hover:text-primary-foreground"
-                  onClick={isMobile ? handleShare : undefined}
+                  onClick={isMobile && "share" in navigator ? handleMobileShare : undefined}
                 >
                   <Share2 className="mr-4 h-6 w-6 group-hover:text-current" />
                   <div className="flex-1 text-left">
