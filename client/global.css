@@ -103,6 +103,29 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Evitar que navegadores móviles (especialmente Samsung Internet) cambien colores automáticamente */
+  html {
+    color-scheme: dark light;
+    -webkit-color-scheme: dark light;
+  }
+
+  html,
+  body,
+  #root {
+    /* Evitar filtros automáticos de color */
+    filter: none !important;
+    -webkit-filter: none !important;
+  }
+
+  /* Forzar que los elementos mantengan sus colores originales */
+  *,
+  *::before,
+  *::after {
+    /* Evitar inversión automática de colores */
+    -webkit-filter: none !important;
+    filter: none !important;
+  }
 }
 
 @layer utilities {
