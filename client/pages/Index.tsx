@@ -103,6 +103,19 @@ export default function Index() {
     };
   }, [showVideo]);
 
+  // Reproducir automáticamente el video cuando se muestre
+  useEffect(() => {
+    if (showVideo) {
+      // Buscar el video y garantizar que se reproduzca
+      setTimeout(() => {
+        const video = document.querySelector('video');
+        if (video) {
+          video.play().catch(console.warn);
+        }
+      }, 100);
+    }
+  }, [showVideo]);
+
   // Cargar todos los iframes inmediatamente
   useEffect(() => {
     // Cargar todos los iframes desde el inicio
