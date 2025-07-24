@@ -333,27 +333,27 @@
 
   /* Optimizaciones específicas para móviles */
   @media (max-width: 768px) {
-    /* Reducir complejidad visual en móviles */
-    .group:hover .group-hover\:scale-\[1\.01\] {
+    /* Reducir complejidad visual en móviles SOLO en elementos que no sean de la pantalla de carga */
+    .group:hover .group-hover\:scale-\[1\.01\]:not(.fixed *) {
       transform: none !important;
     }
 
-    /* Simplificar gradientes complejos en móviles (excepto avatares) */
-    .bg-gradient-to-br:not(.flex > *) {
+    /* Simplificar gradientes complejos en móviles (excepto avatares y pantalla de carga) */
+    .bg-gradient-to-br:not(.flex > *):not(.fixed *) {
       background: var(--background) !important;
     }
 
-    /* Reducir blur effects en móviles */
-    .backdrop-blur-sm,
-    .backdrop-blur-xl {
+    /* Reducir blur effects en móviles (excepto pantalla de carga) */
+    .backdrop-blur-sm:not(.fixed *),
+    .backdrop-blur-xl:not(.fixed *) {
       backdrop-filter: none !important;
       background: rgba(var(--card), 0.95) !important;
     }
 
-    /* Optimizar sombras para móviles */
-    .shadow-3xl,
-    .shadow-2xl,
-    .shadow-xl {
+    /* Optimizar sombras para móviles (excepto pantalla de carga) */
+    .shadow-3xl:not(.fixed *),
+    .shadow-2xl:not(.fixed *),
+    .shadow-xl:not(.fixed *) {
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
     }
   }
