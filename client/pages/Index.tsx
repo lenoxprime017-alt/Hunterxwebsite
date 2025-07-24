@@ -47,6 +47,11 @@ export default function Index() {
   const [pageLoaded, setPageLoaded] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [visibleIframes, setVisibleIframes] = useState<Set<string>>(new Set());
+  const [contentReady, setContentReady] = useState({
+    video: false,
+    mainIframe: false,
+    images: false
+  });
 
   // Detectar móvil al cargar la página
   useEffect(() => {
@@ -64,22 +69,60 @@ export default function Index() {
 
   const handleVideoLoad = useCallback(() => {
     setVideoLoaded(true);
+    setContentReady(prev => ({ ...prev, video: true }));
   }, []);
 
-  // Simulación de carga inicial
+  // Control de carga real basado en contenido
   useEffect(() => {
-    const loadingTimer = setInterval(() => {
-      setLoadingProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(loadingTimer);
-          setTimeout(() => setPageLoaded(true), 500);
-          return 100;
-        }
-        return prev + Math.random() * 15 + 5;
-      });
-    }, 200);
+    const allReady = Object.values(contentReady).every(Boolean);
 
-    return () => clearInterval(loadingTimer);
+    if (allReady && loadingProgress < 100) {
+      setLoadingProgress(100);
+      setTimeout(() => setPageLoaded(true), 800);
+    } else if (!allReady) {
+      // Simular progreso gradual mientras carga
+      const timer = setInterval(() => {
+        setLoadingProgress(prev => {
+          const readyCount = Object.values(contentReady).filter(Boolean).length;
+          const targetProgress = (readyCount / Object.keys(contentReady).length) * 85;
+          return Math.min(prev + 2, targetProgress);
+        });
+      }, 100);
+      return () => clearInterval(timer);
+    }
+  }, [contentReady, loadingProgress]);
+
+  // Detectar cuando las imágenes están listas
+  useEffect(() => {
+    const images = document.querySelectorAll('img');
+    let loadedImages = 0;
+
+    const checkImageLoad = () => {
+      loadedImages++;
+      if (loadedImages >= images.length) {
+        setContentReady(prev => ({ ...prev, images: true }));
+      }
+    };
+
+    if (images.length === 0) {
+      setContentReady(prev => ({ ...prev, images: true }));
+    } else {
+      images.forEach(img => {
+        if (img.complete) {
+          checkImageLoad();
+        } else {
+          img.addEventListener('load', checkImageLoad);
+          img.addEventListener('error', checkImageLoad);
+        }
+      });
+    }
+
+    // Timeout de respaldo
+    const timeout = setTimeout(() => {
+      setContentReady(prev => ({ ...prev, images: true }));
+    }, 3000);
+
+    return () => clearTimeout(timeout);
   }, []);
 
   // Intersection Observer para cargar iframes bajo demanda
