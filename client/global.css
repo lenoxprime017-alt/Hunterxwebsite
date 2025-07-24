@@ -369,16 +369,16 @@
 
   /* Optimizar para conexiones lentas */
   @media (prefers-reduced-data: reduce) {
-    video {
+    video:not(.fixed *) {
       preload: none !important;
     }
 
-    iframe {
+    iframe:not(.fixed *) {
       loading: lazy !important;
     }
 
-    /* Simplificar animaciones */
-    * {
+    /* Simplificar animaciones (excepto pantalla de carga) */
+    *:not(.fixed *) {
       animation-duration: 0.01s !important;
       transition-duration: 0.01s !important;
     }
