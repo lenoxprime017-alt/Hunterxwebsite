@@ -88,13 +88,25 @@ export default function Index() {
     return () => clearInterval(timer);
   }, []);
 
-  // Completar carga cuando el video est�� listo
+  // Completar carga cuando el video esté listo
   useEffect(() => {
     if (videoReady && loadingProgress >= 85) {
       setLoadingProgress(100);
       setTimeout(() => setPageLoaded(true), 500);
     }
   }, [videoReady, loadingProgress]);
+
+  // Timeout de respaldo si el video no carga en 4 segundos
+  useEffect(() => {
+    const backupTimer = setTimeout(() => {
+      if (!videoReady) {
+        console.log("Video backup timeout - forcing load");
+        setVideoReady(true);
+      }
+    }, 4000);
+
+    return () => clearTimeout(backupTimer);
+  }, [videoReady]);
 
   // Cargar todos los iframes inmediatamente
   useEffect(() => {
