@@ -91,35 +91,12 @@ export default function Index() {
     }
   }, [contentReady, loadingProgress]);
 
-  // Detectar cuando las imágenes están listas
+  // Simplificar detección de imágenes con timeout más corto
   useEffect(() => {
-    const images = document.querySelectorAll('img');
-    let loadedImages = 0;
-
-    const checkImageLoad = () => {
-      loadedImages++;
-      if (loadedImages >= images.length) {
-        setContentReady(prev => ({ ...prev, images: true }));
-      }
-    };
-
-    if (images.length === 0) {
-      setContentReady(prev => ({ ...prev, images: true }));
-    } else {
-      images.forEach(img => {
-        if (img.complete) {
-          checkImageLoad();
-        } else {
-          img.addEventListener('load', checkImageLoad);
-          img.addEventListener('error', checkImageLoad);
-        }
-      });
-    }
-
-    // Timeout de respaldo
+    // Marcar imágenes como listas después de un tiempo corto
     const timeout = setTimeout(() => {
       setContentReady(prev => ({ ...prev, images: true }));
-    }, 3000);
+    }, 1000);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -140,7 +117,7 @@ export default function Index() {
     try {
       await navigator.share(shareData);
 
-      // Prevenir efectos de blur/filtros despu��s de compartir
+      // Prevenir efectos de blur/filtros después de compartir
       const preventBlur = () => {
         document.body.style.filter = "none";
         document.body.style.webkitFilter = "none";
