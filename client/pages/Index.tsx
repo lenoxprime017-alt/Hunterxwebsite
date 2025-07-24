@@ -44,6 +44,8 @@ export default function Index() {
   const [copySuccess, setCopySuccess] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [pageLoaded, setPageLoaded] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
 
   // Detectar móvil al cargar la página
   useEffect(() => {
