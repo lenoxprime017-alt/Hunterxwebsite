@@ -64,21 +64,21 @@ export default function Index() {
 
   const handleVideoLoad = useCallback(() => {
     setVideoLoaded(true);
-    setVideoReady(true);
   }, []);
 
-  // Simulación de progreso hasta 85% + esperar video
+  // Carga simple de 2 segundos
   useEffect(() => {
-    const duration = 2000; // 2 segundos hasta 85%
+    const duration = 2000;
     const intervals = 20;
-    const increment = 85 / intervals; // Solo hasta 85%
+    const increment = 100 / intervals;
 
     const timer = setInterval(() => {
       setLoadingProgress(prev => {
         const next = prev + increment;
-        if (next >= 85) {
+        if (next >= 100) {
           clearInterval(timer);
-          return 85;
+          setTimeout(() => setPageLoaded(true), 200);
+          return 100;
         }
         return next;
       });
@@ -86,26 +86,6 @@ export default function Index() {
 
     return () => clearInterval(timer);
   }, []);
-
-  // Completar carga cuando el video esté listo
-  useEffect(() => {
-    if (videoReady && loadingProgress >= 85) {
-      setLoadingProgress(100);
-      setTimeout(() => setPageLoaded(true), 500);
-    }
-  }, [videoReady, loadingProgress]);
-
-  // Timeout de respaldo si el video no carga en 4 segundos
-  useEffect(() => {
-    const backupTimer = setTimeout(() => {
-      if (!videoReady) {
-        console.log("Video backup timeout - forcing load");
-        setVideoReady(true);
-      }
-    }, 4000);
-
-    return () => clearTimeout(backupTimer);
-  }, [videoReady]);
 
   // Cargar todos los iframes inmediatamente
   useEffect(() => {
