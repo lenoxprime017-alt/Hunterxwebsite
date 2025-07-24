@@ -65,6 +65,22 @@ export default function Index() {
     setVideoLoaded(true);
   }, []);
 
+  // Simulación de carga inicial
+  useEffect(() => {
+    const loadingTimer = setInterval(() => {
+      setLoadingProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(loadingTimer);
+          setTimeout(() => setPageLoaded(true), 500);
+          return 100;
+        }
+        return prev + Math.random() * 15 + 5;
+      });
+    }, 200);
+
+    return () => clearInterval(loadingTimer);
+  }, []);
+
   const handleMobileShare = async () => {
     const shareData = {
       title: "HUNTERX - Música Urbana Cristiana",
