@@ -386,14 +386,14 @@
 
   /* Optimizar para dispositivos con batería baja */
   @media (prefers-reduced-motion: reduce) {
-    *:not(.fixed *) {
+    *:not(.fixed):not(.fixed *):not(.fixed .h-full):not(.bg-gradient-to-r):not([style*="width:"]):not(.animate-fadeIn) {
       animation-duration: 0.01s !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01s !important;
       scroll-behavior: auto !important;
     }
 
-    video:not(.fixed *) {
+    video:not(.fixed *):not(.fixed .h-full) {
       autoplay: false !important;
     }
   }
