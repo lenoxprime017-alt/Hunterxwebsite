@@ -667,14 +667,14 @@ export default function Index() {
               Llevando el mensaje de Cristo a través de la música urbana
             </p>
             <p className="text-sm text-muted-foreground">
-              © 2024 HUNTERX. Todos los derechos reservados.
+              �� 2024 HUNTERX. Todos los derechos reservados.
             </p>
           </div>
         </div>
       </footer>
 
-      {/* MODAL DE COMPARTIR FUNCIONAL */}
-      {isShareModalOpen && (
+      {/* MODAL DE COMPARTIR FUNCIONAL - SOLO EN DESKTOP */}
+      {isShareModalOpen && !isMobile && (
         <div
           style={{
             position: "fixed",
@@ -688,6 +688,13 @@ export default function Index() {
             alignItems: "center",
             justifyContent: "center",
             padding: "20px",
+            overflow: "auto",
+          }}
+          onClick={(e) => {
+            // Cerrar modal si se hace clic en el fondo
+            if (e.target === e.currentTarget) {
+              setIsShareModalOpen(false);
+            }
           }}
         >
           <div
@@ -698,8 +705,12 @@ export default function Index() {
               padding: "24px",
               maxWidth: "400px",
               width: "100%",
+              maxHeight: "90vh",
               boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
               color: "hsl(var(--foreground))",
+              margin: "auto",
+              position: "relative",
+              overflow: "auto",
             }}
           >
             {/* Header */}
