@@ -179,6 +179,31 @@ export default function Index() {
     }
   };
 
+  // Pantalla de carga inicial
+  if (!pageLoaded) {
+    return (
+      <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-accent/10 flex items-center justify-center z-50">
+        <div className="text-center">
+          <div className="mb-8">
+            <h1 className="text-4xl sm:text-6xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              HUNTERX
+            </h1>
+            <p className="text-muted-foreground text-lg">Cargando experiencia musical...</p>
+          </div>
+          <div className="w-64 h-2 bg-muted rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-300 ease-out"
+              style={{ width: `${Math.min(loadingProgress, 100)}%` }}
+            />
+          </div>
+          <p className="text-sm text-muted-foreground mt-4">
+            {Math.round(Math.min(loadingProgress, 100))}%
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10"
