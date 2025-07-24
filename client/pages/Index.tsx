@@ -124,29 +124,10 @@ export default function Index() {
     return () => clearTimeout(timeout);
   }, []);
 
-  // Cargar iframe principal inmediatamente y otros bajo demanda
+  // Cargar todos los iframes inmediatamente
   useEffect(() => {
-    // Cargar el video principal inmediatamente
-    setVisibleIframes(prev => new Set([...prev, 'main-video']));
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.getAttribute('data-iframe-id');
-            if (id && id !== 'main-video') {
-              setVisibleIframes(prev => new Set([...prev, id]));
-            }
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '50px' }
-    );
-
-    const iframePlaceholders = document.querySelectorAll('[data-iframe-id]:not([data-iframe-id="main-video"])');
-    iframePlaceholders.forEach(placeholder => observer.observe(placeholder));
-
-    return () => observer.disconnect();
+    // Cargar todos los iframes desde el inicio
+    setVisibleIframes(new Set(['main-video', 'video-2', 'video-3', 'video-4', 'instagram-1', 'instagram-2', 'instagram-3', 'instagram-4', 'instagram-5', 'instagram-6']));
   }, []);
 
   const handleMobileShare = async () => {
@@ -159,7 +140,7 @@ export default function Index() {
     try {
       await navigator.share(shareData);
 
-      // Prevenir efectos de blur/filtros después de compartir
+      // Prevenir efectos de blur/filtros despu��s de compartir
       const preventBlur = () => {
         document.body.style.filter = "none";
         document.body.style.webkitFilter = "none";
