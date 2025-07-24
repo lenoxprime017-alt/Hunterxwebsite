@@ -64,7 +64,6 @@ export default function Index() {
 
   const handleVideoLoad = useCallback(() => {
     setVideoLoaded(true);
-    setContentReady(prev => ({ ...prev, video: true }));
   }, []);
 
   // Control de carga real basado en contenido
