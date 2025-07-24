@@ -364,12 +364,12 @@ export default function Index() {
                   <div className="relative aspect-video">
                     <iframe
                       className="w-full h-full rounded-lg"
-                      src="https://www.youtube.com/embed/JTwL53RpQls?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1&origin=https://hunterx.fly.dev"
+                      src="https://www.youtube.com/embed/JTwL53RpQls?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
                       title="HUNTERX - Video 2"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
-                      loading="lazy"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
@@ -380,12 +380,12 @@ export default function Index() {
                   <div className="relative aspect-video">
                     <iframe
                       className="w-full h-full rounded-lg"
-                      src="https://www.youtube.com/embed/BzivzcIRpOM?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1&origin=https://hunterx.fly.dev"
+                      src="https://www.youtube.com/embed/BzivzcIRpOM?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
                       title="HUNTERX - Video 3"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
-                      loading="lazy"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
@@ -396,12 +396,12 @@ export default function Index() {
                   <div className="relative aspect-video">
                     <iframe
                       className="w-full h-full rounded-lg"
-                      src="https://www.youtube.com/embed/tsPldB4iXpE?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1&origin=https://hunterx.fly.dev"
+                      src="https://www.youtube.com/embed/tsPldB4iXpE?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
                       title="HUNTERX - Video 4"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
-                      loading="lazy"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
