@@ -24,9 +24,30 @@ export default function Index() {
   useEffect(() => {
     console.log("Modal state changed:", isShareModalOpen);
   }, [isShareModalOpen]);
+
+  // Cerrar modal con tecla ESC
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isShareModalOpen) {
+        setIsShareModalOpen(false);
+      }
+    };
+
+    if (isShareModalOpen) {
+      document.addEventListener("keydown", handleEscKey);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscKey);
+    };
+  }, [isShareModalOpen]);
   const [copySuccess, setCopySuccess] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [pageLoaded, setPageLoaded] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [visibleIframes, setVisibleIframes] = useState<Set<string>>(new Set());
+  const [showVideo, setShowVideo] = useState(false);
 
   // Detectar móvil al cargar la página
   useEffect(() => {
@@ -46,11 +67,57 @@ export default function Index() {
     setVideoLoaded(true);
   }, []);
 
+  // Carga con video reproduciéndose en 90%
+  useEffect(() => {
+    const duration = 2200; // 2.2 segundos total
+    const intervals = 22;
+    const increment = 100 / intervals;
+
+    const timer = setInterval(() => {
+      setLoadingProgress((prev) => {
+        const next = prev + increment;
+
+        // Cuando llegue a 90%, mostrar el video
+        if (next >= 90 && !showVideo) {
+          setShowVideo(true);
+        }
+
+        if (next >= 100) {
+          clearInterval(timer);
+          setTimeout(() => setPageLoaded(true), 300);
+          return 100;
+        }
+        return next;
+      });
+    }, duration / intervals);
+
+    return () => clearInterval(timer);
+  }, [showVideo]);
+
+  // Cargar todos los iframes inmediatamente
+  useEffect(() => {
+    // Cargar todos los iframes desde el inicio
+    setVisibleIframes(
+      new Set([
+        "main-video",
+        "video-2",
+        "video-3",
+        "video-4",
+        "instagram-1",
+        "instagram-2",
+        "instagram-3",
+        "instagram-4",
+        "instagram-5",
+        "instagram-6",
+      ]),
+    );
+  }, []);
+
   const handleMobileShare = async () => {
     const shareData = {
       title: "HUNTERX - Música Urbana Cristiana",
       text: "Descubre la música urbana con propósito de HUNTERX. Llevando esperanza y fe a las calles.",
-      url: window.location.href,
+      url: "https://linktreehunterx.netlify.app/",
     };
 
     try {
@@ -98,10 +165,7 @@ export default function Index() {
   };
 
   const copyToClipboard = async () => {
-    const urlToCopy =
-      typeof window !== "undefined"
-        ? window.location.href
-        : "https://hunterx.fly.dev";
+    const urlToCopy = "https://linktreehunterx.netlify.app/";
     try {
       await navigator.clipboard.writeText(urlToCopy);
       setCopySuccess(true);
@@ -120,7 +184,7 @@ export default function Index() {
   };
 
   const shareToSocial = (platform: string) => {
-    const url = encodeURIComponent(window.location.href);
+    const url = encodeURIComponent("https://linktreehunterx.netlify.app/");
     const text = encodeURIComponent(
       "¡Descubre la música urbana con propósito de HUNTERX! 🎵✨",
     );
@@ -147,6 +211,45 @@ export default function Index() {
     }
   };
 
+  // Pantalla de carga inicial
+  if (!pageLoaded) {
+    return (
+      <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-accent/10 flex items-center justify-center z-50 min-h-screen">
+        <div className="text-center px-4 max-w-md mx-auto">
+          <div className="mb-12">
+            <h1 className="text-5xl sm:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-tight">
+              HUNTERX
+            </h1>
+            <p className="text-muted-foreground text-xl">
+              Cargando experiencia musical...
+            </p>
+          </div>
+          <div className="w-full max-w-xs mx-auto">
+            <div className="h-3 bg-muted rounded-full overflow-hidden mb-4">
+              <div
+                className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-500 ease-out rounded-full"
+                style={{ width: `${Math.min(loadingProgress, 100)}%` }}
+              />
+            </div>
+            <p className="text-base text-muted-foreground font-medium">
+              {Math.round(Math.min(loadingProgress, 100))}%
+            </p>
+          </div>
+          <div className="mt-8 text-sm text-muted-foreground">
+            {loadingProgress < 30 && "Preparando contenido..."}
+            {loadingProgress >= 30 &&
+              loadingProgress < 60 &&
+              "Cargando videos..."}
+            {loadingProgress >= 60 &&
+              loadingProgress < 90 &&
+              "Optimizando experiencia..."}
+            {loadingProgress >= 90 && "¡Casi listo!"}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10"
@@ -154,24 +257,21 @@ export default function Index() {
     >
       {/* Hero Section */}
       <section className="relative overflow-hidden h-screen">
-        <video
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-            videoLoaded ? "opacity-100" : "opacity-0"
-          }`}
-          src="https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2"
-          autoPlay
-          loop
-          muted={true}
-          playsInline
-          preload="auto"
-          onLoadStart={handleVideoLoad}
-          onLoadedData={handleVideoLoad}
-          poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080'%3E%3Crect width='100%25' height='100%25' fill='%23111827'/%3E%3C/svg%3E"
-        />
-        {!videoLoaded && (
+        {showVideo && (
+          <video
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100"
+            src="https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2"
+            autoPlay
+            loop
+            muted={true}
+            playsInline
+            preload="auto"
+          />
+        )}
+        {!showVideo && (
           <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
             <div className="animate-pulse text-primary text-lg font-medium">
-              Cargando...
+              Preparando video...
             </div>
           </div>
         )}
@@ -242,17 +342,30 @@ export default function Index() {
             {/* Main Featured Video - Latest Song */}
             <Card className="overflow-hidden group hover:scale-[1.01] transition-all duration-500 shadow-2xl hover:shadow-3xl">
               <CardContent className="p-0">
-                <div className="relative aspect-video">
-                  <iframe
-                    className="w-full h-full rounded-lg"
-                    src="https://www.youtube.com/embed/4kHW5ZkYHIQ?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1&origin=https://hunterx.fly.dev"
-                    title="HUNTERX - Última Canción"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    loading="lazy"
-                    importance="high"
-                  />
+                <div
+                  className="relative aspect-video"
+                  data-iframe-id="main-video"
+                >
+                  {visibleIframes.has("main-video") ? (
+                    <iframe
+                      className="w-full h-full rounded-lg"
+                      src="https://www.youtube.com/embed/4kHW5ZkYHIQ?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
+                      title="HUNTERX - Última Canción"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      loading="eager"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-muted rounded-lg flex items-center justify-center">
+                      <div className="text-center">
+                        <Play className="w-16 h-16 text-primary mx-auto mb-4" />
+                        <p className="text-muted-foreground">
+                          Video de YouTube cargando...
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -264,12 +377,12 @@ export default function Index() {
                   <div className="relative aspect-video">
                     <iframe
                       className="w-full h-full rounded-lg"
-                      src="https://www.youtube.com/embed/JTwL53RpQls?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1&origin=https://hunterx.fly.dev"
+                      src="https://www.youtube.com/embed/JTwL53RpQls?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
                       title="HUNTERX - Video 2"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
-                      loading="lazy"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
@@ -280,12 +393,12 @@ export default function Index() {
                   <div className="relative aspect-video">
                     <iframe
                       className="w-full h-full rounded-lg"
-                      src="https://www.youtube.com/embed/BzivzcIRpOM?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1&origin=https://hunterx.fly.dev"
+                      src="https://www.youtube.com/embed/BzivzcIRpOM?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
                       title="HUNTERX - Video 3"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
-                      loading="lazy"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
@@ -296,12 +409,12 @@ export default function Index() {
                   <div className="relative aspect-video">
                     <iframe
                       className="w-full h-full rounded-lg"
-                      src="https://www.youtube.com/embed/tsPldB4iXpE?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1&origin=https://hunterx.fly.dev"
+                      src="https://www.youtube.com/embed/tsPldB4iXpE?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
                       title="HUNTERX - Video 4"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
-                      loading="lazy"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
@@ -365,10 +478,9 @@ export default function Index() {
                       height="500"
                       frameBorder="0"
                       scrolling="no"
-                      allowTransparency
+                      allowtransparency="true"
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
-                      loading="lazy"
-                      importance="low"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
@@ -390,10 +502,9 @@ export default function Index() {
                       height="500"
                       frameBorder="0"
                       scrolling="no"
-                      allowTransparency
+                      allowtransparency="true"
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
-                      loading="lazy"
-                      importance="low"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
@@ -415,10 +526,9 @@ export default function Index() {
                       height="500"
                       frameBorder="0"
                       scrolling="no"
-                      allowTransparency
+                      allowtransparency="true"
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
-                      loading="lazy"
-                      importance="low"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
@@ -440,10 +550,9 @@ export default function Index() {
                       height="500"
                       frameBorder="0"
                       scrolling="no"
-                      allowTransparency
+                      allowtransparency="true"
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
-                      loading="lazy"
-                      importance="low"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
@@ -465,10 +574,9 @@ export default function Index() {
                       height="500"
                       frameBorder="0"
                       scrolling="no"
-                      allowTransparency
+                      allowtransparency="true"
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
-                      loading="lazy"
-                      importance="low"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
@@ -490,10 +598,9 @@ export default function Index() {
                       height="500"
                       frameBorder="0"
                       scrolling="no"
-                      allowTransparency
+                      allowtransparency="true"
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
-                      loading="lazy"
-                      importance="low"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
@@ -673,21 +780,28 @@ export default function Index() {
         </div>
       </footer>
 
-      {/* MODAL DE COMPARTIR FUNCIONAL */}
-      {isShareModalOpen && (
+      {/* MODAL DE COMPARTIR FUNCIONAL - SOLO EN DESKTOP */}
+      {isShareModalOpen && !isMobile && (
         <div
           style={{
             position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
+            top: "0",
+            left: "0",
+            right: "0",
+            bottom: "0",
             backgroundColor: "rgba(0,0,0,0.75)",
             zIndex: 99999,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
             padding: "20px",
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "center",
+            paddingTop: "20vh",
+          }}
+          onClick={(e) => {
+            // Cerrar modal si se hace clic en el fondo
+            if (e.target === e.currentTarget) {
+              setIsShareModalOpen(false);
+            }
           }}
         >
           <div
@@ -700,6 +814,7 @@ export default function Index() {
               width: "100%",
               boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
               color: "hsl(var(--foreground))",
+              position: "relative",
             }}
           >
             {/* Header */}
