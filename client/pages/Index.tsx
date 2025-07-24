@@ -125,14 +125,17 @@ export default function Index() {
     return () => clearTimeout(timeout);
   }, []);
 
-  // Intersection Observer para cargar iframes bajo demanda
+  // Cargar iframe principal inmediatamente y otros bajo demanda
   useEffect(() => {
+    // Cargar el video principal inmediatamente
+    setVisibleIframes(prev => new Set([...prev, 'main-video']));
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const id = entry.target.getAttribute('data-iframe-id');
-            if (id) {
+            if (id && id !== 'main-video') {
               setVisibleIframes(prev => new Set([...prev, id]));
             }
           }
@@ -141,11 +144,11 @@ export default function Index() {
       { threshold: 0.1, rootMargin: '50px' }
     );
 
-    const iframePlaceholders = document.querySelectorAll('[data-iframe-id]');
+    const iframePlaceholders = document.querySelectorAll('[data-iframe-id]:not([data-iframe-id="main-video"])');
     iframePlaceholders.forEach(placeholder => observer.observe(placeholder));
 
     return () => observer.disconnect();
-  }, [pageLoaded]);
+  }, []);
 
   const handleMobileShare = async () => {
     const shareData = {
