@@ -88,7 +88,7 @@ export default function Index() {
     return () => clearInterval(timer);
   }, []);
 
-  // Completar carga cuando el video esté listo
+  // Completar carga cuando el video est�� listo
   useEffect(() => {
     if (videoReady && loadingProgress >= 85) {
       setLoadingProgress(100);
@@ -252,6 +252,8 @@ export default function Index() {
           preload="auto"
           onLoadStart={handleVideoLoad}
           onLoadedData={handleVideoLoad}
+          onCanPlay={handleVideoLoad}
+          onCanPlayThrough={handleVideoLoad}
           poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080'%3E%3Crect width='100%25' height='100%25' fill='%23111827'/%3E%3C/svg%3E"
         />
         {!videoLoaded && (
