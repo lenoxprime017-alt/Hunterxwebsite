@@ -324,6 +324,16 @@
     animation: breathe 4s ease-in-out infinite;
   }
 
+  /* Forzar animaciones completas en pantalla de carga sin importar las preferencias del dispositivo */
+  .fixed .bg-gradient-to-r,
+  .fixed [style*="width:"],
+  .fixed .h-full,
+  .fixed .transition-all {
+    animation-duration: initial !important;
+    transition-duration: 500ms !important;
+    animation-iteration-count: initial !important;
+  }
+
   /* Improved text rendering */
   .text-rendering-optimized {
     text-rendering: optimizeLegibility;
