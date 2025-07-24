@@ -66,34 +66,25 @@ export default function Index() {
     setVideoLoaded(true);
   }, []);
 
-  // Control de carga real basado en contenido
+  // Simulación de carga simple de 2.5 segundos
   useEffect(() => {
-    const allReady = Object.values(contentReady).every(Boolean);
+    const duration = 2500; // 2.5 segundos
+    const intervals = 25; // 25 actualizaciones
+    const increment = 100 / intervals;
 
-    if (allReady && loadingProgress < 100) {
-      setLoadingProgress(100);
-      setTimeout(() => setPageLoaded(true), 800);
-    } else if (!allReady) {
-      // Simular progreso gradual mientras carga
-      const timer = setInterval(() => {
-        setLoadingProgress(prev => {
-          const readyCount = Object.values(contentReady).filter(Boolean).length;
-          const targetProgress = (readyCount / Object.keys(contentReady).length) * 85;
-          return Math.min(prev + 2, targetProgress);
-        });
-      }, 100);
-      return () => clearInterval(timer);
-    }
-  }, [contentReady, loadingProgress]);
+    const timer = setInterval(() => {
+      setLoadingProgress(prev => {
+        const next = prev + increment;
+        if (next >= 100) {
+          clearInterval(timer);
+          setTimeout(() => setPageLoaded(true), 300);
+          return 100;
+        }
+        return next;
+      });
+    }, duration / intervals);
 
-  // Simplificar detección de imágenes con timeout más corto
-  useEffect(() => {
-    // Marcar imágenes como listas después de un tiempo corto
-    const timeout = setTimeout(() => {
-      setContentReady(prev => ({ ...prev, images: true }));
-    }, 1000);
-
-    return () => clearTimeout(timeout);
+    return () => clearInterval(timer);
   }, []);
 
   // Cargar todos los iframes inmediatamente
