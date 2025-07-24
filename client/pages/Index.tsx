@@ -812,13 +812,12 @@ export default function Index() {
             left: "0",
             right: "0",
             bottom: "0",
-            backgroundColor: "rgba(0,0,0,0.75)",
+            backgroundColor: "rgba(0,0,0,0.80)",
             zIndex: 99999,
             padding: "20px",
             display: "flex",
-            alignItems: "flex-start",
+            alignItems: "center",
             justifyContent: "center",
-            paddingTop: "20vh",
           }}
           onClick={(e) => {
             // Cerrar modal si se hace clic en el fondo
