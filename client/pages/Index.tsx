@@ -322,17 +322,25 @@ export default function Index() {
             {/* Main Featured Video - Latest Song */}
             <Card className="overflow-hidden group hover:scale-[1.01] transition-all duration-500 shadow-2xl hover:shadow-3xl">
               <CardContent className="p-0">
-                <div className="relative aspect-video">
-                  <iframe
-                    className="w-full h-full rounded-lg"
-                    src="https://www.youtube.com/embed/4kHW5ZkYHIQ?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1&origin=https://hunterx.fly.dev"
-                    title="HUNTERX - Última Canción"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    loading="lazy"
-                    importance="high"
-                  />
+                <div className="relative aspect-video" data-iframe-id="main-video">
+                  {visibleIframes.has('main-video') ? (
+                    <iframe
+                      className="w-full h-full rounded-lg"
+                      src="https://www.youtube.com/embed/4kHW5ZkYHIQ?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
+                      title="HUNTERX - Última Canción"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-muted rounded-lg flex items-center justify-center">
+                      <div className="text-center">
+                        <Play className="w-16 h-16 text-primary mx-auto mb-4" />
+                        <p className="text-muted-foreground">Video de YouTube cargando...</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
