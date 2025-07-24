@@ -816,9 +816,8 @@ export default function Index() {
             zIndex: 99999,
             padding: "20px",
             display: "flex",
-            alignItems: "flex-end",
+            alignItems: "center",
             justifyContent: "center",
-            paddingBottom: "60px",
           }}
           onClick={(e) => {
             // Cerrar modal si se hace clic en el fondo
