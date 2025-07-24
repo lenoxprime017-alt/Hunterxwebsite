@@ -55,6 +55,7 @@ export default function Index() {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [visibleIframes, setVisibleIframes] = useState<Set<string>>(new Set());
   const [showVideo, setShowVideo] = useState(false);
+  const [loadedIframes, setLoadedIframes] = useState<Set<string>>(new Set());
 
   // Detectar móvil al cargar la página
   useEffect(() => {
