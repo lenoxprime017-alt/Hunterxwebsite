@@ -467,8 +467,7 @@ export default function Index() {
                       scrolling="no"
                       allowtransparency="true"
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
-                      loading="lazy"
-                      importance="low"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
@@ -492,8 +491,7 @@ export default function Index() {
                       scrolling="no"
                       allowtransparency="true"
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
-                      loading="lazy"
-                      importance="low"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
@@ -517,8 +515,7 @@ export default function Index() {
                       scrolling="no"
                       allowtransparency="true"
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
-                      loading="lazy"
-                      importance="low"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
@@ -542,8 +539,7 @@ export default function Index() {
                       scrolling="no"
                       allowtransparency="true"
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
-                      loading="lazy"
-                      importance="low"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
@@ -567,8 +563,7 @@ export default function Index() {
                       scrolling="no"
                       allowtransparency="true"
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
-                      loading="lazy"
-                      importance="low"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
@@ -592,8 +587,7 @@ export default function Index() {
                       scrolling="no"
                       allowtransparency="true"
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
-                      loading="lazy"
-                      importance="low"
+                      loading="eager"
                     />
                   </div>
                 </CardContent>
