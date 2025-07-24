@@ -248,23 +248,31 @@ export default function Index() {
   // Pantalla de carga inicial
   if (!pageLoaded) {
     return (
-      <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-accent/10 flex items-center justify-center z-50">
-        <div className="text-center">
-          <div className="mb-8">
-            <h1 className="text-4xl sm:text-6xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+      <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-accent/10 flex items-center justify-center z-50 min-h-screen">
+        <div className="text-center px-4 max-w-md mx-auto">
+          <div className="mb-12">
+            <h1 className="text-5xl sm:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-tight">
               HUNTERX
             </h1>
-            <p className="text-muted-foreground text-lg">Cargando experiencia musical...</p>
+            <p className="text-muted-foreground text-xl">Cargando experiencia musical...</p>
           </div>
-          <div className="w-64 h-2 bg-muted rounded-full overflow-hidden">
-            <div
-              className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-300 ease-out"
-              style={{ width: `${Math.min(loadingProgress, 100)}%` }}
-            />
+          <div className="w-full max-w-xs mx-auto">
+            <div className="h-3 bg-muted rounded-full overflow-hidden mb-4">
+              <div
+                className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-500 ease-out rounded-full"
+                style={{ width: `${Math.min(loadingProgress, 100)}%` }}
+              />
+            </div>
+            <p className="text-base text-muted-foreground font-medium">
+              {Math.round(Math.min(loadingProgress, 100))}%
+            </p>
           </div>
-          <p className="text-sm text-muted-foreground mt-4">
-            {Math.round(Math.min(loadingProgress, 100))}%
-          </p>
+          <div className="mt-8 text-sm text-muted-foreground">
+            {loadingProgress < 30 && "Preparando contenido..."}
+            {loadingProgress >= 30 && loadingProgress < 60 && "Cargando videos..."}
+            {loadingProgress >= 60 && loadingProgress < 90 && "Optimizando experiencia..."}
+            {loadingProgress >= 90 && "¡Casi listo!"}
+          </div>
         </div>
       </div>
     );
