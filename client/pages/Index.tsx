@@ -82,6 +82,28 @@ export default function Index() {
     return () => clearInterval(loadingTimer);
   }, []);
 
+  // Intersection Observer para cargar iframes bajo demanda
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('data-iframe-id');
+            if (id) {
+              setVisibleIframes(prev => new Set([...prev, id]));
+            }
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    const iframePlaceholders = document.querySelectorAll('[data-iframe-id]');
+    iframePlaceholders.forEach(placeholder => observer.observe(placeholder));
+
+    return () => observer.disconnect();
+  }, [pageLoaded]);
+
   const handleMobileShare = async () => {
     const shareData = {
       title: "HUNTERX - Música Urbana Cristiana",
