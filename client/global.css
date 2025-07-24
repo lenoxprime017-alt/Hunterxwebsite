@@ -369,16 +369,16 @@
 
   /* Optimizar para conexiones lentas */
   @media (prefers-reduced-data: reduce) {
-    video:not(.fixed *) {
+    video:not(.fixed *):not(.fixed .h-full) {
       preload: none !important;
     }
 
-    iframe:not(.fixed *) {
+    iframe:not(.fixed *):not(.fixed .h-full) {
       loading: lazy !important;
     }
 
     /* Simplificar animaciones (excepto pantalla de carga) */
-    *:not(.fixed *) {
+    *:not(.fixed):not(.fixed *):not(.fixed .h-full):not(.bg-gradient-to-r):not([style*="width:"]) {
       animation-duration: 0.01s !important;
       transition-duration: 0.01s !important;
     }
