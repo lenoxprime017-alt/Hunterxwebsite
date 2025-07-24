@@ -830,13 +830,16 @@ export default function Index() {
             style={{
               backgroundColor: "hsl(var(--background))",
               border: "1px solid hsl(var(--border))",
-              borderRadius: "12px",
-              padding: "24px",
-              maxWidth: "400px",
+              borderRadius: "16px",
+              padding: "28px",
+              maxWidth: "420px",
               width: "100%",
-              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+              maxHeight: "90vh",
+              overflowY: "auto",
+              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.4)",
               color: "hsl(var(--foreground))",
               position: "relative",
+              animation: "modalFadeIn 0.2s ease-out",
             }}
           >
             {/* Header */}
