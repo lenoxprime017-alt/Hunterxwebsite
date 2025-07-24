@@ -74,7 +74,7 @@ export default function Index() {
     const increment = 100 / intervals;
 
     const timer = setInterval(() => {
-      setLoadingProgress(prev => {
+      setLoadingProgress((prev) => {
         const next = prev + increment;
 
         // Cuando llegue a 90%, mostrar el video
@@ -97,7 +97,20 @@ export default function Index() {
   // Cargar todos los iframes inmediatamente
   useEffect(() => {
     // Cargar todos los iframes desde el inicio
-    setVisibleIframes(new Set(['main-video', 'video-2', 'video-3', 'video-4', 'instagram-1', 'instagram-2', 'instagram-3', 'instagram-4', 'instagram-5', 'instagram-6']));
+    setVisibleIframes(
+      new Set([
+        "main-video",
+        "video-2",
+        "video-3",
+        "video-4",
+        "instagram-1",
+        "instagram-2",
+        "instagram-3",
+        "instagram-4",
+        "instagram-5",
+        "instagram-6",
+      ]),
+    );
   }, []);
 
   const handleMobileShare = async () => {
@@ -207,7 +220,9 @@ export default function Index() {
             <h1 className="text-5xl sm:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-tight">
               HUNTERX
             </h1>
-            <p className="text-muted-foreground text-xl">Cargando experiencia musical...</p>
+            <p className="text-muted-foreground text-xl">
+              Cargando experiencia musical...
+            </p>
           </div>
           <div className="w-full max-w-xs mx-auto">
             <div className="h-3 bg-muted rounded-full overflow-hidden mb-4">
@@ -222,8 +237,12 @@ export default function Index() {
           </div>
           <div className="mt-8 text-sm text-muted-foreground">
             {loadingProgress < 30 && "Preparando contenido..."}
-            {loadingProgress >= 30 && loadingProgress < 60 && "Cargando videos..."}
-            {loadingProgress >= 60 && loadingProgress < 90 && "Optimizando experiencia..."}
+            {loadingProgress >= 30 &&
+              loadingProgress < 60 &&
+              "Cargando videos..."}
+            {loadingProgress >= 60 &&
+              loadingProgress < 90 &&
+              "Optimizando experiencia..."}
             {loadingProgress >= 90 && "¡Casi listo!"}
           </div>
         </div>
@@ -323,8 +342,11 @@ export default function Index() {
             {/* Main Featured Video - Latest Song */}
             <Card className="overflow-hidden group hover:scale-[1.01] transition-all duration-500 shadow-2xl hover:shadow-3xl">
               <CardContent className="p-0">
-                <div className="relative aspect-video" data-iframe-id="main-video">
-                  {visibleIframes.has('main-video') ? (
+                <div
+                  className="relative aspect-video"
+                  data-iframe-id="main-video"
+                >
+                  {visibleIframes.has("main-video") ? (
                     <iframe
                       className="w-full h-full rounded-lg"
                       src="https://www.youtube.com/embed/4kHW5ZkYHIQ?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
@@ -333,13 +355,14 @@ export default function Index() {
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
                       loading="eager"
-
                     />
                   ) : (
                     <div className="w-full h-full bg-muted rounded-lg flex items-center justify-center">
                       <div className="text-center">
                         <Play className="w-16 h-16 text-primary mx-auto mb-4" />
-                        <p className="text-muted-foreground">Video de YouTube cargando...</p>
+                        <p className="text-muted-foreground">
+                          Video de YouTube cargando...
+                        </p>
                       </div>
                     </div>
                   )}
