@@ -74,31 +74,7 @@ export default function Index() {
     setVideoLoaded(true);
   }, []);
 
-  // Lista de todos los embeds que necesitamos cargar
-  const totalEmbeds = [
-    "main-video",
-    "video-2",
-    "video-3",
-    "video-4",
-    "instagram-1",
-    "instagram-2",
-    "instagram-3",
-    "instagram-4",
-    "instagram-5",
-    "instagram-6"
-  ];
-
-  // Función para marcar un iframe como cargado
-  const markIframeAsLoaded = useCallback((iframeId: string) => {
-    setLoadedIframes(prev => {
-      const newSet = new Set(prev);
-      newSet.add(iframeId);
-      console.log(`Iframe ${iframeId} cargado. Total cargados: ${newSet.size}/${totalEmbeds.length}`);
-      return newSet;
-    });
-  }, [totalEmbeds.length]);
-
-  // Precargar video y gestionar progreso basado en embeds cargados
+  // Precargar video inmediatamente y mostrar cuando cargue
   useEffect(() => {
     // Precargar el video inmediatamente al montar el componente
     const video = document.createElement("video");
@@ -107,27 +83,33 @@ export default function Index() {
     video.preload = "auto";
     video.muted = true;
 
-    // Mostrar video al 20% de progreso
-    if (loadedIframes.size >= totalEmbeds.length * 0.2 && !showVideo) {
-      setShowVideo(true);
-    }
+    const duration = 2200; // 2.2 segundos total
+    const intervals = 22;
+    const increment = 100 / intervals;
 
-    // Actualizar progreso basado en embeds cargados
-    const progress = (loadedIframes.size / totalEmbeds.length) * 100;
-    setLoadingProgress(progress);
+    const timer = setInterval(() => {
+      setLoadingProgress((prev) => {
+        const next = prev + increment;
 
-    // Si todos los embeds están cargados, terminar la carga
-    if (loadedIframes.size === totalEmbeds.length && progress >= 100) {
-      setTimeout(() => {
-        setPageLoaded(true);
-        console.log("Todos los embeds cargados. Mostrando página.");
-      }, 500);
-    }
+        // Cuando llegue a 80%, mostrar el video (antes que termine la carga)
+        if (next >= 80 && !showVideo) {
+          setShowVideo(true);
+        }
+
+        if (next >= 100) {
+          clearInterval(timer);
+          setTimeout(() => setPageLoaded(true), 300);
+          return 100;
+        }
+        return next;
+      });
+    }, duration / intervals);
 
     return () => {
+      clearInterval(timer);
       video.remove(); // Limpiar el video precargado
     };
-  }, [loadedIframes.size, totalEmbeds.length, showVideo, markIframeAsLoaded]);
+  }, [showVideo]);
 
   // Reproducir automáticamente el video cuando se muestre
   useEffect(() => {
