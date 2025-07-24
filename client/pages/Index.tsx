@@ -382,7 +382,8 @@ export default function Index() {
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
-                      loading="lazy"
+                      loading="eager"
+                      onLoad={() => setContentReady(prev => ({ ...prev, mainIframe: true }))}
                     />
                   ) : (
                     <div className="w-full h-full bg-muted rounded-lg flex items-center justify-center">
