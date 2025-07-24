@@ -386,14 +386,14 @@
 
   /* Optimizar para dispositivos con batería baja */
   @media (prefers-reduced-motion: reduce) {
-    * {
+    *:not(.fixed *) {
       animation-duration: 0.01s !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01s !important;
       scroll-behavior: auto !important;
     }
 
-    video {
+    video:not(.fixed *) {
       autoplay: false !important;
     }
   }
