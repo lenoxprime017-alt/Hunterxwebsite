@@ -35,15 +35,10 @@ export default function Index() {
 
     if (isShareModalOpen) {
       document.addEventListener("keydown", handleEscKey);
-      // Prevenir scroll del body cuando el modal está abierto
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
     }
 
     return () => {
       document.removeEventListener("keydown", handleEscKey);
-      document.body.style.overflow = "unset";
     };
   }, [isShareModalOpen]);
   const [copySuccess, setCopySuccess] = useState(false);
