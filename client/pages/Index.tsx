@@ -67,18 +67,24 @@ export default function Index() {
     setVideoLoaded(true);
   }, []);
 
-  // Carga simple de 2 segundos
+  // Carga con video reproduciéndose en 90%
   useEffect(() => {
-    const duration = 2000;
-    const intervals = 20;
+    const duration = 2200; // 2.2 segundos total
+    const intervals = 22;
     const increment = 100 / intervals;
 
     const timer = setInterval(() => {
       setLoadingProgress(prev => {
         const next = prev + increment;
+
+        // Cuando llegue a 90%, mostrar el video
+        if (next >= 90 && !showVideo) {
+          setShowVideo(true);
+        }
+
         if (next >= 100) {
           clearInterval(timer);
-          setTimeout(() => setPageLoaded(true), 200);
+          setTimeout(() => setPageLoaded(true), 300);
           return 100;
         }
         return next;
@@ -86,7 +92,7 @@ export default function Index() {
     }, duration / intervals);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [showVideo]);
 
   // Cargar todos los iframes inmediatamente
   useEffect(() => {
