@@ -67,8 +67,14 @@ export default function Index() {
     setVideoLoaded(true);
   }, []);
 
-  // Carga con video reproduciéndose en 90%
+  // Precargar video inmediatamente y mostrar cuando cargue
   useEffect(() => {
+    // Precargar el video inmediatamente al montar el componente
+    const video = document.createElement('video');
+    video.src = "https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2";
+    video.preload = 'auto';
+    video.muted = true;
+
     const duration = 2200; // 2.2 segundos total
     const intervals = 22;
     const increment = 100 / intervals;
@@ -77,8 +83,8 @@ export default function Index() {
       setLoadingProgress((prev) => {
         const next = prev + increment;
 
-        // Cuando llegue a 90%, mostrar el video
-        if (next >= 90 && !showVideo) {
+        // Cuando llegue a 80%, mostrar el video (antes que termine la carga)
+        if (next >= 80 && !showVideo) {
           setShowVideo(true);
         }
 
@@ -91,7 +97,10 @@ export default function Index() {
       });
     }, duration / intervals);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      video.remove(); // Limpiar el video precargado
+    };
   }, [showVideo]);
 
   // Cargar todos los iframes inmediatamente
@@ -266,6 +275,14 @@ export default function Index() {
             muted={true}
             playsInline
             preload="auto"
+            onCanPlay={(e) => {
+              // Asegurar que el video se reproduzca inmediatamente cuando esté listo
+              e.currentTarget.play();
+            }}
+            onLoadStart={() => {
+              // Pre-cargar el video en segundo plano
+              console.log('Video empezando a cargar');
+            }}
           />
         )}
         {!showVideo && (
@@ -290,7 +307,7 @@ export default function Index() {
               </h1>
               <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 lg:mb-12 max-w-3xl leading-relaxed px-4">
                 Música urbana con propósito. Llevando esperanza y fe a las
-                calles través de letras que transforman vidas.
+                calles a través de letras que transforman vidas.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto max-w-md sm:max-w-none">
                 <Button
