@@ -703,6 +703,10 @@ export default function Index() {
             zIndex: 99999,
             padding: "20px",
             overflowY: "auto",
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "center",
+            paddingBottom: "80px",
           }}
           onClick={(e) => {
             // Cerrar modal si se hace clic en el fondo
@@ -721,9 +725,8 @@ export default function Index() {
               width: "100%",
               boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
               color: "hsl(var(--foreground))",
-              margin: "50vh auto 0 auto",
-              transform: "translateY(-50%)",
               position: "relative",
+              transform: "translateY(-100%)",
             }}
           >
             {/* Header */}
