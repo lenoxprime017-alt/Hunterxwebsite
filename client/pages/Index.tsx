@@ -25,7 +25,7 @@ export default function Index() {
     console.log("Modal state changed:", isShareModalOpen);
   }, [isShareModalOpen]);
 
-  // Cerrar modal con tecla ESC
+  // Cerrar modal con tecla ESC y bloquear scroll
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
       if (event.key === "Escape" && isShareModalOpen) {
@@ -34,11 +34,18 @@ export default function Index() {
     };
 
     if (isShareModalOpen) {
+      // Bloquear scroll del body cuando el modal está abierto
+      document.body.style.overflow = 'hidden';
       document.addEventListener("keydown", handleEscKey);
+    } else {
+      // Restaurar scroll cuando el modal se cierra
+      document.body.style.overflow = 'unset';
     }
 
     return () => {
       document.removeEventListener("keydown", handleEscKey);
+      // Asegurar que el scroll se restaure al limpiar
+      document.body.style.overflow = 'unset';
     };
   }, [isShareModalOpen]);
   const [copySuccess, setCopySuccess] = useState(false);
@@ -747,21 +754,7 @@ export default function Index() {
               </div>
             </Button>
 
-            <Button
-              variant="outline"
-              size="lg"
-              className="w-full justify-start h-16 group hover:bg-primary hover:text-primary-foreground mb-4"
-              onClick={() => {
-                console.log("TEST: Opening modal directly");
-                setIsShareModalOpen(true);
-              }}
-            >
-              <Share2 className="mr-4 h-6 w-6 group-hover:text-current" />
-              <div className="flex-1 text-left">
-                <div className="font-semibold">TEST - Compartir (Modal)</div>
-                <div className="text-sm opacity-70">Prueba del modal</div>
-              </div>
-            </Button>
+
 
             <Button
               variant="outline"
