@@ -388,7 +388,9 @@
     }
 
     /* Simplificar animaciones (excepto pantalla de carga) */
-    *:not(.fixed):not(.fixed *):not(.fixed .h-full):not(.bg-gradient-to-r):not([style*="width:"]) {
+    *:not(.fixed):not(.fixed *):not(.fixed .h-full):not(.bg-gradient-to-r):not(
+        [style*="width:"]
+      ) {
       animation-duration: 0.01s !important;
       transition-duration: 0.01s !important;
     }
@@ -396,7 +398,9 @@
 
   /* Optimizar para dispositivos con batería baja */
   @media (prefers-reduced-motion: reduce) {
-    *:not(.fixed):not(.fixed *):not(.fixed .h-full):not(.bg-gradient-to-r):not([style*="width:"]):not(.animate-fadeIn) {
+    *:not(.fixed):not(.fixed *):not(.fixed .h-full):not(.bg-gradient-to-r):not(
+        [style*="width:"]
+      ):not(.animate-fadeIn) {
       animation-duration: 0.01s !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01s !important;
