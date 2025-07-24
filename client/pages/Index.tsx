@@ -238,20 +238,17 @@ export default function Index() {
     >
       {/* Hero Section */}
       <section className="relative overflow-hidden h-screen">
-        <video
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-            videoLoaded ? "opacity-100" : "opacity-0"
-          }`}
-          src="https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2"
-          autoPlay
-          loop
-          muted={true}
-          playsInline
-          preload="auto"
-          onLoadStart={handleVideoLoad}
-          onLoadedData={handleVideoLoad}
-          poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080'%3E%3Crect width='100%25' height='100%25' fill='%23111827'/%3E%3C/svg%3E"
-        />
+        {showVideo && (
+          <video
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100"
+            src="https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2"
+            autoPlay
+            loop
+            muted={true}
+            playsInline
+            preload="auto"
+          />
+        )}
         {!videoLoaded && (
           <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
             <div className="animate-pulse text-primary text-lg font-medium">
