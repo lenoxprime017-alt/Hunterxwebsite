@@ -765,15 +765,18 @@ export default function Index() {
                   isMobile,
                   hasWebShare: "share" in navigator,
                 });
-                // En móviles con Web Share API, usar función nativa
-                if (isMobile && "share" in navigator) {
-                  console.log("Using mobile Web Share API");
-                  handleMobileShare();
-                } else {
-                  // En PC, abrir modal
-                  console.log("Opening modal on PC");
-                  setIsShareModalOpen(true);
+                // En móviles SOLO usar Web Share API, NO abrir modal jamás
+                if (isMobile) {
+                  console.log("Mobile detected - using native Web Share API only");
+                  if ("share" in navigator) {
+                    handleMobileShare();
+                  }
+                  // En móviles NO hacer nada más, no abrir modal
+                  return;
                 }
+                // SOLO en PC abrir modal
+                console.log("PC detected - opening modal");
+                setIsShareModalOpen(true);
               }}
             >
               <Share2 className="mr-4 h-6 w-6 group-hover:text-current" />
