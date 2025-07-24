@@ -818,6 +818,9 @@ export default function Index() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            paddingTop: `${window.scrollY + window.innerHeight * 0.2}px`,
+            paddingBottom: `${window.innerHeight * 0.2}px`,
+            alignItems: "flex-start",
           }}
           onClick={(e) => {
             // Cerrar modal si se hace clic en el fondo
