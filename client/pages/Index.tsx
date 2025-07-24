@@ -249,10 +249,10 @@ export default function Index() {
             preload="auto"
           />
         )}
-        {!videoLoaded && (
+        {!showVideo && (
           <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
             <div className="animate-pulse text-primary text-lg font-medium">
-              Cargando...
+              Preparando video...
             </div>
           </div>
         )}
