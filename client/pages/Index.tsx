@@ -35,17 +35,17 @@ export default function Index() {
 
     if (isShareModalOpen) {
       // Bloquear scroll del body cuando el modal está abierto
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
       document.addEventListener("keydown", handleEscKey);
     } else {
       // Restaurar scroll cuando el modal se cierra
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
 
     return () => {
       document.removeEventListener("keydown", handleEscKey);
       // Asegurar que el scroll se restaure al limpiar
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [isShareModalOpen]);
   const [copySuccess, setCopySuccess] = useState(false);
@@ -77,9 +77,10 @@ export default function Index() {
   // Precargar video inmediatamente y mostrar cuando cargue
   useEffect(() => {
     // Precargar el video inmediatamente al montar el componente
-    const video = document.createElement('video');
-    video.src = "https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2";
-    video.preload = 'auto';
+    const video = document.createElement("video");
+    video.src =
+      "https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2";
+    video.preload = "auto";
     video.muted = true;
 
     const duration = 2200; // 2.2 segundos total
@@ -115,7 +116,7 @@ export default function Index() {
     if (showVideo) {
       // Buscar el video y garantizar que se reproduzca
       setTimeout(() => {
-        const video = document.querySelector('video');
+        const video = document.querySelector("video");
         if (video) {
           video.play().catch(console.warn);
         }
@@ -301,7 +302,7 @@ export default function Index() {
             }}
             onLoadStart={() => {
               // Pre-cargar el video en segundo plano
-              console.log('Video empezando a cargar');
+              console.log("Video empezando a cargar");
             }}
           />
         )}
@@ -754,8 +755,6 @@ export default function Index() {
               </div>
             </Button>
 
-
-
             <Button
               variant="outline"
               size="lg"
@@ -767,7 +766,9 @@ export default function Index() {
                 });
                 // En móviles SOLO usar Web Share API, NO abrir modal jamás
                 if (isMobile) {
-                  console.log("Mobile detected - using native Web Share API only");
+                  console.log(
+                    "Mobile detected - using native Web Share API only",
+                  );
                   if ("share" in navigator) {
                     handleMobileShare();
                   }
