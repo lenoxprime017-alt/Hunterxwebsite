@@ -243,36 +243,95 @@ export default function Index() {
   // Pantalla de carga inicial
   if (!pageLoaded) {
     return (
-      <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-accent/10 flex items-center justify-center z-50 min-h-screen">
-        <div className="text-center px-4 max-w-md mx-auto">
-          <div className="mb-12">
-            <h1 className="text-5xl sm:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-tight">
+      <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800 flex items-center justify-center z-50 min-h-screen overflow-hidden">
+        {/* Efectos de fondo animados */}
+        <div className="absolute inset-0">
+          {/* Gradiente animado */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-secondary/20 animate-pulse"></div>
+
+          {/* Partículas de fondo */}
+          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary/40 rounded-full animate-bounce delay-100"></div>
+          <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-secondary/60 rounded-full animate-bounce delay-300"></div>
+          <div className="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-primary/30 rounded-full animate-bounce delay-500"></div>
+          <div className="absolute bottom-1/4 right-1/3 w-1 h-1 bg-secondary/40 rounded-full animate-bounce delay-700"></div>
+
+          {/* Círculos de luz */}
+          <div className="absolute top-20 left-20 w-32 h-32 bg-primary/10 rounded-full blur-2xl animate-pulse delay-200"></div>
+          <div className="absolute bottom-20 right-20 w-40 h-40 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-400"></div>
+        </div>
+
+        <div className="text-center px-4 max-w-lg mx-auto relative z-10">
+          {/* Logo animado */}
+          <div className="mb-16 relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-3xl animate-pulse"></div>
+            <h1 className="relative text-6xl sm:text-8xl font-black mb-6 bg-gradient-to-r from-primary via-white to-secondary bg-clip-text text-transparent tracking-tight drop-shadow-2xl animate-pulse">
               HUNTERX
             </h1>
-            <p className="text-muted-foreground text-xl">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+              <div className="w-2 h-2 bg-secondary rounded-full animate-bounce delay-100"></div>
+              <div className="w-2 h-2 bg-primary rounded-full animate-bounce delay-200"></div>
+            </div>
+            <p className="text-gray-300 text-xl font-light tracking-wide animate-pulse delay-300">
               Cargando experiencia musical...
             </p>
           </div>
-          <div className="w-full max-w-xs mx-auto">
-            <div className="h-3 bg-muted rounded-full overflow-hidden mb-4">
+
+          {/* Barra de progreso mejorada */}
+          <div className="w-full max-w-sm mx-auto mb-8">
+            <div className="relative h-4 bg-gray-700/50 rounded-full overflow-hidden backdrop-blur-sm border border-gray-600/30 shadow-lg">
+              {/* Brillo de fondo */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
+
+              {/* Barra de progreso principal */}
               <div
-                className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-500 ease-out rounded-full"
+                className="relative h-full bg-gradient-to-r from-primary via-primary/80 to-secondary transition-all duration-700 ease-out rounded-full shadow-lg"
                 style={{ width: `${Math.min(loadingProgress, 100)}%` }}
-              />
+              >
+                {/* Efecto de brillo en movimiento */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse rounded-full"></div>
+
+                {/* Brillo en el extremo */}
+                <div className="absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-white/50 to-transparent rounded-full animate-pulse"></div>
+              </div>
             </div>
-            <p className="text-base text-muted-foreground font-medium">
-              {Math.round(Math.min(loadingProgress, 100))}%
-            </p>
+
+            {/* Porcentaje con efecto */}
+            <div className="flex justify-between items-center mt-4">
+              <span className="text-sm text-gray-400 font-medium">Progreso</span>
+              <span className="text-2xl font-bold text-white drop-shadow-lg animate-pulse">
+                {Math.round(Math.min(loadingProgress, 100))}%
+              </span>
+            </div>
           </div>
-          <div className="mt-8 text-sm text-muted-foreground">
-            {loadingProgress < 30 && "Preparando contenido..."}
-            {loadingProgress >= 30 &&
-              loadingProgress < 60 &&
-              "Cargando videos..."}
-            {loadingProgress >= 60 &&
-              loadingProgress < 90 &&
-              "Optimizando experiencia..."}
-            {loadingProgress >= 90 && "¡Casi listo!"}
+
+          {/* Estados de carga con animaciones */}
+          <div className="mt-12 relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-800/50 to-transparent rounded-lg blur-sm"></div>
+            <div className="relative bg-gray-800/30 backdrop-blur-sm border border-gray-600/20 rounded-lg px-6 py-4 shadow-xl">
+              <div className="flex items-center justify-center gap-3">
+                {/* Spinner animado */}
+                <div className="relative">
+                  <div className="w-6 h-6 border-2 border-gray-600 border-t-primary rounded-full animate-spin"></div>
+                  <div className="absolute inset-0 w-6 h-6 border-2 border-transparent border-b-secondary rounded-full animate-spin" style={{animationDirection: 'reverse', animationDuration: '0.8s'}}></div>
+                </div>
+
+                {/* Texto de estado */}
+                <span className="text-gray-300 font-medium tracking-wide animate-pulse">
+                  {loadingProgress < 30 && "🎵 Preparando contenido..."}
+                  {loadingProgress >= 30 && loadingProgress < 60 && "📹 Cargando videos..."}
+                  {loadingProgress >= 60 && loadingProgress < 90 && "⚡ Optimizando experiencia..."}
+                  {loadingProgress >= 90 && "✨ ¡Casi listo!"}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Elementos decorativos adicionales */}
+          <div className="mt-12 flex justify-center gap-4">
+            <div className="w-3 h-3 bg-primary/60 rounded-full animate-bounce delay-100"></div>
+            <div className="w-3 h-3 bg-secondary/60 rounded-full animate-bounce delay-200"></div>
+            <div className="w-3 h-3 bg-primary/60 rounded-full animate-bounce delay-300"></div>
           </div>
         </div>
       </div>
