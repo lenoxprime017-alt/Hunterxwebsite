@@ -324,6 +324,16 @@
     animation: breathe 4s ease-in-out infinite;
   }
 
+  /* Forzar animaciones completas en pantalla de carga sin importar las preferencias del dispositivo */
+  .fixed .bg-gradient-to-r,
+  .fixed [style*="width:"],
+  .fixed .h-full,
+  .fixed .transition-all {
+    animation-duration: initial !important;
+    transition-duration: 500ms !important;
+    animation-iteration-count: initial !important;
+  }
+
   /* Improved text rendering */
   .text-rendering-optimized {
     text-rendering: optimizeLegibility;
@@ -333,27 +343,27 @@
 
   /* Optimizaciones específicas para móviles */
   @media (max-width: 768px) {
-    /* Reducir complejidad visual en móviles */
-    .group:hover .group-hover\:scale-\[1\.01\] {
+    /* Reducir complejidad visual en móviles SOLO en elementos que no sean de la pantalla de carga */
+    .group:hover .group-hover\:scale-\[1\.01\]:not(.fixed *) {
       transform: none !important;
     }
 
-    /* Simplificar gradientes complejos en móviles (excepto avatares) */
-    .bg-gradient-to-br:not(.flex > *) {
+    /* Simplificar gradientes complejos en móviles (excepto avatares y pantalla de carga) */
+    .bg-gradient-to-br:not(.flex > *):not(.fixed *) {
       background: var(--background) !important;
     }
 
-    /* Reducir blur effects en móviles */
-    .backdrop-blur-sm,
-    .backdrop-blur-xl {
+    /* Reducir blur effects en móviles (excepto pantalla de carga) */
+    .backdrop-blur-sm:not(.fixed *),
+    .backdrop-blur-xl:not(.fixed *) {
       backdrop-filter: none !important;
       background: rgba(var(--card), 0.95) !important;
     }
 
-    /* Optimizar sombras para móviles */
-    .shadow-3xl,
-    .shadow-2xl,
-    .shadow-xl {
+    /* Optimizar sombras para móviles (excepto pantalla de carga) */
+    .shadow-3xl:not(.fixed *),
+    .shadow-2xl:not(.fixed *),
+    .shadow-xl:not(.fixed *) {
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
     }
   }
@@ -369,16 +379,18 @@
 
   /* Optimizar para conexiones lentas */
   @media (prefers-reduced-data: reduce) {
-    video {
+    video:not(.fixed *):not(.fixed .h-full) {
       preload: none !important;
     }
 
-    iframe {
+    iframe:not(.fixed *):not(.fixed .h-full) {
       loading: lazy !important;
     }
 
-    /* Simplificar animaciones */
-    * {
+    /* Simplificar animaciones (excepto pantalla de carga) */
+    *:not(.fixed):not(.fixed *):not(.fixed .h-full):not(.bg-gradient-to-r):not(
+        [style*="width:"]
+      ) {
       animation-duration: 0.01s !important;
       transition-duration: 0.01s !important;
     }
@@ -386,14 +398,16 @@
 
   /* Optimizar para dispositivos con batería baja */
   @media (prefers-reduced-motion: reduce) {
-    * {
+    *:not(.fixed):not(.fixed *):not(.fixed .h-full):not(.bg-gradient-to-r):not(
+        [style*="width:"]
+      ):not(.animate-fadeIn) {
       animation-duration: 0.01s !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01s !important;
       scroll-behavior: auto !important;
     }
 
-    video {
+    video:not(.fixed *):not(.fixed .h-full) {
       autoplay: false !important;
     }
   }
