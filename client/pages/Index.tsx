@@ -700,17 +700,14 @@ export default function Index() {
         <div
           style={{
             position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
+            top: "0",
+            left: "0",
+            right: "0",
+            bottom: "0",
             backgroundColor: "rgba(0,0,0,0.75)",
             zIndex: 99999,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
             padding: "20px",
-            overflow: "auto",
+            overflowY: "auto",
           }}
           onClick={(e) => {
             // Cerrar modal si se hace clic en el fondo
@@ -727,12 +724,11 @@ export default function Index() {
               padding: "24px",
               maxWidth: "400px",
               width: "100%",
-              maxHeight: "90vh",
               boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
               color: "hsl(var(--foreground))",
-              margin: "auto",
+              margin: "50vh auto 0 auto",
+              transform: "translateY(-50%)",
               position: "relative",
-              overflow: "auto",
             }}
           >
             {/* Header */}
