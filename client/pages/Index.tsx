@@ -453,7 +453,7 @@ export default function Index() {
                       height="500"
                       frameBorder="0"
                       scrolling="no"
-                      allowTransparency
+                      allowtransparency
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
                       loading="lazy"
                       importance="low"
@@ -478,7 +478,7 @@ export default function Index() {
                       height="500"
                       frameBorder="0"
                       scrolling="no"
-                      allowTransparency
+                      allowtransparency
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
                       loading="lazy"
                       importance="low"
@@ -503,7 +503,7 @@ export default function Index() {
                       height="500"
                       frameBorder="0"
                       scrolling="no"
-                      allowTransparency
+                      allowtransparency
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
                       loading="lazy"
                       importance="low"
@@ -528,7 +528,7 @@ export default function Index() {
                       height="500"
                       frameBorder="0"
                       scrolling="no"
-                      allowTransparency
+                      allowtransparency
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
                       loading="lazy"
                       importance="low"
@@ -553,7 +553,7 @@ export default function Index() {
                       height="500"
                       frameBorder="0"
                       scrolling="no"
-                      allowTransparency
+                      allowtransparency
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
                       loading="lazy"
                       importance="low"
@@ -578,7 +578,7 @@ export default function Index() {
                       height="500"
                       frameBorder="0"
                       scrolling="no"
-                      allowTransparency
+                      allowtransparency
                       className="w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01] instagram-embed"
                       loading="lazy"
                       importance="low"
