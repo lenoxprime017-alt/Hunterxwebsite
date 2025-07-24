@@ -25,7 +25,7 @@ export default function Index() {
     console.log("Modal state changed:", isShareModalOpen);
   }, [isShareModalOpen]);
 
-  // Cerrar modal con tecla ESC
+  // Cerrar modal con tecla ESC y bloquear scroll
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
       if (event.key === "Escape" && isShareModalOpen) {
@@ -34,11 +34,18 @@ export default function Index() {
     };
 
     if (isShareModalOpen) {
+      // Bloquear scroll del body cuando el modal está abierto
+      document.body.style.overflow = "hidden";
       document.addEventListener("keydown", handleEscKey);
+    } else {
+      // Restaurar scroll cuando el modal se cierra
+      document.body.style.overflow = "unset";
     }
 
     return () => {
       document.removeEventListener("keydown", handleEscKey);
+      // Asegurar que el scroll se restaure al limpiar
+      document.body.style.overflow = "unset";
     };
   }, [isShareModalOpen]);
   const [copySuccess, setCopySuccess] = useState(false);
@@ -67,8 +74,15 @@ export default function Index() {
     setVideoLoaded(true);
   }, []);
 
-  // Carga con video reproduciéndose en 90%
+  // Precargar video inmediatamente y mostrar cuando cargue
   useEffect(() => {
+    // Precargar el video inmediatamente al montar el componente
+    const video = document.createElement("video");
+    video.src =
+      "https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2";
+    video.preload = "auto";
+    video.muted = true;
+
     const duration = 2200; // 2.2 segundos total
     const intervals = 22;
     const increment = 100 / intervals;
@@ -77,8 +91,8 @@ export default function Index() {
       setLoadingProgress((prev) => {
         const next = prev + increment;
 
-        // Cuando llegue a 90%, mostrar el video
-        if (next >= 90 && !showVideo) {
+        // Cuando llegue a 80%, mostrar el video (antes que termine la carga)
+        if (next >= 80 && !showVideo) {
           setShowVideo(true);
         }
 
@@ -91,7 +105,23 @@ export default function Index() {
       });
     }, duration / intervals);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      video.remove(); // Limpiar el video precargado
+    };
+  }, [showVideo]);
+
+  // Reproducir automáticamente el video cuando se muestre
+  useEffect(() => {
+    if (showVideo) {
+      // Buscar el video y garantizar que se reproduzca
+      setTimeout(() => {
+        const video = document.querySelector("video");
+        if (video) {
+          video.play().catch(console.warn);
+        }
+      }, 100);
+    }
   }, [showVideo]);
 
   // Cargar todos los iframes inmediatamente
@@ -252,7 +282,7 @@ export default function Index() {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10"
+      className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10 animate-fadeIn"
       translate="no"
     >
       {/* Hero Section */}
@@ -266,6 +296,14 @@ export default function Index() {
             muted={true}
             playsInline
             preload="auto"
+            onCanPlay={(e) => {
+              // Asegurar que el video se reproduzca inmediatamente cuando esté listo
+              e.currentTarget.play();
+            }}
+            onLoadStart={() => {
+              // Pre-cargar el video en segundo plano
+              console.log("Video empezando a cargar");
+            }}
           />
         )}
         {!showVideo && (
@@ -290,7 +328,7 @@ export default function Index() {
               </h1>
               <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 lg:mb-12 max-w-3xl leading-relaxed px-4">
                 Música urbana con propósito. Llevando esperanza y fe a las
-                calles través de letras que transforman vidas.
+                calles a través de letras que transforman vidas.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto max-w-md sm:max-w-none">
                 <Button
@@ -720,37 +758,26 @@ export default function Index() {
             <Button
               variant="outline"
               size="lg"
-              className="w-full justify-start h-16 group hover:bg-primary hover:text-primary-foreground mb-4"
-              onClick={() => {
-                console.log("TEST: Opening modal directly");
-                setIsShareModalOpen(true);
-              }}
-            >
-              <Share2 className="mr-4 h-6 w-6 group-hover:text-current" />
-              <div className="flex-1 text-left">
-                <div className="font-semibold">TEST - Compartir (Modal)</div>
-                <div className="text-sm opacity-70">Prueba del modal</div>
-              </div>
-            </Button>
-
-            <Button
-              variant="outline"
-              size="lg"
               className="w-full justify-start h-16 group hover:bg-primary hover:text-primary-foreground"
               onClick={() => {
                 console.log("Share button clicked!", {
                   isMobile,
                   hasWebShare: "share" in navigator,
                 });
-                // En móviles con Web Share API, usar función nativa
-                if (isMobile && "share" in navigator) {
-                  console.log("Using mobile Web Share API");
-                  handleMobileShare();
-                } else {
-                  // En PC, abrir modal
-                  console.log("Opening modal on PC");
-                  setIsShareModalOpen(true);
+                // En móviles SOLO usar Web Share API, NO abrir modal jamás
+                if (isMobile) {
+                  console.log(
+                    "Mobile detected - using native Web Share API only",
+                  );
+                  if ("share" in navigator) {
+                    handleMobileShare();
+                  }
+                  // En móviles NO hacer nada más, no abrir modal
+                  return;
                 }
+                // SOLO en PC abrir modal
+                console.log("PC detected - opening modal");
+                setIsShareModalOpen(true);
               }}
             >
               <Share2 className="mr-4 h-6 w-6 group-hover:text-current" />
@@ -789,13 +816,15 @@ export default function Index() {
             left: "0",
             right: "0",
             bottom: "0",
-            backgroundColor: "rgba(0,0,0,0.75)",
+            backgroundColor: "rgba(0,0,0,0.80)",
             zIndex: 99999,
             padding: "20px",
             display: "flex",
-            alignItems: "flex-start",
+            alignItems: "center",
             justifyContent: "center",
-            paddingTop: "20vh",
+            paddingTop: `${window.scrollY + window.innerHeight * 0.2}px`,
+            paddingBottom: `${window.innerHeight * 0.2}px`,
+            alignItems: "flex-start",
           }}
           onClick={(e) => {
             // Cerrar modal si se hace clic en el fondo
@@ -808,13 +837,16 @@ export default function Index() {
             style={{
               backgroundColor: "hsl(var(--background))",
               border: "1px solid hsl(var(--border))",
-              borderRadius: "12px",
-              padding: "24px",
-              maxWidth: "400px",
+              borderRadius: "16px",
+              padding: "28px",
+              maxWidth: "420px",
               width: "100%",
-              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+              maxHeight: "90vh",
+              overflowY: "auto",
+              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.4)",
               color: "hsl(var(--foreground))",
               position: "relative",
+              animation: "modalFadeIn 0.2s ease-out",
             }}
           >
             {/* Header */}
