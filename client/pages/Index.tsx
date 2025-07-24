@@ -243,17 +243,10 @@ export default function Index() {
   // Pantalla de carga inicial
   if (!pageLoaded) {
     return (
-      <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-accent/10 flex items-center justify-center z-50 min-h-screen relative overflow-hidden">
-        {/* Fondo animado sutil */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-32 h-32 bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-40 h-40 bg-secondary/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-accent/5 rounded-full blur-3xl animate-pulse delay-500"></div>
-        </div>
-
-        <div className="text-center px-4 max-w-md mx-auto relative z-10">
+      <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-accent/10 flex items-center justify-center z-50 min-h-screen">
+        <div className="text-center px-4 max-w-md mx-auto">
           <div className="mb-12">
-            <h1 className="text-5xl sm:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-tight animate-pulse">
+            <h1 className="text-5xl sm:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-tight">
               HUNTERX
             </h1>
             <p className="text-muted-foreground text-xl">
@@ -261,14 +254,11 @@ export default function Index() {
             </p>
           </div>
           <div className="w-full max-w-xs mx-auto">
-            <div className="h-3 bg-muted rounded-full overflow-hidden mb-4 relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
+            <div className="h-3 bg-muted rounded-full overflow-hidden mb-4">
               <div
-                className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-500 ease-out rounded-full relative"
+                className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-500 ease-out rounded-full"
                 style={{ width: `${Math.min(loadingProgress, 100)}%` }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
-              </div>
+              />
             </div>
             <p className="text-base text-muted-foreground font-medium">
               {Math.round(Math.min(loadingProgress, 100))}%
@@ -291,7 +281,7 @@ export default function Index() {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10"
+      className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10 animate-fadeIn"
       translate="no"
     >
       {/* Hero Section */}
