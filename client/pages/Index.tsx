@@ -67,7 +67,7 @@ export default function Index() {
     const shareData = {
       title: "HUNTERX - Música Urbana Cristiana",
       text: "Descubre la música urbana con propósito de HUNTERX. Llevando esperanza y fe a las calles.",
-      url: window.location.href,
+      url: "https://linktreehunterx.netlify.app/",
     };
 
     try {
@@ -115,10 +115,7 @@ export default function Index() {
   };
 
   const copyToClipboard = async () => {
-    const urlToCopy =
-      typeof window !== "undefined"
-        ? window.location.href
-        : "https://hunterx.fly.dev";
+    const urlToCopy = "https://linktreehunterx.netlify.app/";
     try {
       await navigator.clipboard.writeText(urlToCopy);
       setCopySuccess(true);
@@ -137,7 +134,7 @@ export default function Index() {
   };
 
   const shareToSocial = (platform: string) => {
-    const url = encodeURIComponent(window.location.href);
+    const url = encodeURIComponent("https://linktreehunterx.netlify.app/");
     const text = encodeURIComponent(
       "¡Descubre la música urbana con propósito de HUNTERX! 🎵✨",
     );
@@ -702,11 +699,10 @@ export default function Index() {
             backgroundColor: "rgba(0,0,0,0.75)",
             zIndex: 99999,
             padding: "20px",
-            overflowY: "auto",
             display: "flex",
-            alignItems: "flex-end",
+            alignItems: "flex-start",
             justifyContent: "center",
-            paddingBottom: "80px",
+            paddingTop: "20vh",
           }}
           onClick={(e) => {
             // Cerrar modal si se hace clic en el fondo
@@ -726,7 +722,6 @@ export default function Index() {
               boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
               color: "hsl(var(--foreground))",
               position: "relative",
-              transform: "translateY(-100%)",
             }}
           >
             {/* Header */}
