@@ -24,6 +24,28 @@ export default function Index() {
   useEffect(() => {
     console.log("Modal state changed:", isShareModalOpen);
   }, [isShareModalOpen]);
+
+  // Cerrar modal con tecla ESC
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isShareModalOpen) {
+        setIsShareModalOpen(false);
+      }
+    };
+
+    if (isShareModalOpen) {
+      document.addEventListener("keydown", handleEscKey);
+      // Prevenir scroll del body cuando el modal está abierto
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscKey);
+      document.body.style.overflow = "unset";
+    };
+  }, [isShareModalOpen]);
   const [copySuccess, setCopySuccess] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -667,7 +689,7 @@ export default function Index() {
               Llevando el mensaje de Cristo a través de la música urbana
             </p>
             <p className="text-sm text-muted-foreground">
-              �� 2024 HUNTERX. Todos los derechos reservados.
+              © 2024 HUNTERX. Todos los derechos reservados.
             </p>
           </div>
         </div>
