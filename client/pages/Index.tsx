@@ -49,7 +49,6 @@ export default function Index() {
   const [visibleIframes, setVisibleIframes] = useState<Set<string>>(new Set());
   const [contentReady, setContentReady] = useState({
     video: false,
-    mainIframe: false,
     images: false
   });
 
