@@ -387,7 +387,7 @@ export default function Index() {
                   {visibleIframes.has("main-video") ? (
                     <iframe
                       className="w-full h-full rounded-lg"
-                      src="https://www.youtube.com/embed/4kHW5ZkYHIQ?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
+                      src="https://www.youtube.com/embed/2b2HiphJnAw?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
                       title="HUNTERX - Última Canción"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -415,7 +415,7 @@ export default function Index() {
                   <div className="relative aspect-video">
                     <iframe
                       className="w-full h-full rounded-lg"
-                      src="https://www.youtube.com/embed/JTwL53RpQls?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
+                      src="https://www.youtube.com/embed/IiPXiinr0lg?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
                       title="HUNTERX - Video 2"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -431,7 +431,7 @@ export default function Index() {
                   <div className="relative aspect-video">
                     <iframe
                       className="w-full h-full rounded-lg"
-                      src="https://www.youtube.com/embed/BzivzcIRpOM?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
+                      src="https://www.youtube.com/embed/Q48dAWMFlBY?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
                       title="HUNTERX - Video 3"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -447,7 +447,7 @@ export default function Index() {
                   <div className="relative aspect-video">
                     <iframe
                       className="w-full h-full rounded-lg"
-                      src="https://www.youtube.com/embed/tsPldB4iXpE?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
+                      src="https://www.youtube.com/embed/4kHW5ZkYHIQ?rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&disablekb=0&autohide=1&enablejsapi=1"
                       title="HUNTERX - Video 4"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -511,7 +511,7 @@ export default function Index() {
                     style={{ height: "500px" }}
                   >
                     <iframe
-                      src="https://www.instagram.com/p/DL5CtHzt0Zd/embed/?utm_source=ig_embed&ig_rid=null"
+                      src="https://www.instagram.com/p/DZNQmHkAevp/embed/?utm_source=ig_embed&ig_rid=null"
                       width="100%"
                       height="500"
                       frameBorder="0"
@@ -535,7 +535,7 @@ export default function Index() {
                     style={{ height: "500px" }}
                   >
                     <iframe
-                      src="https://www.instagram.com/p/DL5yywlOrvk/embed/?utm_source=ig_embed&ig_rid=null"
+                      src="https://www.instagram.com/p/DZKqIq2lgxm/embed/?utm_source=ig_embed&ig_rid=null"
                       width="100%"
                       height="500"
                       frameBorder="0"
@@ -559,7 +559,7 @@ export default function Index() {
                     style={{ height: "500px" }}
                   >
                     <iframe
-                      src="https://www.instagram.com/p/DCzzvj0vzTv/embed/?utm_source=ig_embed&ig_rid=null"
+                      src="https://www.instagram.com/p/DYDeVdiorrD/embed/?utm_source=ig_embed&ig_rid=null"
                       width="100%"
                       height="500"
                       frameBorder="0"
@@ -583,7 +583,7 @@ export default function Index() {
                     style={{ height: "500px" }}
                   >
                     <iframe
-                      src="https://www.instagram.com/p/DMNv9T8tjAC/embed/?utm_source=ig_embed&ig_rid=null"
+                      src="https://www.instagram.com/p/DXsdi4KiFo7/embed/?utm_source=ig_embed&ig_rid=null"
                       width="100%"
                       height="500"
                       frameBorder="0"
@@ -607,7 +607,7 @@ export default function Index() {
                     style={{ height: "500px" }}
                   >
                     <iframe
-                      src="https://www.instagram.com/p/DMGnYA-PnYD/embed/?utm_source=ig_embed&ig_rid=null"
+                      src="https://www.instagram.com/p/DXpwgVrFg6h/embed/?utm_source=ig_embed&ig_rid=null"
                       width="100%"
                       height="500"
                       frameBorder="0"
@@ -631,7 +631,7 @@ export default function Index() {
                     style={{ height: "500px" }}
                   >
                     <iframe
-                      src="https://www.instagram.com/p/DMBdwi4OLaR/embed/?utm_source=ig_embed&ig_rid=null"
+                      src="https://www.instagram.com/p/DW_q5IRjZd2/embed/?utm_source=ig_embed&ig_rid=null"
                       width="100%"
                       height="500"
                       frameBorder="0"
