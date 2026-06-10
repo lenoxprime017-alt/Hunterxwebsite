@@ -78,8 +78,7 @@ export default function Index() {
   useEffect(() => {
     // Precargar el video inmediatamente al montar el componente
     const video = document.createElement("video");
-    video.src =
-      "https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2";
+    video.src = "/hunterx.mp4";
     video.preload = "auto";
     video.muted = true;
 
@@ -290,7 +289,7 @@ export default function Index() {
         {showVideo && (
           <video
             className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100"
-            src="https://cdn.builder.io/o/assets%2Fe5efb23401dd4b95852e27b8d0f225c2%2Fd7b18dfa4be248398d8497372bca2951?alt=media&token=221edc24-6aaf-43e9-a04e-41dcfa15d339&apiKey=e5efb23401dd4b95852e27b8d0f225c2"
+            src="/hunterx.mp4"
             autoPlay
             loop
             muted={true}
@@ -313,41 +312,41 @@ export default function Index() {
             </div>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-black/30" />
         <div className="relative h-full flex items-center">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
               <Badge
                 variant="secondary"
-                className="mb-4 sm:mb-6 text-xs sm:text-sm font-semibold px-3 py-1"
+                className="mb-4 sm:mb-6 text-xs sm:text-sm font-semibold px-3 py-1 animate-slideInFromTop"
               >
                 Música Urbana Cristiana
               </Badge>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 lg:mb-8 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent leading-tight tracking-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 lg:mb-8 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent leading-tight tracking-tight animate-slideInFromTop" style={{animationDelay: '0.1s'}}>
                 HUNTERX
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 lg:mb-12 max-w-3xl leading-relaxed px-4">
+              <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 lg:mb-12 max-w-3xl leading-relaxed px-4 animate-slideInFromTop" style={{animationDelay: '0.2s'}}>
                 Música urbana con propósito. Llevando esperanza y fe a las
                 calles a través de letras que transforman vidas.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto max-w-md sm:max-w-none">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto max-w-md sm:max-w-none animate-slideInFromBottom" style={{animationDelay: '0.3s'}}>
                 <Button
                   size="lg"
-                  className="group w-full sm:w-auto h-14 sm:h-16 text-base sm:text-lg lg:text-xl px-8 sm:px-10"
+                  className="group w-full sm:w-auto h-14 sm:h-16 text-base sm:text-lg lg:text-xl px-8 sm:px-10 transition-all duration-300 hover:shadow-lg hover:shadow-primary/50 hover:-translate-y-1"
                   onClick={() =>
                     window.open(
-                      "https://www.youtube.com/watch?v=4kHW5ZkYHIQ",
+                      "https://www.youtube.com/watch?v=2b2HiphJnAw",
                       "_blank",
                     )
                   }
                 >
-                  <Play className="mr-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform" />
+                  <Play className="mr-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-125 transition-transform duration-300" />
                   Escuchar Ahora
                 </Button>
                 <Button
                   variant="outline"
                   size="lg"
-                  className="w-full sm:w-auto h-14 sm:h-16 text-base sm:text-lg lg:text-xl px-8 sm:px-10"
+                  className="group w-full sm:w-auto h-14 sm:h-16 text-base sm:text-lg lg:text-xl px-8 sm:px-10 transition-all duration-300 hover:bg-red-500/10 hover:border-red-500/50 hover:-translate-y-1"
                   onClick={() =>
                     window.open(
                       "https://www.instagram.com/hunterxoficial/",
@@ -355,7 +354,7 @@ export default function Index() {
                     )
                   }
                 >
-                  <Heart className="mr-3 h-5 w-5 sm:h-6 sm:w-6" />
+                  <Heart className="mr-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-125 group-hover:fill-red-500 transition-all duration-300" />
                   Seguir
                 </Button>
               </div>
@@ -368,17 +367,17 @@ export default function Index() {
       <section className="py-16 sm:py-20 lg:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight animate-slideInFromTop">
               Últimos Videos
             </h2>
-            <p className="text-muted-foreground text-base sm:text-lg lg:text-xl max-w-4xl mx-auto px-4 sm:px-0 leading-relaxed">
+            <p className="text-muted-foreground text-base sm:text-lg lg:text-xl max-w-4xl mx-auto px-4 sm:px-0 leading-relaxed animate-slideInFromBottom" style={{animationDelay: '0.1s'}}>
               Descubre la música que está impactando vidas y llevando esperanza
             </p>
           </div>
 
           <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
             {/* Main Featured Video - Latest Song */}
-            <Card className="overflow-hidden group hover:scale-[1.01] transition-all duration-500 shadow-2xl hover:shadow-3xl">
+            <Card className="overflow-hidden group hover:scale-[1.02] transition-all duration-500 shadow-2xl hover:shadow-3xl hover:shadow-primary/20">
               <CardContent className="p-0">
                 <div
                   className="relative aspect-video"
@@ -410,7 +409,7 @@ export default function Index() {
 
             {/* Secondary Videos Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
-              <Card className="overflow-hidden group hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl">
+              <Card className="overflow-hidden group hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-primary/20 animate-scaleIn" style={{animationDelay: '0.1s'}}>
                 <CardContent className="p-0">
                   <div className="relative aspect-video">
                     <iframe
@@ -426,7 +425,7 @@ export default function Index() {
                 </CardContent>
               </Card>
 
-              <Card className="overflow-hidden group hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl">
+              <Card className="overflow-hidden group hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-accent/20 animate-scaleIn" style={{animationDelay: '0.2s'}}>
                 <CardContent className="p-0">
                   <div className="relative aspect-video">
                     <iframe
@@ -442,7 +441,7 @@ export default function Index() {
                 </CardContent>
               </Card>
 
-              <Card className="overflow-hidden group hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl md:col-span-2 xl:col-span-1">
+              <Card className="overflow-hidden group hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-secondary/20 animate-scaleIn md:col-span-2 xl:col-span-1" style={{animationDelay: '0.3s'}}>
                 <CardContent className="p-0">
                   <div className="relative aspect-video">
                     <iframe
@@ -475,19 +474,19 @@ export default function Index() {
                 <Instagram className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
               <h2
-                className="text-3xl sm:text-4xl lg:text-6xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 bg-clip-text text-transparent leading-tight"
+                className="text-3xl sm:text-4xl lg:text-6xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 bg-clip-text text-transparent leading-tight animate-slideInFromTop"
                 style={{ paddingBottom: "0.2em" }}
               >
                 Instagram
               </h2>
             </div>
-            <p className="text-muted-foreground text-lg sm:text-xl max-w-3xl mx-auto mb-6 sm:mb-8 px-4 sm:px-0">
+            <p className="text-muted-foreground text-lg sm:text-xl max-w-3xl mx-auto mb-6 sm:mb-8 px-4 sm:px-0 animate-slideInFromBottom" style={{animationDelay: '0.1s'}}>
               Sígueme para contenido exclusivo, detrás de cámaras y las últimas
               noticias
             </p>
             <Button
               size="lg"
-              className="group bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 hover:from-pink-600 hover:via-purple-600 hover:to-orange-600 text-white border-0 shadow-xl hover:shadow-2xl transition-all duration-300 h-14 sm:h-16 px-8 sm:px-12 text-lg sm:text-xl"
+              className="group bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 hover:from-pink-600 hover:via-purple-600 hover:to-orange-600 text-white border-0 shadow-xl hover:shadow-2xl transition-all duration-300 h-14 sm:h-16 px-8 sm:px-12 text-lg sm:text-xl hover:-translate-y-1 animate-slideInFromBottom" style={{animationDelay: '0.2s'}}
               onClick={() =>
                 window.open(
                   "https://www.instagram.com/hunterxoficial/",
@@ -495,16 +494,16 @@ export default function Index() {
                 )
               }
             >
-              <Instagram className="mr-4 h-6 w-6 sm:h-7 sm:w-7 group-hover:scale-110 transition-transform" />
+              <Instagram className="mr-4 h-6 w-6 sm:h-7 sm:w-7 group-hover:scale-125 transition-transform duration-300" />
               @hunterxoficial
             </Button>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
             {/* Instagram Post 1 */}
-            <div className="group relative">
+            <div className="group relative animate-scaleIn" style={{animationDelay: '0.1s'}}>
               <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
-              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-primary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
+              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-primary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl group-hover:shadow-pink-500/20">
                 <CardContent className="p-0">
                   <div
                     className="relative overflow-hidden bg-background rounded-xl instagram-container"
@@ -526,9 +525,9 @@ export default function Index() {
             </div>
 
             {/* Instagram Post 2 */}
-            <div className="group relative">
+            <div className="group relative animate-scaleIn" style={{animationDelay: '0.2s'}}>
               <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-orange-500 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
-              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-secondary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
+              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-secondary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl group-hover:shadow-purple-500/20">
                 <CardContent className="p-0">
                   <div
                     className="relative overflow-hidden bg-background rounded-xl instagram-container"
@@ -550,9 +549,9 @@ export default function Index() {
             </div>
 
             {/* Instagram Post 3 */}
-            <div className="group relative">
+            <div className="group relative animate-scaleIn" style={{animationDelay: '0.3s'}}>
               <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
-              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-accent/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
+              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-accent/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl group-hover:shadow-orange-500/20">
                 <CardContent className="p-0">
                   <div
                     className="relative overflow-hidden bg-background rounded-xl instagram-container"
@@ -574,9 +573,9 @@ export default function Index() {
             </div>
 
             {/* Instagram Post 4 */}
-            <div className="group relative">
+            <div className="group relative animate-scaleIn" style={{animationDelay: '0.4s'}}>
               <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-orange-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
-              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-primary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
+              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-primary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl group-hover:shadow-pink-500/20">
                 <CardContent className="p-0">
                   <div
                     className="relative overflow-hidden bg-background rounded-xl instagram-container"
@@ -598,9 +597,9 @@ export default function Index() {
             </div>
 
             {/* Instagram Post 5 */}
-            <div className="group relative">
+            <div className="group relative animate-scaleIn" style={{animationDelay: '0.5s'}}>
               <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
-              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-secondary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
+              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-secondary/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl group-hover:shadow-purple-500/20">
                 <CardContent className="p-0">
                   <div
                     className="relative overflow-hidden bg-background rounded-xl instagram-container"
@@ -622,9 +621,9 @@ export default function Index() {
             </div>
 
             {/* Instagram Post 6 */}
-            <div className="group relative">
+            <div className="group relative animate-scaleIn" style={{animationDelay: '0.6s'}}>
               <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 via-purple-500 to-pink-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
-              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-accent/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl">
+              <Card className="relative overflow-hidden rounded-2xl border border-border/20 bg-background/95 backdrop-blur-sm group-hover:border-accent/30 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-2xl group-hover:shadow-orange-500/20">
                 <CardContent className="p-0">
                   <div
                     className="relative overflow-hidden bg-background rounded-xl instagram-container"
