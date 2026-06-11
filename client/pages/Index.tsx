@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 // Dialog imports removed - using custom modal instead
 import {
   Play,
+  Pause,
   Music,
   Heart,
   Share2,
@@ -14,11 +15,14 @@ import {
   Copy,
   Check,
   X,
+  Volume2,
 } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
 export default function Index() {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(0.2);
 
   // Sistema robusto de reproducción de audio
   useEffect(() => {
@@ -29,7 +33,7 @@ export default function Index() {
       audio = document.createElement("audio");
       audio.loop = true;
       audio.preload = "auto";
-      audio.volume = 0.4;
+      audio.volume = 0.2;
 
       const source = document.createElement("source");
       source.src = "/InmensoAmor.mp3";
@@ -40,18 +44,24 @@ export default function Index() {
     }
 
     // Configurar volumen
-    audio.volume = 0.4;
+    audio.volume = volume;
     audio.loop = true;
 
     // Función para reproducir
     const attemptPlay = async () => {
       try {
         await audio.play();
+        setIsPlaying(true);
         console.log("✓ Audio reproduciendo");
       } catch (err) {
         console.log("⚠ Autoplay bloqueado, esperando interacción...");
       }
     };
+
+    // Event listeners para actualizar estado
+    const updatePlayingState = () => setIsPlaying(!audio.paused);
+    audio.addEventListener('play', updatePlayingState);
+    audio.addEventListener('pause', updatePlayingState);
 
     // Intentar reproducir inmediatamente
     attemptPlay();
@@ -82,8 +92,33 @@ export default function Index() {
       document.removeEventListener('click', playOnInteraction);
       document.removeEventListener('touchstart', playOnInteraction);
       document.removeEventListener('keydown', playOnInteraction);
+      audio.removeEventListener('play', updatePlayingState);
+      audio.removeEventListener('pause', updatePlayingState);
     };
-  }, []);
+  }, [volume]);
+
+  // Funciones de control de audio
+  const togglePlayPause = () => {
+    const audio = document.querySelector("audio") as HTMLAudioElement;
+    if (audio) {
+      if (audio.paused) {
+        audio.play();
+        setIsPlaying(true);
+      } else {
+        audio.pause();
+        setIsPlaying(false);
+      }
+    }
+  };
+
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+    const audio = document.querySelector("audio") as HTMLAudioElement;
+    if (audio) {
+      audio.volume = newVolume;
+    }
+  };
 
   // Debug logging for modal state
   useEffect(() => {
@@ -438,12 +473,42 @@ export default function Index() {
           <div className="flex flex-col items-center justify-center">
             {/* Contenedor de imagen en cuadro */}
             <div className="mb-8 sm:mb-12 w-full max-w-2xl sm:max-w-4xl animate-slideInFromTop">
-              <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl border-4 border-primary/20 hover:border-primary/50 transition-all duration-300">
+              <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl border-4 border-primary/20 hover:border-primary/50 transition-all duration-300 group">
                 <img
                   src="/InmensoAmor.jpg"
                   alt="InmensoAmor"
                   className="w-full h-full object-cover"
                 />
+                {/* Botón de play/pause en el centro */}
+                <button
+                  onClick={togglePlayPause}
+                  className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                >
+                  <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300">
+                    {isPlaying ? (
+                      <Pause className="w-12 h-12 sm:w-16 sm:h-16 text-white fill-white" />
+                    ) : (
+                      <Play className="w-12 h-12 sm:w-16 sm:h-16 text-white fill-white ml-1" />
+                    )}
+                  </div>
+                </button>
+              </div>
+
+              {/* Control de volumen */}
+              <div className="mt-6 sm:mt-8 flex items-center gap-4 justify-center max-w-xs mx-auto">
+                <Volume2 className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={volume}
+                  onChange={handleVolumeChange}
+                  className="w-full h-2 bg-gradient-to-r from-muted to-primary rounded-lg appearance-none cursor-pointer accent-primary"
+                />
+                <span className="text-xs text-muted-foreground font-medium min-w-[2.5rem]">
+                  {Math.round(volume * 100)}%
+                </span>
               </div>
             </div>
 
