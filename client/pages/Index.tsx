@@ -20,13 +20,23 @@ import { useState, useEffect, useCallback } from "react";
 export default function Index() {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
-  // Configurar volumen del audio y autoplay
+  // Configurar volumen del audio y permitir reproducción
   useEffect(() => {
     const audio = document.querySelector("audio") as HTMLAudioElement;
     if (audio) {
       audio.volume = 0.4;
+      // Intentar reproducir automáticamente
       audio.play().catch(() => {
-        // Autoplay puede estar bloqueado, ignorar
+        // Si el autoplay es bloqueado, esperar a interacción del usuario
+        const playOnInteraction = () => {
+          audio.play().catch(() => {
+            // Ignorar si falla después de interacción
+          });
+          document.removeEventListener('click', playOnInteraction);
+          document.removeEventListener('touchstart', playOnInteraction);
+        };
+        document.addEventListener('click', playOnInteraction, { once: true });
+        document.addEventListener('touchstart', playOnInteraction, { once: true });
       });
     }
   }, []);
@@ -385,11 +395,11 @@ export default function Index() {
       */}
 
       {/* NUEVO Hero Section - Imagen InmensoAmor.jpg */}
-      <section className="relative overflow-hidden py-16 sm:py-20 lg:py-32 bg-gradient-to-br from-background via-background to-accent/10">
+      <section className="relative overflow-hidden py-16 sm:py-20 lg:py-32 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center">
             {/* Contenedor de imagen en cuadro */}
-            <div className="mb-8 sm:mb-12 w-full max-w-md sm:max-w-lg animate-slideInFromTop">
+            <div className="mb-8 sm:mb-12 w-full max-w-2xl sm:max-w-4xl animate-slideInFromTop">
               <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl border-4 border-primary/20 hover:border-primary/50 transition-all duration-300">
                 <img
                   src="/InmensoAmor.jpg"
@@ -532,9 +542,9 @@ export default function Index() {
 
       {/* Instagram Posts Section */}
       <section className="py-20 sm:py-24 lg:py-32 relative overflow-hidden">
-        {/* Background Effects */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card/50" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-secondary/5" />
+        {/* Background Effects - COMENTADO TEMPORALMENTE */}
+        {/* <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card/50" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-secondary/5" /> */}
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-16 sm:mb-20 lg:mb-24">
