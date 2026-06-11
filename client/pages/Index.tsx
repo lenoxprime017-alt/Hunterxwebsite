@@ -20,6 +20,17 @@ import { useState, useEffect, useCallback } from "react";
 export default function Index() {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
+  // Configurar volumen del audio y autoplay
+  useEffect(() => {
+    const audio = document.querySelector("audio") as HTMLAudioElement;
+    if (audio) {
+      audio.volume = 0.4;
+      audio.play().catch(() => {
+        // Autoplay puede estar bloqueado, ignorar
+      });
+    }
+  }, []);
+
   // Debug logging for modal state
   useEffect(() => {
     console.log("Modal state changed:", isShareModalOpen);
@@ -284,7 +295,16 @@ export default function Index() {
       className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10 animate-fadeIn"
       translate="no"
     >
-      {/* Hero Section */}
+      {/* Audio elemento - Música en bucle */}
+      <audio
+        loop
+        style={{ display: "none" }}
+      >
+        <source src="/InmensoAmor.mp3" type="audio/mpeg" />
+      </audio>
+
+      {/* COMENTADO TEMPORALMENTE - Hero Section con Video Original */}
+      {/*
       <section className="relative overflow-hidden h-screen">
         {showVideo && (
           <video
@@ -358,6 +378,55 @@ export default function Index() {
                   Seguir
                 </Button>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      */}
+
+      {/* NUEVO Hero Section - Imagen InmensoAmor.jpg */}
+      <section className="relative overflow-hidden py-16 sm:py-20 lg:py-32 bg-gradient-to-br from-background via-background to-accent/10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center justify-center">
+            {/* Contenedor de imagen en cuadro */}
+            <div className="mb-8 sm:mb-12 w-full max-w-md sm:max-w-lg animate-slideInFromTop">
+              <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl border-4 border-primary/20 hover:border-primary/50 transition-all duration-300">
+                <img
+                  src="/InmensoAmor.jpg"
+                  alt="InmensoAmor"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Botones repositionados */}
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto max-w-md sm:max-w-none animate-slideInFromBottom" style={{animationDelay: '0.2s'}}>
+              <Button
+                size="lg"
+                className="group w-full sm:w-auto h-14 sm:h-16 text-base sm:text-lg lg:text-xl px-8 sm:px-10 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 shadow-lg hover:shadow-xl hover:shadow-amber-500/50 transition-all duration-300 hover:-translate-y-1"
+                onClick={() =>
+                  window.open(
+                    "https://www.youtube.com/watch?v=2b2HiphJnAw",
+                    "_blank",
+                  )
+                }
+              >
+                <Play className="mr-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-125 transition-transform duration-300" />
+                Escuchar Ahora
+              </Button>
+              <Button
+                size="lg"
+                className="group w-full sm:w-auto h-14 sm:h-16 text-base sm:text-lg lg:text-xl px-8 sm:px-10 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 shadow-lg hover:shadow-xl hover:shadow-rose-500/50 transition-all duration-300 hover:-translate-y-1"
+                onClick={() =>
+                  window.open(
+                    "https://www.instagram.com/hunterxoficial/",
+                    "_blank",
+                  )
+                }
+              >
+                <Heart className="mr-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-125 group-hover:fill-white transition-all duration-300" />
+                Seguir
+              </Button>
             </div>
           </div>
         </div>
