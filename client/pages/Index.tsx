@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 // Dialog imports removed - using custom modal instead
 import {
   Play,
+  Pause,
   Music,
   Heart,
   Share2,
@@ -14,11 +15,110 @@ import {
   Copy,
   Check,
   X,
+  Volume2,
 } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
 export default function Index() {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(0.2);
+
+  // Sistema robusto de reproducción de audio
+  useEffect(() => {
+    // Crear audio dinámicamente si no existe
+    let audio = document.querySelector("audio") as HTMLAudioElement;
+
+    if (!audio) {
+      audio = document.createElement("audio");
+      audio.loop = true;
+      audio.preload = "auto";
+      audio.volume = 0.2;
+
+      const source = document.createElement("source");
+      source.src = "/InmensoAmor.mp3";
+      source.type = "audio/mpeg";
+      audio.appendChild(source);
+
+      document.body.appendChild(audio);
+    }
+
+    // Configurar volumen
+    audio.volume = volume;
+    audio.loop = true;
+
+    // Función para reproducir
+    const attemptPlay = async () => {
+      try {
+        await audio.play();
+        setIsPlaying(true);
+        console.log("✓ Audio reproduciendo");
+      } catch (err) {
+        console.log("⚠ Autoplay bloqueado, esperando interacción...");
+      }
+    };
+
+    // Event listeners para actualizar estado
+    const updatePlayingState = () => setIsPlaying(!audio.paused);
+    audio.addEventListener('play', updatePlayingState);
+    audio.addEventListener('pause', updatePlayingState);
+
+    // Intentar reproducir inmediatamente
+    attemptPlay();
+
+    // Si falla, reproducir al primer click/touch
+    const playOnInteraction = async (e: Event) => {
+      if (audio.paused) {
+        try {
+          await audio.play();
+          console.log("✓ Audio iniciado por interacción");
+          // Remover después de éxito
+          document.removeEventListener('click', playOnInteraction);
+          document.removeEventListener('touchstart', playOnInteraction);
+          document.removeEventListener('keydown', playOnInteraction);
+        } catch (err) {
+          console.log("Error:", err);
+        }
+      }
+    };
+
+    // Listeners para cualquier interacción
+    document.addEventListener('click', playOnInteraction);
+    document.addEventListener('touchstart', playOnInteraction);
+    document.addEventListener('keydown', playOnInteraction);
+
+    // Limpiar
+    return () => {
+      document.removeEventListener('click', playOnInteraction);
+      document.removeEventListener('touchstart', playOnInteraction);
+      document.removeEventListener('keydown', playOnInteraction);
+      audio.removeEventListener('play', updatePlayingState);
+      audio.removeEventListener('pause', updatePlayingState);
+    };
+  }, [volume]);
+
+  // Funciones de control de audio
+  const togglePlayPause = () => {
+    const audio = document.querySelector("audio") as HTMLAudioElement;
+    if (audio) {
+      if (audio.paused) {
+        audio.play();
+        setIsPlaying(true);
+      } else {
+        audio.pause();
+        setIsPlaying(false);
+      }
+    }
+  };
+
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+    const audio = document.querySelector("audio") as HTMLAudioElement;
+    if (audio) {
+      audio.volume = newVolume;
+    }
+  };
 
   // Debug logging for modal state
   useEffect(() => {
@@ -284,7 +384,10 @@ export default function Index() {
       className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10 animate-fadeIn"
       translate="no"
     >
-      {/* Hero Section */}
+      {/* Audio creado dinámicamente por JavaScript */}
+
+      {/* COMENTADO TEMPORALMENTE - Hero Section con Video Original */}
+      {/*
       <section className="relative overflow-hidden h-screen">
         {showVideo && (
           <video
@@ -358,6 +461,85 @@ export default function Index() {
                   Seguir
                 </Button>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      */}
+
+      {/* NUEVO Hero Section - Imagen InmensoAmor.jpg */}
+      <section className="relative overflow-hidden py-16 sm:py-20 lg:py-32 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center justify-center">
+            {/* Contenedor de imagen en cuadro */}
+            <div className="mb-8 sm:mb-12 w-full max-w-2xl sm:max-w-4xl animate-slideInFromTop">
+              <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl border-4 border-primary/20 hover:border-primary/50 transition-all duration-300 group">
+                <img
+                  src="/InmensoAmor.jpg"
+                  alt="InmensoAmor"
+                  className="w-full h-full object-cover"
+                />
+                {/* Botón de play/pause en el centro */}
+                <button
+                  onClick={togglePlayPause}
+                  className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                >
+                  <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300">
+                    {isPlaying ? (
+                      <Pause className="w-12 h-12 sm:w-16 sm:h-16 text-white fill-white" />
+                    ) : (
+                      <Play className="w-12 h-12 sm:w-16 sm:h-16 text-white fill-white ml-1" />
+                    )}
+                  </div>
+                </button>
+              </div>
+
+              {/* Control de volumen */}
+              <div className="mt-6 sm:mt-8 flex items-center gap-4 justify-center max-w-xs mx-auto">
+                <Volume2 className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={volume}
+                  onChange={handleVolumeChange}
+                  className="w-full h-2 bg-gradient-to-r from-muted to-primary rounded-lg appearance-none cursor-pointer accent-primary"
+                />
+                <span className="text-xs text-muted-foreground font-medium min-w-[2.5rem]">
+                  {Math.round(volume * 100)}%
+                </span>
+              </div>
+            </div>
+
+            {/* Botones repositionados */}
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto max-w-md sm:max-w-none animate-slideInFromBottom" style={{animationDelay: '0.2s'}}>
+              <Button
+                size="lg"
+                className="group w-full sm:w-auto h-14 sm:h-16 text-base sm:text-lg lg:text-xl px-8 sm:px-10 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 shadow-lg hover:shadow-xl hover:shadow-amber-500/50 transition-all duration-300 hover:-translate-y-1"
+                onClick={() =>
+                  window.open(
+                    "https://www.youtube.com/watch?v=2b2HiphJnAw",
+                    "_blank",
+                  )
+                }
+              >
+                <Play className="mr-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-125 transition-transform duration-300" />
+                Escuchar Ahora
+              </Button>
+              <Button
+                size="lg"
+                className="group w-full sm:w-auto h-14 sm:h-16 text-base sm:text-lg lg:text-xl px-8 sm:px-10 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 shadow-lg hover:shadow-xl hover:shadow-rose-500/50 transition-all duration-300 hover:-translate-y-1"
+                onClick={() =>
+                  window.open(
+                    "https://www.instagram.com/hunterxoficial/",
+                    "_blank",
+                  )
+                }
+              >
+                <Heart className="mr-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-125 group-hover:fill-white transition-all duration-300" />
+                Seguir
+              </Button>
             </div>
           </div>
         </div>
@@ -463,9 +645,9 @@ export default function Index() {
 
       {/* Instagram Posts Section */}
       <section className="py-20 sm:py-24 lg:py-32 relative overflow-hidden">
-        {/* Background Effects */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card/50" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-secondary/5" />
+        {/* Background Effects - COMENTADO TEMPORALMENTE */}
+        {/* <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card/50" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-secondary/5" /> */}
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-16 sm:mb-20 lg:mb-24">
