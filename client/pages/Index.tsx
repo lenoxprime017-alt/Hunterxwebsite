@@ -15,32 +15,53 @@ import {
   Check,
   X,
 } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 export default function Index() {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioStartedRef = useRef(false);
 
-  // Configurar volumen del audio y reproducir con primer click
+  // Inicializar audio
   useEffect(() => {
-    const audio = document.querySelector("audio") as HTMLAudioElement;
-    if (audio) {
-      audio.volume = 0.4;
-      audio.currentTime = 0;
-      audio.pause();
-
-      // Reproducir con el primer click/interacción del usuario
-      const playOnFirstInteraction = () => {
-        audio.play().catch(() => {
-          console.log("Audio play failed");
-        });
-        // Remover listeners después del primer click
-        document.removeEventListener('click', playOnFirstInteraction);
-        document.removeEventListener('touchstart', playOnFirstInteraction);
-      };
-
-      document.addEventListener('click', playOnFirstInteraction, { once: true });
-      document.addEventListener('touchstart', playOnFirstInteraction, { once: true });
+    audioRef.current = document.querySelector("audio") as HTMLAudioElement;
+    if (audioRef.current) {
+      audioRef.current.volume = 0.4;
+      audioRef.current.loop = true;
     }
+  }, []);
+
+  // Reproducir audio con cualquier interacción
+  useEffect(() => {
+    const playAudio = () => {
+      if (audioRef.current && !audioStartedRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play().then(() => {
+          audioStartedRef.current = true;
+          console.log("Audio iniciado");
+        }).catch((err) => {
+          console.log("No se pudo reproducir:", err);
+        });
+      }
+    };
+
+    // Escuchar clicks en todo el documento
+    document.addEventListener('click', playAudio);
+    document.addEventListener('touchstart', playAudio);
+
+    // También intentar al cargar
+    setTimeout(() => {
+      if (audioRef.current && !audioStartedRef.current) {
+        audioRef.current.play().catch(() => {
+          // Ignorar si falla, esperar click
+        });
+      }
+    }, 500);
+
+    return () => {
+      document.removeEventListener('click', playAudio);
+      document.removeEventListener('touchstart', playAudio);
+    };
   }, []);
 
   // Debug logging for modal state
