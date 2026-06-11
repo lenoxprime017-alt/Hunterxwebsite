@@ -19,27 +19,42 @@ import { useState, useEffect, useCallback } from "react";
 
 export default function Index() {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const [audioStarted, setAudioStarted] = useState(false);
 
   // Configurar volumen del audio y permitir reproducción
   useEffect(() => {
-    const audio = document.querySelector("audio") as HTMLAudioElement;
-    if (audio) {
-      audio.volume = 0.4;
-      // Intentar reproducir automáticamente
-      audio.play().catch(() => {
-        // Si el autoplay es bloqueado, esperar a interacción del usuario
-        const playOnInteraction = () => {
-          audio.play().catch(() => {
-            // Ignorar si falla después de interacción
+    const startAudio = () => {
+      const audio = document.querySelector("audio") as HTMLAudioElement;
+      if (audio) {
+        audio.currentTime = 0;
+        audio.volume = 0.4;
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            setAudioStarted(true);
+          }).catch(() => {
+            // Si el autoplay es bloqueado, esperar a interacción del usuario
+            if (!audioStarted) {
+              const playOnInteraction = () => {
+                audio.play().then(() => {
+                  setAudioStarted(true);
+                }).catch(() => {
+                  // Ignorar si falla
+                });
+                document.removeEventListener('click', playOnInteraction);
+                document.removeEventListener('touchstart', playOnInteraction);
+              };
+              document.addEventListener('click', playOnInteraction, { once: true });
+              document.addEventListener('touchstart', playOnInteraction, { once: true });
+            }
           });
-          document.removeEventListener('click', playOnInteraction);
-          document.removeEventListener('touchstart', playOnInteraction);
-        };
-        document.addEventListener('click', playOnInteraction, { once: true });
-        document.addEventListener('touchstart', playOnInteraction, { once: true });
-      });
-    }
-  }, []);
+        }
+      }
+    };
+
+    // Pequeño delay para asegurar que el DOM esté listo
+    setTimeout(startAudio, 100);
+  }, [audioStarted]);
 
   // Debug logging for modal state
   useEffect(() => {
@@ -308,6 +323,7 @@ export default function Index() {
       {/* Audio elemento - Música en bucle */}
       <audio
         loop
+        preload="auto"
         style={{ display: "none" }}
       >
         <source src="/InmensoAmor.mp3" type="audio/mpeg" />
