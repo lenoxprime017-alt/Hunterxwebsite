@@ -15,52 +15,73 @@ import {
   Check,
   X,
 } from "lucide-react";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export default function Index() {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const audioStartedRef = useRef(false);
 
-  // Inicializar audio
+  // Sistema robusto de reproducción de audio
   useEffect(() => {
-    audioRef.current = document.querySelector("audio") as HTMLAudioElement;
-    if (audioRef.current) {
-      audioRef.current.volume = 0.4;
-      audioRef.current.loop = true;
+    // Crear audio dinámicamente si no existe
+    let audio = document.querySelector("audio") as HTMLAudioElement;
+
+    if (!audio) {
+      audio = document.createElement("audio");
+      audio.loop = true;
+      audio.preload = "auto";
+      audio.volume = 0.4;
+
+      const source = document.createElement("source");
+      source.src = "/InmensoAmor.mp3";
+      source.type = "audio/mpeg";
+      audio.appendChild(source);
+
+      document.body.appendChild(audio);
     }
-  }, []);
 
-  // Reproducir audio con cualquier interacción
-  useEffect(() => {
-    const playAudio = () => {
-      if (audioRef.current && !audioStartedRef.current) {
-        audioRef.current.currentTime = 0;
-        audioRef.current.play().then(() => {
-          audioStartedRef.current = true;
-          console.log("Audio iniciado");
-        }).catch((err) => {
-          console.log("No se pudo reproducir:", err);
-        });
+    // Configurar volumen
+    audio.volume = 0.4;
+    audio.loop = true;
+
+    // Función para reproducir
+    const attemptPlay = async () => {
+      try {
+        await audio.play();
+        console.log("✓ Audio reproduciendo");
+      } catch (err) {
+        console.log("⚠ Autoplay bloqueado, esperando interacción...");
       }
     };
 
-    // Escuchar clicks en todo el documento
-    document.addEventListener('click', playAudio);
-    document.addEventListener('touchstart', playAudio);
+    // Intentar reproducir inmediatamente
+    attemptPlay();
 
-    // También intentar al cargar
-    setTimeout(() => {
-      if (audioRef.current && !audioStartedRef.current) {
-        audioRef.current.play().catch(() => {
-          // Ignorar si falla, esperar click
-        });
+    // Si falla, reproducir al primer click/touch
+    const playOnInteraction = async (e: Event) => {
+      if (audio.paused) {
+        try {
+          await audio.play();
+          console.log("✓ Audio iniciado por interacción");
+          // Remover después de éxito
+          document.removeEventListener('click', playOnInteraction);
+          document.removeEventListener('touchstart', playOnInteraction);
+          document.removeEventListener('keydown', playOnInteraction);
+        } catch (err) {
+          console.log("Error:", err);
+        }
       }
-    }, 500);
+    };
 
+    // Listeners para cualquier interacción
+    document.addEventListener('click', playOnInteraction);
+    document.addEventListener('touchstart', playOnInteraction);
+    document.addEventListener('keydown', playOnInteraction);
+
+    // Limpiar
     return () => {
-      document.removeEventListener('click', playAudio);
-      document.removeEventListener('touchstart', playAudio);
+      document.removeEventListener('click', playOnInteraction);
+      document.removeEventListener('touchstart', playOnInteraction);
+      document.removeEventListener('keydown', playOnInteraction);
     };
   }, []);
 
@@ -328,14 +349,7 @@ export default function Index() {
       className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10 animate-fadeIn"
       translate="no"
     >
-      {/* Audio elemento - Música en bucle */}
-      <audio
-        loop
-        preload="auto"
-        style={{ display: "none" }}
-      >
-        <source src="/InmensoAmor.mp3" type="audio/mpeg" />
-      </audio>
+      {/* Audio creado dinámicamente por JavaScript */}
 
       {/* COMENTADO TEMPORALMENTE - Hero Section con Video Original */}
       {/*
