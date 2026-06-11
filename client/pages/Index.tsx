@@ -19,42 +19,29 @@ import { useState, useEffect, useCallback } from "react";
 
 export default function Index() {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
-  const [audioStarted, setAudioStarted] = useState(false);
 
-  // Configurar volumen del audio y permitir reproducción
+  // Configurar volumen del audio y reproducir con primer click
   useEffect(() => {
-    const startAudio = () => {
-      const audio = document.querySelector("audio") as HTMLAudioElement;
-      if (audio) {
-        audio.currentTime = 0;
-        audio.volume = 0.4;
-        const playPromise = audio.play();
-        if (playPromise !== undefined) {
-          playPromise.then(() => {
-            setAudioStarted(true);
-          }).catch(() => {
-            // Si el autoplay es bloqueado, esperar a interacción del usuario
-            if (!audioStarted) {
-              const playOnInteraction = () => {
-                audio.play().then(() => {
-                  setAudioStarted(true);
-                }).catch(() => {
-                  // Ignorar si falla
-                });
-                document.removeEventListener('click', playOnInteraction);
-                document.removeEventListener('touchstart', playOnInteraction);
-              };
-              document.addEventListener('click', playOnInteraction, { once: true });
-              document.addEventListener('touchstart', playOnInteraction, { once: true });
-            }
-          });
-        }
-      }
-    };
+    const audio = document.querySelector("audio") as HTMLAudioElement;
+    if (audio) {
+      audio.volume = 0.4;
+      audio.currentTime = 0;
+      audio.pause();
 
-    // Pequeño delay para asegurar que el DOM esté listo
-    setTimeout(startAudio, 100);
-  }, [audioStarted]);
+      // Reproducir con el primer click/interacción del usuario
+      const playOnFirstInteraction = () => {
+        audio.play().catch(() => {
+          console.log("Audio play failed");
+        });
+        // Remover listeners después del primer click
+        document.removeEventListener('click', playOnFirstInteraction);
+        document.removeEventListener('touchstart', playOnFirstInteraction);
+      };
+
+      document.addEventListener('click', playOnFirstInteraction, { once: true });
+      document.addEventListener('touchstart', playOnFirstInteraction, { once: true });
+    }
+  }, []);
 
   // Debug logging for modal state
   useEffect(() => {
