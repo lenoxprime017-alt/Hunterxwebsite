@@ -16,6 +16,8 @@ import {
   Check,
   X,
   Volume2,
+  Smartphone,
+  Radio,
 } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
@@ -24,13 +26,14 @@ export default function Index() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.2);
 
-  // Sistema robusto de reproducción de audio
+  // Sistema robusto de reproducción de audio para Netlify
   useEffect(() => {
-    // Crear audio dinámicamente si no existe
-    let audio = document.querySelector("audio") as HTMLAudioElement;
+    // Crear o obtener audio elemento
+    let audio = document.querySelector("audio#hunterx-audio") as HTMLAudioElement;
 
     if (!audio) {
       audio = document.createElement("audio");
+      audio.id = "hunterx-audio";
       audio.loop = true;
       audio.preload = "auto";
       audio.volume = 0.2;
@@ -47,53 +50,106 @@ export default function Index() {
     audio.volume = volume;
     audio.loop = true;
 
-    // Función para reproducir
-    const attemptPlay = async () => {
-      try {
-        await audio.play();
-        setIsPlaying(true);
-        console.log("✓ Audio reproduciendo");
-      } catch (err) {
-        console.log("⚠ Autoplay bloqueado, esperando interacción...");
+    // Limitar a 59 segundos y reiniciar el bucle
+    const handleTimeUpdate = () => {
+      if (audio.currentTime > 59) {
+        audio.currentTime = 0;
       }
     };
+
+    audio.addEventListener('timeupdate', handleTimeUpdate);
+
+    // Detectar si es móvil y pausar cuando sale de la página
+    const isMobileDevice = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    ) || window.innerWidth <= 768;
+
+    const handleVisibilityChange = () => {
+      if (isMobileDevice) {
+        if (document.hidden) {
+          // Página está en segundo plano - pausar audio
+          audio.pause();
+          setIsPlaying(false);
+          console.log("📱 Música pausada (saliste de la página)");
+        }
+        // Nota: No reproducimos automáticamente cuando vuelve porque el usuario puede no querer eso
+      }
+    };
+
+    if (isMobileDevice) {
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+    }
 
     // Event listeners para actualizar estado
     const updatePlayingState = () => setIsPlaying(!audio.paused);
     audio.addEventListener('play', updatePlayingState);
     audio.addEventListener('pause', updatePlayingState);
 
-    // Intentar reproducir inmediatamente
-    attemptPlay();
-
-    // Si falla, reproducir al primer click/touch
-    const playOnInteraction = async (e: Event) => {
-      if (audio.paused) {
-        try {
-          await audio.play();
-          console.log("✓ Audio iniciado por interacción");
-          // Remover después de éxito
-          document.removeEventListener('click', playOnInteraction);
-          document.removeEventListener('touchstart', playOnInteraction);
-          document.removeEventListener('keydown', playOnInteraction);
-        } catch (err) {
-          console.log("Error:", err);
+    // Función para intentar reproducir
+    const attemptAutoplay = async () => {
+      try {
+        // Asegurar que el audio esté listo
+        if (audio.readyState < 2) {
+          // Esperar a que el audio esté listo
+          await new Promise(resolve => {
+            audio.oncanplay = () => {
+              audio.oncanplay = null;
+              resolve(null);
+            };
+          });
         }
+
+        // Intentar reproducir
+        const playPromise = audio.play();
+        if (playPromise) {
+          await playPromise;
+          setIsPlaying(true);
+          console.log("✓ Autoplay activado en Netlify");
+        }
+      } catch (err) {
+        console.log("⚠ Autoplay bloqueado, esperando interacción del usuario...");
       }
     };
 
-    // Listeners para cualquier interacción
-    document.addEventListener('click', playOnInteraction);
-    document.addEventListener('touchstart', playOnInteraction);
-    document.addEventListener('keydown', playOnInteraction);
+    // Estrategia múltiple para autoplay
+    // 1. Intentar cuando la página carga
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => attemptAutoplay(), 500);
+      }, { once: true });
+    } else {
+      setTimeout(() => attemptAutoplay(), 500);
+    }
+
+    // 2. También intentar cuando el usuario interactúa (como fallback)
+    let autoplayAttempted = false;
+    const autoplayOnInteraction = async () => {
+      if (!autoplayAttempted && audio.paused) {
+        autoplayAttempted = true;
+        try {
+          await audio.play();
+          setIsPlaying(true);
+          console.log("✓ Audio iniciado por interacción");
+        } catch (err) {
+          console.log("Error:", err);
+        }
+        // Remover listeners después del primer intento
+        document.removeEventListener('click', autoplayOnInteraction);
+        document.removeEventListener('touchstart', autoplayOnInteraction);
+      }
+    };
+
+    document.addEventListener('click', autoplayOnInteraction, { once: true });
+    document.addEventListener('touchstart', autoplayOnInteraction, { once: true });
 
     // Limpiar
     return () => {
-      document.removeEventListener('click', playOnInteraction);
-      document.removeEventListener('touchstart', playOnInteraction);
-      document.removeEventListener('keydown', playOnInteraction);
+      document.removeEventListener('click', autoplayOnInteraction);
+      document.removeEventListener('touchstart', autoplayOnInteraction);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       audio.removeEventListener('play', updatePlayingState);
       audio.removeEventListener('pause', updatePlayingState);
+      audio.removeEventListener('timeupdate', handleTimeUpdate);
     };
   }, [volume]);
 
@@ -859,6 +915,7 @@ export default function Index() {
           </div>
 
           <div className="max-w-2xl mx-auto space-y-4">
+            {/* Spotify */}
             <Button
               variant="outline"
               size="lg"
@@ -870,7 +927,9 @@ export default function Index() {
                 )
               }
             >
-              <Music2 className="mr-4 h-6 w-6 text-green-500 group-hover:text-current transition-colors" />
+              <svg className="mr-4 h-6 w-6 text-green-500 group-hover:text-current transition-colors fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.57 17.23c-.3.56-.94.74-1.5.44-4.1-2.5-9.3-3.07-15.4-1.68-.58.13-1.16-.23-1.3-.8-.13-.57.23-1.16.8-1.3 6.5-1.55 12.2-.87 16.7 1.95.55.33.73.98.4 1.54zm1.48-3.34c-.37.7-1.18.92-1.88.56-4.7-2.87-11.82-3.7-17.36-2.02-.7.2-1.42-.23-1.62-.93-.2-.7.23-1.42.93-1.62 6.3-1.93 14.28-1.04 19.54 2.3.7.43.92 1.3.5 2zm.12-3.47c-5.63-3.35-14.94-3.65-20.33-2.02-.84.24-1.72-.24-1.96-1.08-.24-.84.24-1.72 1.08-1.96 6.2-1.8 16.3-1.44 22.6 2.34.75.46 1 1.38.54 2.13-.46.75-1.38 1-2.13.54z"/>
+              </svg>
               <div className="flex-1 text-left">
                 <div className="font-semibold">Spotify</div>
                 <div className="text-sm opacity-70">
@@ -879,6 +938,123 @@ export default function Index() {
               </div>
             </Button>
 
+            {/* Amazon Music */}
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full justify-start h-16 group hover:bg-amber-600 hover:text-white transition-all duration-300"
+              onClick={() =>
+                window.open(
+                  "https://music.amazon.com/artists/B0B1H5S5NN/hunterx",
+                  "_blank",
+                )
+              }
+            >
+              <svg className="mr-4 h-6 w-6 text-amber-600 group-hover:text-current transition-colors fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.5 10c-1 0-1.5-.5-3-2.5-1.5 2-2 2.5-3 2.5s-1.5-.5-3-2.5c-1.5 2-2 2.5-3 2.5-1.9 0-3-1.6-3-4V4c0-1 .7-2 2-2h2v2H5v7c0 1 .6 2 1.5 2 .6 0 1-.3 1.5-1 .5.7 1 1 1.5 1 .6 0 1-.3 1.5-1 .5.7 1 1 1.5 1 .9 0 1.5-1 1.5-2V4h2v6c0 2.4-1.1 4-3.5 4z"/>
+              </svg>
+              <div className="flex-1 text-left">
+                <div className="font-semibold">Amazon Music</div>
+                <div className="text-sm opacity-70">
+                  Escucha en Amazon Music
+                </div>
+              </div>
+            </Button>
+
+            {/* Tidal */}
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full justify-start h-16 group hover:bg-cyan-600 hover:text-white transition-all duration-300"
+              onClick={() =>
+                window.open(
+                  "https://tidal.com/artist/32191449",
+                  "_blank",
+                )
+              }
+            >
+              <svg className="mr-4 h-6 w-6 text-cyan-600 group-hover:text-current transition-colors fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 3v4H0V3h4zm5 0v4H5V3h4zm5 0v4h-4V3h4zm5 0v4h-4V3h4zm-15 5v4H0V8h4zm5 0v4H5V8h4zm5 0v4h-4V8h4zm5 0v4h-4V8h4zm-15 5v4H0v-4h4zm5 0v4H5v-4h4zm5 0v4h-4v-4h4zm5 0v4h-4v-4h4z"/>
+              </svg>
+              <div className="flex-1 text-left">
+                <div className="font-semibold">Tidal</div>
+                <div className="text-sm opacity-70">
+                  Música sin pérdida en Tidal
+                </div>
+              </div>
+            </Button>
+
+            {/* SoundCloud */}
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full justify-start h-16 group hover:bg-orange-500 hover:text-white transition-all duration-300"
+              onClick={() =>
+                window.open(
+                  "https://soundcloud.com/hunterx-music",
+                  "_blank",
+                )
+              }
+            >
+              <svg className="mr-4 h-6 w-6 text-orange-600 group-hover:text-current transition-colors fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+              </svg>
+              <div className="flex-1 text-left">
+                <div className="font-semibold">SoundCloud</div>
+                <div className="text-sm opacity-70">
+                  Descubre mi música en SoundCloud
+                </div>
+              </div>
+            </Button>
+
+            {/* Deezer */}
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full justify-start h-16 group hover:bg-red-600 hover:text-white transition-all duration-300"
+              onClick={() =>
+                window.open(
+                  "https://www.deezer.com/us/artist/170169807",
+                  "_blank",
+                )
+              }
+            >
+              <svg className="mr-4 h-6 w-6 text-red-600 group-hover:text-current transition-colors fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 7h4v2H2zm0 4h4v2H2zm0 4h4v2H2zm6 0h4v2H8zm0-4h4v2H8zm0-4h4v2H8zm6 0h4v2h-4zm0 4h4v2h-4zm0 4h4v2h-4z"/>
+              </svg>
+              <div className="flex-1 text-left">
+                <div className="font-semibold">Deezer</div>
+                <div className="text-sm opacity-70">
+                  Disponible en Deezer
+                </div>
+              </div>
+            </Button>
+
+            {/* BOOMPLAY */}
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full justify-start h-16 group hover:bg-purple-600 hover:text-white transition-all duration-300"
+              onClick={() =>
+                window.open(
+                  "https://www.boomplay.com/artists/108407557",
+                  "_blank",
+                )
+              }
+            >
+              <svg className="mr-4 h-6 w-6 text-purple-600 group-hover:text-current transition-colors fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none"/>
+                <polygon points="10,8 10,16 16,12" fill="currentColor"/>
+              </svg>
+              <div className="flex-1 text-left">
+                <div className="font-semibold">BOOMPLAY</div>
+                <div className="text-sm opacity-70">
+                  Escucha en BOOMPLAY
+                </div>
+              </div>
+            </Button>
+
+            {/* Apple Music */}
             <Button
               variant="outline"
               size="lg"
@@ -899,6 +1075,7 @@ export default function Index() {
               </div>
             </Button>
 
+            {/* YouTube */}
             <Button
               variant="outline"
               size="lg"
@@ -916,6 +1093,7 @@ export default function Index() {
               </div>
             </Button>
 
+            {/* Instagram */}
             <Button
               variant="outline"
               size="lg"
