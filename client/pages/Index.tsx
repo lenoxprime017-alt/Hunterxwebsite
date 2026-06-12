@@ -1094,7 +1094,7 @@ export default function Index() {
             <Button
               variant="outline"
               size="lg"
-              className="w-full justify-start h-16 group hover:bg-gray-600 hover:text-white"
+              className="w-full justify-start h-16 group hover:bg-red-600 hover:text-white"
               onClick={() =>
                 window.open(
                   "https://music.youtube.com/channel/UC3ravZxAW9yucYtqYndGUNw",
