@@ -927,9 +927,11 @@ export default function Index() {
                 )
               }
             >
-              <svg className="mr-4 h-6 w-6 text-green-500 group-hover:text-current transition-colors fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.57 17.23c-.3.56-.94.74-1.5.44-4.1-2.5-9.3-3.07-15.4-1.68-.58.13-1.16-.23-1.3-.8-.13-.57.23-1.16.8-1.3 6.5-1.55 12.2-.87 16.7 1.95.55.33.73.98.4 1.54zm1.48-3.34c-.37.7-1.18.92-1.88.56-4.7-2.87-11.82-3.7-17.36-2.02-.7.2-1.42-.23-1.62-.93-.2-.7.23-1.42.93-1.62 6.3-1.93 14.28-1.04 19.54 2.3.7.43.92 1.3.5 2zm.12-3.47c-5.63-3.35-14.94-3.65-20.33-2.02-.84.24-1.72-.24-1.96-1.08-.24-.84.24-1.72 1.08-1.96 6.2-1.8 16.3-1.44 22.6 2.34.75.46 1 1.38.54 2.13-.46.75-1.38 1-2.13.54z"/>
-              </svg>
+              <img
+                src="/Spotify.png"
+                alt="Spotify"
+                className="mr-4 h-12 w-12 object-contain flex-shrink-0"
+              />
               <div className="flex-1 text-left">
                 <div className="font-semibold">Spotify</div>
                 <div className="text-sm opacity-70">
@@ -950,9 +952,11 @@ export default function Index() {
                 )
               }
             >
-              <svg className="mr-4 h-6 w-6 text-amber-600 group-hover:text-current transition-colors fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18.5 10c-1 0-1.5-.5-3-2.5-1.5 2-2 2.5-3 2.5s-1.5-.5-3-2.5c-1.5 2-2 2.5-3 2.5-1.9 0-3-1.6-3-4V4c0-1 .7-2 2-2h2v2H5v7c0 1 .6 2 1.5 2 .6 0 1-.3 1.5-1 .5.7 1 1 1.5 1 .6 0 1-.3 1.5-1 .5.7 1 1 1.5 1 .9 0 1.5-1 1.5-2V4h2v6c0 2.4-1.1 4-3.5 4z"/>
-              </svg>
+              <img
+                src="/AmazonMusic.png"
+                alt="Amazon Music"
+                className="mr-4 h-12 w-12 object-contain flex-shrink-0"
+              />
               <div className="flex-1 text-left">
                 <div className="font-semibold">Amazon Music</div>
                 <div className="text-sm opacity-70">
@@ -973,9 +977,11 @@ export default function Index() {
                 )
               }
             >
-              <svg className="mr-4 h-6 w-6 text-cyan-600 group-hover:text-current transition-colors fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 3v4H0V3h4zm5 0v4H5V3h4zm5 0v4h-4V3h4zm5 0v4h-4V3h4zm-15 5v4H0V8h4zm5 0v4H5V8h4zm5 0v4h-4V8h4zm5 0v4h-4V8h4zm-15 5v4H0v-4h4zm5 0v4H5v-4h4zm5 0v4h-4v-4h4zm5 0v4h-4v-4h4z"/>
-              </svg>
+              <img
+                src="/Tidal.png"
+                alt="Tidal"
+                className="mr-4 h-12 w-12 object-contain flex-shrink-0"
+              />
               <div className="flex-1 text-left">
                 <div className="font-semibold">Tidal</div>
                 <div className="text-sm opacity-70">
@@ -996,9 +1002,11 @@ export default function Index() {
                 )
               }
             >
-              <svg className="mr-4 h-6 w-6 text-orange-600 group-hover:text-current transition-colors fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
-              </svg>
+              <img
+                src="/soundcloud.png"
+                alt="SoundCloud"
+                className="mr-4 h-12 w-12 object-contain flex-shrink-0"
+              />
               <div className="flex-1 text-left">
                 <div className="font-semibold">SoundCloud</div>
                 <div className="text-sm opacity-70">
@@ -1019,9 +1027,11 @@ export default function Index() {
                 )
               }
             >
-              <svg className="mr-4 h-6 w-6 text-red-600 group-hover:text-current transition-colors fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 7h4v2H2zm0 4h4v2H2zm0 4h4v2H2zm6 0h4v2H8zm0-4h4v2H8zm0-4h4v2H8zm6 0h4v2h-4zm0 4h4v2h-4zm0 4h4v2h-4z"/>
-              </svg>
+              <img
+                src="/Deezer.png"
+                alt="Deezer"
+                className="mr-4 h-12 w-12 object-contain flex-shrink-0"
+              />
               <div className="flex-1 text-left">
                 <div className="font-semibold">Deezer</div>
                 <div className="text-sm opacity-70">
@@ -1042,10 +1052,11 @@ export default function Index() {
                 )
               }
             >
-              <svg className="mr-4 h-6 w-6 text-purple-600 group-hover:text-current transition-colors fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none"/>
-                <polygon points="10,8 10,16 16,12" fill="currentColor"/>
-              </svg>
+              <img
+                src="/Boomplay.png"
+                alt="Boomplay"
+                className="mr-4 h-12 w-12 object-contain flex-shrink-0"
+              />
               <div className="flex-1 text-left">
                 <div className="font-semibold">BOOMPLAY</div>
                 <div className="text-sm opacity-70">
@@ -1066,11 +1077,40 @@ export default function Index() {
                 )
               }
             >
-              <Headphones className="mr-4 h-6 w-6 text-gray-500 group-hover:text-current" />
+             <img
+                src="/Apple_Music.png"
+                alt="AppleMusic"
+                className="mr-4 h-12 w-12 object-contain flex-shrink-0"
+              />
               <div className="flex-1 text-left">
                 <div className="font-semibold">Apple Music</div>
                 <div className="text-sm opacity-70">
                   Disponible en Apple Music
+                </div>
+              </div>
+            </Button>
+
+            {/* Youtube Music */}
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full justify-start h-16 group hover:bg-gray-600 hover:text-white"
+              onClick={() =>
+                window.open(
+                  "https://music.youtube.com/channel/UC3ravZxAW9yucYtqYndGUNw",
+                  "_blank",
+                )
+              }
+            >
+             <img
+                src="/Youtube_Music.png"
+                alt="YoutubeMusic"
+                className="mr-4 h-12 w-12 object-contain flex-shrink-0"
+              />
+              <div className="flex-1 text-left">
+                <div className="font-semibold">Youtube Music</div>
+                <div className="text-sm opacity-70">
+                  Disponible en Youtube Music
                 </div>
               </div>
             </Button>
@@ -1084,7 +1124,11 @@ export default function Index() {
                 window.open("https://www.youtube.com/@EHUNTERX", "_blank")
               }
             >
-              <Youtube className="mr-4 h-6 w-6 text-red-500 group-hover:text-current" />
+              <img
+                src="/Youtube.png"
+                alt="Youtube"
+                className="mr-4 h-12 w-12 object-contain flex-shrink-0"
+              />
               <div className="flex-1 text-left">
                 <div className="font-semibold">YouTube - @EHUNTERX</div>
                 <div className="text-sm opacity-70">
@@ -1105,7 +1149,11 @@ export default function Index() {
                 )
               }
             >
-              <Instagram className="mr-4 h-6 w-6 text-pink-500 group-hover:text-current" />
+              <img
+                src="/Instagram.png"
+                alt="Instagram"
+                className="mr-4 h-12 w-12 object-contain flex-shrink-0"
+              />
               <div className="flex-1 text-left">
                 <div className="font-semibold">Instagram - @hunterxoficial</div>
                 <div className="text-sm opacity-70">
