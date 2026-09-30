@@ -15,6 +15,9 @@ import { VideosSection } from "@/components/site/VideosSection";
 
 export default function Index() {
   const ready = useCriticalAssets([LATEST_RELEASE.cover]);
+  const isAudioHero =
+    !(LATEST_RELEASE.mode === "video" && LATEST_RELEASE.video) &&
+    !!LATEST_RELEASE.audio;
   const [shareOpen, setShareOpen] = useState(false);
 
   const heroSentinelRef = useRef<HTMLDivElement>(null);
@@ -36,7 +39,7 @@ export default function Index() {
   return (
     <MotionConfig reducedMotion="never">
       <AudioPlayerProvider
-        src={LATEST_RELEASE.audio}
+        src={isAudioHero ? LATEST_RELEASE.audio : ""}
         loopAt={LATEST_RELEASE.previewSeconds}
       >
         <AnimatePresence>{!ready && <IntroLoader />}</AnimatePresence>
@@ -55,7 +58,7 @@ export default function Index() {
           </main>
 
           <Footer />
-          <MiniPlayer visible={ready && !heroInView} />
+          {isAudioHero && <MiniPlayer visible={ready && !heroInView} />}
         </div>
 
         <ShareDialog open={shareOpen} onOpenChange={setShareOpen} />

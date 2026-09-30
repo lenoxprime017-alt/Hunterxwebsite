@@ -6,8 +6,8 @@ import {
   useTransform,
   type Variants,
 } from "framer-motion";
-import { ArrowDown, Instagram, Play } from "lucide-react";
-import { useRef } from "react";
+import { ArrowDown, Instagram, Play, Volume2, VolumeX } from "lucide-react";
+import { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useAudioPlayer } from "@/hooks/use-audio-player";
 import { useIsDesktopLayout, useIsMobileLayout } from "@/hooks/use-media-query";
@@ -112,7 +112,7 @@ export function Hero({ ready }: { ready: boolean }) {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
               </span>
-              Nuevo sencillo
+              {LATEST_RELEASE.badge}
             </span>
           </motion.div>
 
@@ -207,8 +207,14 @@ export function Hero({ ready }: { ready: boolean }) {
           transition={{ duration: 1.2, delay: 0.25, ease: EASE_OUT }}
           className="order-1 mx-auto w-full max-w-[18rem] sm:max-w-md lg:order-2 lg:max-w-lg"
         >
-          <CoverArt />
-          <HeroPlayer />
+          {LATEST_RELEASE.mode === "video" && LATEST_RELEASE.video ? (
+            <HeroVideo />
+          ) : (
+            <>
+              <CoverArt />
+              <HeroPlayer />
+            </>
+          )}
         </motion.div>
       </motion.div>
 
@@ -327,6 +333,54 @@ function CoverArt() {
         </motion.div>
       </div>
     </motion.div>
+  );
+}
+
+/**
+ * Modo video (se elige en el panel /admin): el video se reproduce en bucle y
+ * silenciado (los navegadores no permiten autoplay con sonido); el botón
+ * activa el sonido.
+ */
+function HeroVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [muted, setMuted] = useState(true);
+
+  return (
+    <div className="group relative overflow-hidden rounded-2xl bg-card shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)] ring-1 ring-white/10">
+      <video
+        ref={videoRef}
+        className="aspect-[4/5] w-full object-cover sm:aspect-square"
+        src={LATEST_RELEASE.video}
+        poster={LATEST_RELEASE.cover}
+        autoPlay
+        loop
+        muted={muted}
+        playsInline
+        preload="metadata"
+      />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-5 pt-16">
+        <p className="font-display text-2xl uppercase tracking-tight text-white">
+          {LATEST_RELEASE.title}
+        </p>
+        {LATEST_RELEASE.producer && (
+          <p className="text-xs uppercase tracking-[0.25em] text-white/70">
+            {LATEST_RELEASE.producer}
+          </p>
+        )}
+      </div>
+      <button
+        type="button"
+        onClick={() => {
+          const video = videoRef.current;
+          setMuted((m) => !m);
+          video?.play().catch(() => {});
+        }}
+        aria-label={muted ? "Activar sonido del video" : "Silenciar video"}
+        className="tap-press absolute bottom-5 right-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105"
+      >
+        {muted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+      </button>
+    </div>
   );
 }
 

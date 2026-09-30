@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: "dist/spa",
   },
-  plugins: [react(), expressPlugin()],
+  plugins: [react(), adminPanelPlugin(), expressPlugin()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./client"),
@@ -20,6 +20,23 @@ export default defineConfig(({ mode }) => ({
     },
   },
 }));
+
+// En desarrollo, /admin y /admin/ deben abrir el panel (public/admin/index.html)
+// en lugar de la app. En producción Netlify ya sirve ese archivo directamente.
+function adminPanelPlugin(): Plugin {
+  return {
+    name: "admin-panel",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use((req, _res, next) => {
+        if (req.url === "/admin" || req.url === "/admin/") {
+          req.url = "/admin/index.html";
+        }
+        next();
+      });
+    },
+  };
+}
 
 function expressPlugin(): Plugin {
   return {

@@ -1,0 +1,28 @@
+{
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=2b2HiphJnAw",
+      "title": "Inmenso Amor",
+      "artists": "HUNTERX",
+      "kind": "Audio Oficial"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=IiPXiinr0lg",
+      "title": "Cristo Redentor",
+      "artists": "HUNTERX, Moyh",
+      "kind": "Video Oficial"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Q48dAWMFlBY",
+      "title": "No Me Rindo",
+      "artists": "HUNTERX",
+      "kind": "Visualizer"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=4kHW5ZkYHIQ",
+      "title": "Jerusalén",
+      "artists": "HUNTERX ft. Julia Javier",
+      "kind": "Video Oficial"
+    }
+  ]
+}

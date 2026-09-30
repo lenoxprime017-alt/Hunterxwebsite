@@ -26,6 +26,7 @@ const AudioPlayerContext = createContext<AudioPlayerState | null>(null);
 export const AUDIO_CONTROL_ATTR = { "data-audio-control": "" } as const;
 
 interface AudioPlayerProviderProps {
+  /** Si está vacío no se crea ningún audio (p. ej. hero en modo video). */
   src: string;
   /** Si se define, la canción vuelve al inicio al llegar a este segundo. */
   loopAt?: number;
@@ -47,6 +48,7 @@ export function AudioPlayerProvider({
   const [trackDuration, setTrackDuration] = useState(0);
 
   useEffect(() => {
+    if (!src) return;
     const audio = new Audio();
     audio.src = src;
     audio.loop = true;

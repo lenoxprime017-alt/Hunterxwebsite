@@ -11,7 +11,7 @@ import {
 import { useCallback, useEffect, useRef, useState } from "react";
 import { haptic, useIsMobileLayout } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
-import { ARTIST, INSTAGRAM_POSTS } from "./data";
+import { ARTIST, INSTAGRAM_OVERRIDES, INSTAGRAM_POSTS } from "./data";
 import generatedPosts from "./instagram.generated.json";
 import { Reveal, SectionHeading } from "./primitives";
 
@@ -26,10 +26,26 @@ interface PostMeta {
   type: "reel" | "carousel" | "photo" | string;
 }
 
-/** Imágenes descargadas con `npm run instagram` (scripts/instagram-thumbs.mjs). */
-const POST_META = new Map(
+/**
+ * Datos de cada publicación: lo puesto a mano en el panel (imagen subida,
+ * usuario, tipo) tiene prioridad sobre lo descargado con `npm run instagram`.
+ */
+const DOWNLOADED = new Map(
   (generatedPosts as PostMeta[]).map((post) => [post.code, post]),
 );
+const POST_META = new Map<string, PostMeta>();
+for (const code of INSTAGRAM_POSTS) {
+  const downloaded = DOWNLOADED.get(code);
+  const manual = INSTAGRAM_OVERRIDES.get(code);
+  const image = manual?.image || downloaded?.image;
+  if (!image) continue;
+  POST_META.set(code, {
+    code,
+    image,
+    username: manual?.username || downloaded?.username || "",
+    type: manual?.type || downloaded?.type || "photo",
+  });
+}
 
 const TYPE_BADGE = {
   reel: { label: "Reel", icon: Play },

@@ -1,0 +1,74 @@
+{
+  "platforms": [
+    {
+      "name": "Spotify",
+      "description": "Escucha mi música completa",
+      "url": "https://open.spotify.com/artist/0S8UiJTjzt86hM9wolenDG",
+      "icon": "/Spotify.png",
+      "color": "#1DB954"
+    },
+    {
+      "name": "Apple Music",
+      "description": "Disponible en Apple Music",
+      "url": "https://music.apple.com/do/artist/hunterx/1458292118",
+      "icon": "/Apple_Music.png",
+      "color": "#FA243C"
+    },
+    {
+      "name": "YouTube Music",
+      "description": "Disponible en YouTube Music",
+      "url": "https://music.youtube.com/channel/UC3ravZxAW9yucYtqYndGUNw",
+      "icon": "/Youtube_Music.png",
+      "color": "#FF0033"
+    },
+    {
+      "name": "Amazon Music",
+      "description": "Escucha en Amazon Music",
+      "url": "https://music.amazon.com/artists/B0B1H5S5NN/hunterx",
+      "icon": "/AmazonMusic.png",
+      "color": "#25D1DA"
+    },
+    {
+      "name": "Tidal",
+      "description": "Música sin pérdida en Tidal",
+      "url": "https://tidal.com/artist/32191449",
+      "icon": "/Tidal.png",
+      "color": "#E5E5E5"
+    },
+    {
+      "name": "Deezer",
+      "description": "Disponible en Deezer",
+      "url": "https://www.deezer.com/us/artist/170169807",
+      "icon": "/Deezer.png",
+      "color": "#A238FF"
+    },
+    {
+      "name": "SoundCloud",
+      "description": "Descubre mi música en SoundCloud",
+      "url": "https://soundcloud.com/hunterx-music",
+      "icon": "/soundcloud.png",
+      "color": "#FF5500"
+    },
+    {
+      "name": "Boomplay",
+      "description": "Escucha en Boomplay",
+      "url": "https://www.boomplay.com/artists/108407557",
+      "icon": "/Boomplay.png",
+      "color": "#2E6BFF"
+    },
+    {
+      "name": "YouTube",
+      "description": "@EHUNTERX · Videos y contenido exclusivo",
+      "url": "https://www.youtube.com/@EHUNTERX",
+      "icon": "/Youtube.png",
+      "color": "#FF0000"
+    },
+    {
+      "name": "Instagram",
+      "description": "@hunterxoficial · Detrás de cámaras y más",
+      "url": "https://www.instagram.com/hunterxoficial/",
+      "icon": "/Instagram.png",
+      "color": "#E1306C"
+    }
+  ]
+}

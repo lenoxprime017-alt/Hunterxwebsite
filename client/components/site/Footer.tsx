@@ -21,7 +21,7 @@ export function Footer() {
 
         <div className="mt-10 flex flex-col items-center gap-6 text-center sm:flex-row sm:justify-between sm:text-left">
           <p className="max-w-sm text-sm text-muted-foreground">
-            Llevando el mensaje de Cristo a través de la música urbana.
+            {ARTIST.footerText}
           </p>
 
           <div className="flex items-center gap-3">

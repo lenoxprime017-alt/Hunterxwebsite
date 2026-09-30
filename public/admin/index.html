@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Que los buscadores no indexen el panel -->
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <!--
+      Política de seguridad: solo permite ejecutar el script del panel (fijado
+      a una versión exacta y verificado con su hash) y conectarse con GitHub y
+      Netlify. Bloquea scripts de otros orígenes, plugins y que el panel se
+      muestre dentro de otra página. ('unsafe-eval' lo exige Decap: valida su
+      configuración con AJV, que compila funciones en tiempo de ejecución.)
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; media-src 'self' data: blob: https:; connect-src 'self' https://api.github.com https://api.netlify.com https://raw.githubusercontent.com https://*.githubusercontent.com http://localhost:8081; frame-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'"
+    />
+    <title>Panel · HUNTERX</title>
+    <!-- Ruta absoluta: funciona entrando por /admin o /admin/ -->
+    <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
+    <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+  </head>
+  <body>
+    <!-- Decap CMS fijado a 3.16.3 con verificación de integridad (SRI):
+         si el archivo del CDN fuera alterado, el navegador no lo ejecuta. -->
+    <script
+      src="https://unpkg.com/decap-cms@3.16.3/dist/decap-cms.js"
+      integrity="sha384-A/Gdn928CNLufmnGWGs9RM4Q9o8bSNLeJERqBFrBjwzL7FRpoLT3MPF8Tl0+Wd2p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
