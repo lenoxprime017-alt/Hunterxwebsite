@@ -2,47 +2,66 @@
 <html lang="es" translate="no">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="google" content="notranslate" />
     <meta name="format-detection" content="telephone=no" />
 
-    <!-- Evitar que Samsung Internet y otros navegadores cambien colores automáticamente -->
-    <meta name="color-scheme" content="dark light" />
-    <meta name="theme-color" content="#f59e0b" />
+    <title>HUNTERX - Música Urbana Cristiana</title>
     <meta
-      name="theme-color"
-      content="#f59e0b"
-      media="(prefers-color-scheme: light)"
+      name="description"
+      content="HUNTERX: música urbana con propósito. Escucha «Inmenso Amor», mira los últimos videos y sígueme en todas las plataformas."
     />
-    <meta
-      name="theme-color"
-      content="#fbbf24"
-      media="(prefers-color-scheme: dark)"
-    />
+    <link rel="canonical" href="https://linktreehunterx.netlify.app/" />
 
-    <!-- Samsung Internet específico -->
+    <!-- Vista previa al compartir (WhatsApp, Instagram, Facebook, X...) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="HUNTERX" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:url" content="https://linktreehunterx.netlify.app/" />
+    <meta property="og:title" content="HUNTERX - Música Urbana Cristiana" />
+    <meta
+      property="og:description"
+      content="Música urbana con propósito. Escucha «Inmenso Amor», ya disponible."
+    />
+    <meta property="og:image" content="https://linktreehunterx.netlify.app/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="HUNTERX - Música Urbana Cristiana" />
+    <meta
+      name="twitter:description"
+      content="Música urbana con propósito. Escucha «Inmenso Amor», ya disponible."
+    />
+    <meta name="twitter:image" content="https://linktreehunterx.netlify.app/og-image.jpg" />
+
+    <!-- El sitio siempre es oscuro: evita que el navegador fuerce colores -->
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#090b12" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Iconos -->
+    <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Recursos críticos -->
+    <link rel="preload" as="image" href="/InmensoAmor.jpg" fetchpriority="high" />
+    <link rel="preconnect" href="https://i.ytimg.com" />
+
+    <!-- Tipografías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat+Brush&family=Manrope:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
     />
-
-    <!-- Evitar que el navegador fuerce modo oscuro -->
-    <meta name="supported-color-schemes" content="dark light" />
-
-    <!-- Preconnect para acelerar carga de recursos externos -->
-    <link rel="preconnect" href="https://www.youtube.com" />
-    <link rel="preconnect" href="https://www.instagram.com" />
-    <link rel="preconnect" href="https://cdn.builder.io" />
-    <link rel="dns-prefetch" href="//www.youtube.com" />
-    <link rel="dns-prefetch" href="//www.instagram.com" />
-    <link rel="dns-prefetch" href="//cdn.builder.io" />
-
-    <title>HUNTERX - Música Urbana Cristiana</title>
   </head>
 
-  <body translate="no">
+  <body translate="no" style="background-color: #090b12">
     <div id="root" translate="no"></div>
 
     <script type="module" src="/client/App.tsx"></script>

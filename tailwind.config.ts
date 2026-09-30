@@ -13,6 +13,11 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["Manrope", "system-ui", "sans-serif"],
+        display: ["Anton", "Impact", "sans-serif"],
+        script: ["'Caveat Brush'", "cursive"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

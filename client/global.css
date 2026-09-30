@@ -9,88 +9,43 @@
    * A different format will require also updating the theme in tailwind.config.ts.
   */
   :root {
-    --background: 220 20% 7%;
-    --foreground: 45 100% 85%;
+    --background: 225 30% 5%;
+    --foreground: 40 40% 96%;
 
-    --card: 220 20% 10%;
-    --card-foreground: 45 100% 85%;
+    --card: 225 25% 8%;
+    --card-foreground: 40 40% 96%;
 
-    --popover: 220 20% 10%;
-    --popover-foreground: 45 100% 85%;
+    --popover: 225 25% 8%;
+    --popover-foreground: 40 40% 96%;
 
-    --primary: 45 100% 60%;
-    --primary-foreground: 220 20% 7%;
+    --primary: 44 100% 58%;
+    --primary-foreground: 225 30% 6%;
 
     --secondary: 35 80% 45%;
-    --secondary-foreground: 45 100% 85%;
+    --secondary-foreground: 40 40% 96%;
 
-    --muted: 220 15% 15%;
-    --muted-foreground: 45 30% 65%;
+    --muted: 225 20% 13%;
+    --muted-foreground: 40 12% 68%;
 
     --accent: 35 80% 45%;
-    --accent-foreground: 45 100% 85%;
+    --accent-foreground: 40 40% 96%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 15% 20%;
-    --input: 220 15% 15%;
-    --ring: 45 100% 60%;
+    --border: 225 20% 16%;
+    --input: 225 20% 14%;
+    --ring: 44 100% 58%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 220 25% 5%;
-    --foreground: 45 100% 90%;
-
-    --card: 220 25% 8%;
-    --card-foreground: 45 100% 90%;
-
-    --popover: 220 25% 8%;
-    --popover-foreground: 45 100% 90%;
-
-    --primary: 45 100% 65%;
-    --primary-foreground: 220 25% 5%;
-
-    --secondary: 35 90% 50%;
-    --secondary-foreground: 45 100% 90%;
-
-    --muted: 220 20% 12%;
-    --muted-foreground: 45 40% 70%;
-
-    --accent: 35 90% 50%;
-    --accent-foreground: 45 100% 90%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 220 20% 18%;
-    --input: 220 20% 12%;
-    --ring: 45 100% 65%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
@@ -100,419 +55,378 @@
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground;
-  }
-
-  /* Evitar que navegadores móviles (especialmente Samsung Internet) cambien colores automáticamente */
   html {
-    color-scheme: dark light;
-    -webkit-color-scheme: dark light;
+    /* El sitio es siempre oscuro: evita que Samsung Internet / Chrome fuercen su propio modo oscuro */
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  html,
-  body,
-  #root {
-    /* Evitar filtros automáticos de color */
-    filter: none !important;
-    -webkit-filter: none !important;
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    text-rendering: optimizeLegibility;
   }
 
-  /* Forzar que los elementos mantengan sus colores originales */
-  *,
-  *::before,
-  *::after {
-    /* Evitar inversión automática de colores */
-    -webkit-filter: none !important;
-    filter: none !important;
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
   }
 
-  /* Prevenir efectos después de usar Web Share API */
-  html:focus-within,
-  body:focus-within {
-    -webkit-filter: none !important;
-    filter: none !important;
-    backdrop-filter: none !important;
+  :focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 3px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 999px;
+    border: 2px solid hsl(var(--background));
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.6);
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.35em] text-primary;
+  }
+  .eyebrow::before,
+  .eyebrow::after {
+    content: "";
+    @apply h-px w-8 bg-primary/50;
+  }
+
+  .text-gold {
+    background: linear-gradient(135deg, #fde68a 0%, hsl(var(--primary)) 45%, #d97706 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-instagram {
+    background: linear-gradient(90deg, #f472b6, #a855f7, #f59e0b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-bottom: 0.08em;
+  }
+
+  .glass {
+    background: hsl(var(--card) / 0.65);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+  }
+
+  .btn-primary {
+    @apply relative inline-flex h-14 items-center justify-center gap-3 overflow-hidden rounded-full bg-primary px-8 text-base font-bold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5;
+    box-shadow: 0 15px 40px -12px hsl(var(--primary) / 0.7);
+  }
+  .btn-primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.45) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.8s ease;
+  }
+  .btn-primary:hover::after {
+    transform: translateX(100%);
+  }
+
+  .btn-ghost {
+    @apply inline-flex h-14 items-center justify-center gap-3 rounded-full border border-white/15 bg-white/5 px-7 text-base font-semibold text-foreground backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10;
+  }
+
+  .nav-link {
+    @apply relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground;
+  }
+  .nav-link::after,
+  .link-underline::after {
+    content: "";
+    @apply absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-primary transition-transform duration-300;
+  }
+  .nav-link:hover::after,
+  .link-underline:hover::after {
+    @apply origin-left scale-x-100;
+  }
+  .link-underline {
+    @apply relative inline-block transition-colors;
+  }
+
+  /* Brillos de fondo */
+  .glow-orb {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 9999px;
+    background: radial-gradient(circle, hsl(var(--primary) / 0.55), transparent 65%);
+    filter: blur(60px);
+    z-index: -1;
+  }
+  .glow-orb--blue {
+    background: radial-gradient(circle, rgb(56 130 246 / 0.5), transparent 65%);
+  }
+  .glow-orb--pink {
+    background: radial-gradient(circle, rgb(236 72 153 / 0.5), transparent 65%);
+  }
+
+  /* Textura de grano sutil para un acabado más "editorial" */
+  .noise::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Disco de vinilo */
+  .vinyl {
+    position: relative;
+    background:
+      radial-gradient(circle, transparent 0 17%, rgb(0 0 0 / 0) 17%),
+      repeating-radial-gradient(circle, #0b0b0d 0 2px, #16161a 2px 4px);
+    box-shadow:
+      0 30px 60px -15px rgb(0 0 0 / 0.8),
+      inset 0 0 0 1px rgb(255 255 255 / 0.05);
+  }
+  .vinyl::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: conic-gradient(from 30deg, transparent 0 10%, rgb(255 255 255 / 0.08) 15%, transparent 25% 60%, rgb(255 255 255 / 0.06) 65%, transparent 75%);
+  }
+
+  /* Ecualizador */
+  .eq-bar {
+    transition: height 0.3s ease;
+  }
+  .eq-bar--active {
+    height: 100%;
+    animation: eq 0.9s ease-in-out infinite alternate;
+    transform-origin: bottom;
+  }
+
+  .loader-line {
+    animation: loader-line 1.2s ease-in-out infinite;
+  }
+
+  /* Tarjetas de plataformas con foco de luz que sigue el cursor */
+  .platform-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    background: radial-gradient(
+      220px circle at var(--x, 50%) var(--y, 50%),
+      color-mix(in srgb, var(--brand) 22%, transparent),
+      transparent 70%
+    );
+  }
+  .platform-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Control de volumen */
+  .volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 999px;
+    cursor: pointer;
+    background: linear-gradient(
+      to right,
+      hsl(var(--primary)) var(--value, 20%),
+      rgb(255 255 255 / 0.12) var(--value, 20%)
+    );
+  }
+  .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 12px;
+    width: 12px;
+    border-radius: 999px;
+    background: hsl(var(--foreground));
+    box-shadow: 0 0 0 4px hsl(var(--primary) / 0.25);
+  }
+  .volume-slider::-moz-range-thumb {
+    height: 12px;
+    width: 12px;
+    border: none;
+    border-radius: 999px;
+    background: hsl(var(--foreground));
   }
 }
 
 @layer utilities {
-  /* Optimizaciones de rendimiento para móviles */
-  html {
-    scroll-behavior: smooth;
-    /* Forzar aceleración por hardware */
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    /* Optimizar el rendering */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+  .animate-marquee,
+  .marquee-track {
+    animation: marquee 45s linear infinite;
   }
-
-  /* Acelerar animaciones y transiciones */
-  * {
-    /* Promover capas de composición cuando hay transformaciones */
-    will-change: auto;
+  @media (max-width: 1023px) {
+    .marquee-track {
+      animation-duration: 30s;
+    }
   }
-
-  /* Optimizar elementos animados */
-  .group:hover,
-  [class*="hover:"],
-  [class*="group-hover:"] {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-
-  /* Optimizar imágenes y videos para móviles */
-  img,
-  video {
-    /* Mejorar calidad de interpolación */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    /* Acelerar decodificación */
-    content-visibility: auto;
-  }
-
-  /* Optimizar iframes */
-  iframe {
-    /* Acelerar rendering */
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    /* Mejorar scroll dentro de iframe */
+  .no-scrollbar {
+    scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
-    /* Acelerar contenido */
-    content-visibility: auto;
-    contain-intrinsic-size: 560px 315px;
   }
-
-  /* Instagram container styling */
-  .instagram-container {
-    position: relative;
-    overflow: hidden;
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
-
-  /* Custom styles for Instagram embeds - clean and well designed */
-  .instagram-embed {
-    border-radius: 16px !important;
-    overflow: hidden !important;
-    width: 100% !important;
-    height: 100% !important;
+  .animate-spin-slow {
+    animation: spin 6s linear infinite;
   }
-
-  /* Enhanced Instagram embeds styling */
-  iframe[src*="instagram.com"] {
-    border-radius: 16px !important;
-    border: none !important;
-    filter: brightness(1.05) contrast(1.02) saturate(1.05);
-    transition: all 0.3s ease;
-    /* Optimizar para móviles */
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    will-change: transform;
+  .animate-drift {
+    animation: drift 18s ease-in-out infinite;
   }
-
-  /* Optimizar YouTube iframes */
-  iframe[src*="youtube.com"],
-  iframe[src*="youtu.be"] {
-    /* Acelerar rendering */
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    will-change: transform;
-    /* Mejorar loading */
-    content-visibility: auto;
-    contain-intrinsic-size: 560px 315px;
+  .animate-drift-slow {
+    animation: drift 26s ease-in-out infinite reverse;
   }
-
-  /* Better mobile touch targets */
-  @media (max-width: 768px) {
-    button,
-    a,
-    [role="button"] {
-      min-height: 44px;
-      min-width: 44px;
-    }
+  .animate-ping-slow {
+    animation: ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
   }
-
-  /* Custom shadow utilities */
-  .shadow-3xl {
-    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
-  }
-
-  /* Modal animations */
-  @keyframes modalFadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95) translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-  }
-
-  /* Page transition animation */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fadeIn {
-    animation: fadeIn 1.5s ease-out;
-  }
-
-  /* Loading screen animations */
-  @keyframes floatUp {
-    0%,
-    100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-
-  @keyframes shimmer {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-
-  @keyframes glow {
-    0%,
-    100% {
-      box-shadow: 0 0 20px rgba(var(--primary), 0.3);
-    }
-    50% {
-      box-shadow: 0 0 40px rgba(var(--primary), 0.6);
-    }
-  }
-
-  @keyframes breathe {
-    0%,
-    100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.05);
-    }
-  }
-
-  @keyframes slideInFromTop {
-    from {
-      opacity: 0;
-      transform: translateY(-30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slideInFromBottom {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes scaleIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  @keyframes floatingElement {
-    0%,
-    100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-15px);
-    }
-  }
-
-  @keyframes pulseGlow {
-    0%,
-    100% {
-      box-shadow: 0 0 20px rgba(45, 212, 191, 0.3);
-    }
-    50% {
-      box-shadow: 0 0 40px rgba(45, 212, 191, 0.6);
-    }
-  }
-
-  /* Loading screen utilities */
-  .animate-float {
-    animation: floatUp 3s ease-in-out infinite;
-  }
-
-  .animate-shimmer {
-    animation: shimmer 2s ease-in-out infinite;
-  }
-
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite;
-  }
-
   .animate-breathe {
-    animation: breathe 4s ease-in-out infinite;
+    animation: breathe 3s ease-in-out infinite;
+  }
+}
+
+/* ---------- Animaciones solo para celular / tablet ---------- */
+@media (max-width: 1023px) {
+  /* Respuesta al tocar: el elemento se "hunde" un poco */
+  /* Al soltar rebota con un pequeño "overshoot" elástico */
+  .tap-press,
+  .btn-primary,
+  .btn-ghost {
+    transition-property: transform, background-color, border-color, color, box-shadow;
+    transition-duration: 0.45s;
+    transition-timing-function: cubic-bezier(0.34, 1.8, 0.5, 1);
+  }
+  .tap-press:active,
+  .btn-primary:active,
+  .btn-ghost:active {
+    transform: scale(0.93) !important;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-out;
+  }
+  .btn-primary:active {
+    box-shadow: 0 0 0 6px hsl(var(--primary) / 0.25), 0 10px 30px -10px hsl(var(--primary) / 0.8);
   }
 
-  .animate-slideInFromTop {
-    animation: slideInFromTop 0.6s ease-out;
+  /* Portada flotando suavemente cuando la música no suena */
+  .mobile-float {
+    animation: float-soft 5s ease-in-out infinite;
   }
 
-  .animate-slideInFromBottom {
-    animation: slideInFromBottom 0.6s ease-out;
+  /* Destello que cruza la portada una vez */
+  .cover-shine {
+    background: linear-gradient(115deg, transparent 35%, rgb(255 255 255 / 0.35) 50%, transparent 65%);
+    transform: translateX(-120%);
+    animation: cover-shine 1.4s 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
-  .animate-scaleIn {
-    animation: scaleIn 0.5s ease-out;
+  /* Ahorro de batería: los brillos de fondo quedan quietos en celular */
+  .animate-drift,
+  .animate-drift-slow {
+    animation: none;
   }
+}
 
-  .animate-floating {
-    animation: floatingElement 3s ease-in-out infinite;
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
   }
-
-  .animate-pulseGlow {
-    animation: pulseGlow 2s ease-in-out infinite;
+  50% {
+    transform: translateY(-8px);
   }
+}
 
-  /* Forzar animaciones completas en pantalla de carga sin importar las preferencias del dispositivo */
-  .fixed .bg-gradient-to-r,
-  .fixed [style*="width:"],
-  .fixed .h-full,
-  .fixed .transition-all {
-    animation-duration: initial !important;
-    transition-duration: 500ms !important;
-    animation-iteration-count: initial !important;
+@keyframes cover-shine {
+  to {
+    transform: translateX(120%);
   }
+}
 
-  /* Improved text rendering */
-  .text-rendering-optimized {
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+/* Barra del punto activo del carrusel de Instagram (dura lo mismo que el autoplay) */
+.ig-progress {
+  transform: scaleX(0);
+  animation-name: ig-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes ig-progress {
+  to {
+    transform: scaleX(1);
   }
+}
 
-  /* Optimizaciones específicas para móviles */
-  @media (max-width: 768px) {
-    /* Reducir complejidad visual en móviles SOLO en elementos que no sean de la pantalla de carga */
-    .group:hover .group-hover\:scale-\[1\.01\]:not(.fixed *) {
-      transform: none !important;
-    }
-
-    /* Simplificar gradientes complejos en móviles (excepto avatares y pantalla de carga) */
-    .bg-gradient-to-br:not(.flex > *):not(.fixed *) {
-      background: var(--background) !important;
-    }
-
-    /* Reducir blur effects en móviles (excepto pantalla de carga) */
-    .backdrop-blur-sm:not(.fixed *),
-    .backdrop-blur-xl:not(.fixed *) {
-      backdrop-filter: none !important;
-      background: rgba(var(--card), 0.95) !important;
-    }
-
-    /* Optimizar sombras para móviles (excepto pantalla de carga) */
-    .shadow-3xl:not(.fixed *),
-    .shadow-2xl:not(.fixed *),
-    .shadow-xl:not(.fixed *) {
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
-    }
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
   }
+}
 
-  /* Prevenir zoom en inputs en iOS */
-  @media screen and (-webkit-min-device-pixel-ratio: 0) {
-    select,
-    input,
-    textarea {
-      font-size: 16px !important;
-    }
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
   }
-
-  /* Optimizar para conexiones lentas */
-  @media (prefers-reduced-data: reduce) {
-    video:not(.fixed *):not(.fixed .h-full) {
-      preload: none !important;
-    }
-
-    iframe:not(.fixed *):not(.fixed .h-full) {
-      loading: lazy !important;
-    }
-
-    /* Simplificar animaciones (excepto pantalla de carga) */
-    *:not(.fixed):not(.fixed *):not(.fixed .h-full):not(.bg-gradient-to-r):not(
-        [style*="width:"]
-      ) {
-      animation-duration: 0.01s !important;
-      transition-duration: 0.01s !important;
-    }
+  33% {
+    transform: translate(60px, -40px) scale(1.1);
   }
-
-  /* Optimizar para dispositivos con batería baja */
-  @media (prefers-reduced-motion: reduce) {
-    *:not(.fixed):not(.fixed *):not(.fixed .h-full):not(.bg-gradient-to-r):not(
-        [style*="width:"]
-      ):not(.animate-fadeIn) {
-      animation-duration: 0.01s !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01s !important;
-      scroll-behavior: auto !important;
-    }
-
-    video:not(.fixed *):not(.fixed .h-full) {
-      autoplay: false !important;
-    }
+  66% {
+    transform: translate(-40px, 50px) scale(0.95);
   }
+}
 
-  /* Estilos específicos para Samsung Internet para evitar cambios automáticos de color */
-  @media screen and (-webkit-min-device-pixel-ratio: 0) {
-    html {
-      /* Evitar modo oscuro forzado en Samsung Internet */
-      -webkit-color-scheme: dark light;
-    }
-
-    body {
-      /* Mantener colores originales */
-      -webkit-filter: none !important;
-      filter: none !important;
-      /* Añadir traducción prevention */
-      translate: no;
-    }
-
-    /* Prevenir traducción automática */
-    [translate="no"],
-    .notranslate {
-      -webkit-transform: translateZ(0);
-      transform: translateZ(0);
-    }
+@keyframes eq {
+  0% {
+    transform: scaleY(0.25);
   }
+  50% {
+    transform: scaleY(0.9);
+  }
+  100% {
+    transform: scaleY(0.45);
+  }
+}
 
-  /* Media query específica para Samsung Internet */
-  @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) {
-    * {
-      -webkit-filter: none !important;
-      filter: none !important;
-    }
+@keyframes loader-line {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+/* "Reducir movimiento": solo se quita el scroll suave del navegador; las
+   animaciones del sitio se mantienen (ver MotionConfig en pages/Index.tsx). */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
