@@ -128,3 +128,236 @@ body.hx-login a[href*="decapcms"] {
   opacity: 0.5;
   filter: grayscale(1) brightness(2.2);
 }
+
+/* =====================================================================
+   Formularios: retoques generales
+   ===================================================================== */
+
+label[for*="-field-"] {
+  letter-spacing: 0.04em;
+}
+input[id*="-field-"],
+textarea[id*="-field-"] {
+  border-radius: 10px !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+input[id*="-field-"]:focus,
+textarea[id*="-field-"]:focus {
+  border-color: #d99a06 !important;
+  box-shadow: 0 0 0 3px rgb(251 191 36 / 0.25) !important;
+  outline: none !important;
+}
+
+/* =====================================================================
+   Tipo de portada: tarjetas Canción / Video
+   ===================================================================== */
+
+.hx-mode {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding: 4px 0;
+}
+@media (max-width: 640px) {
+  .hx-mode {
+    grid-template-columns: 1fr;
+  }
+}
+.hx-mode__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 18px;
+  border: 2px solid #dfe1e7;
+  border-radius: 14px;
+  background: #fff;
+  color: #1f2937;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.hx-mode__card:hover {
+  border-color: #f2c94c;
+  transform: translateY(-2px);
+}
+.hx-mode__card:focus-visible {
+  outline: 3px solid rgb(251 191 36 / 0.5);
+  outline-offset: 2px;
+}
+.hx-mode__card.is-active {
+  border-color: #d99a06;
+  background: linear-gradient(180deg, #fffbeb, #fff);
+  box-shadow: 0 12px 30px -16px rgb(217 154 6 / 0.7);
+}
+.hx-mode__check {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #f1f2f5;
+  color: #6b7280;
+  font-size: 11px;
+  font-weight: 700;
+}
+.hx-mode__card.is-active .hx-mode__check {
+  background: #d99a06;
+  color: #fff;
+}
+.hx-mode__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 4px;
+  border-radius: 12px;
+  background: #111827;
+  color: #fbbf24;
+}
+.hx-mode__icon .hx-icon {
+  width: 22px;
+  height: 22px;
+}
+.hx-mode__title {
+  font-size: 17px;
+}
+.hx-mode__text {
+  color: #4b5563;
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+.hx-mode__fields {
+  margin-top: 4px;
+  color: #92400e;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Solo se muestran los campos del tipo elegido (se oculta el bloque completo
+   del campo: ControlContainer > ControlTopbar > label) */
+body[data-hero-mode="video"] div:has(> div > label[for^="title-field"]),
+body[data-hero-mode="video"] div:has(> div > label[for^="producer-field"]),
+body[data-hero-mode="video"] div:has(> div > label[for^="cover-field"]),
+body[data-hero-mode="video"] div:has(> div > label[for^="audio-field"]),
+body[data-hero-mode="video"] div:has(> div > label[for^="previewSeconds-field"]),
+body[data-hero-mode="audio"] div:has(> div > label[for^="video-field"]),
+body[data-hero-mode="audio"] div:has(> div > label[for^="videoPoster-field"]) {
+  display: none !important;
+}
+/* La etiqueta del selector ya va dentro de las tarjetas */
+label[for^="mode-field"] {
+  display: none !important;
+}
+
+/* =====================================================================
+   Avisos propios (reemplazan los del navegador)
+   ===================================================================== */
+
+.hx-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgb(9 11 18 / 0.6);
+  backdrop-filter: blur(6px);
+  animation: hx-fade 0.18s ease-out;
+}
+.hx-dialog.is-leaving {
+  animation: hx-fade 0.16s ease-in reverse forwards;
+}
+.hx-dialog__card {
+  width: min(440px, 100%);
+  padding: 28px 26px 22px;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 20px;
+  background: #10131c;
+  color: #f7f3ea;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  text-align: center;
+  box-shadow: 0 40px 80px -20px rgb(0 0 0 / 0.6);
+  animation: hx-pop 0.24s cubic-bezier(0.34, 1.4, 0.5, 1);
+}
+.hx-dialog__icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 14px;
+  border-radius: 999px;
+  background: rgb(251 191 36 / 0.15);
+  color: #fbbf24;
+  font-size: 26px;
+  font-weight: 800;
+}
+.hx-dialog__card.is-danger .hx-dialog__icon {
+  background: rgb(248 113 113 / 0.15);
+  color: #f87171;
+}
+.hx-dialog__title {
+  margin: 0 0 8px;
+  color: #f7f3ea !important;
+  font-size: 20px;
+  font-weight: 700;
+}
+.hx-dialog__body {
+  margin: 0 0 22px;
+  color: #c9c3b6;
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+.hx-dialog__actions {
+  display: flex;
+  gap: 10px;
+}
+.hx-dialog__btn {
+  flex: 1;
+  height: 46px;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.05);
+  color: #f7f3ea;
+  font: 600 14px system-ui, sans-serif;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.hx-dialog__btn:hover {
+  background: rgb(255 255 255 / 0.1);
+}
+.hx-dialog__btn:active {
+  transform: scale(0.97);
+}
+.hx-dialog__btn:focus-visible {
+  outline: 3px solid rgb(251 191 36 / 0.5);
+  outline-offset: 2px;
+}
+.hx-dialog__btn--primary {
+  border-color: transparent;
+  background: #fbbf24;
+  color: #111;
+}
+.hx-dialog__btn--primary:hover {
+  background: #fcd34d;
+}
+.is-danger .hx-dialog__btn--primary {
+  background: #ef4444;
+  color: #fff;
+}
+.is-danger .hx-dialog__btn--primary:hover {
+  background: #f87171;
+}
+@keyframes hx-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes hx-pop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+}

@@ -54,46 +54,44 @@ collections:
             widget: guia
             required: false
             text: >-
-              Es la parte superior de la página. Puedes destacar una canción
-              (portada + reproductor) o un video.
+              Es la parte superior de la página. Elige si quieres destacar una
+              canción o un video: el formulario cambia según lo que elijas.
             steps:
-              - Elige qué mostrar en «Tipo de portada».
-              - Escribe el nombre de la canción y los créditos.
-              - Sube la portada (cuadrada, 1080×1080).
-              - Sube la canción en MP3 o el video en MP4, según el tipo elegido.
-              - Revisa la vista previa de la derecha y pulsa Publicar.
+              - Elige el tipo de portada (Canción o Video).
+              - Completa los campos que aparecen debajo.
+              - Revisa la vista previa de la derecha.
+              - Pulsa Publicar.
           - label: Tipo de portada
             name: mode
-            widget: select
+            widget: hero-mode
             default: audio
-            options:
-              - { label: "Canción con portada y reproductor", value: audio }
-              - { label: "Video", value: video }
-            hint: Con «Canción» se ve la portada y suena la canción en bucle. Con «Video» se reproduce el video en lugar de la portada.
           - label: Etiqueta superior
             name: badge
             widget: string
             default: Nuevo sencillo
-            hint: "Texto corto que aparece sobre el nombre del artista. Ejemplos: Nuevo sencillo, Ya disponible, Estreno."
+            hint: "Texto corto que aparece sobre el nombre del artista. Ejemplos: Nuevo sencillo, Nuevo video, Estreno."
+          # --- Campos del tipo «Canción» ---
           - label: Nombre de la canción
             name: title
             widget: string
+            required: false
           - label: Productor o créditos
             name: producer
             widget: string
             required: false
             hint: "Ejemplo: Prod. Latrenzha"
-          - label: Portada
+          - label: Portada de la canción
             name: cover
             widget: image
             choose_url: false
-            hint: Imagen cuadrada en JPG, ideal 1080×1080. También se usa como fondo, en el reproductor y al compartir.
+            required: false
+            hint: Imagen cuadrada en JPG, ideal 1080×1080. También se usa como fondo y al compartir la página.
           - label: Canción (MP3)
             name: audio
             widget: file
             choose_url: false
             required: false
-            hint: Solo para el tipo «Canción». MP3 de menos de 10 MB.
+            hint: MP3 de menos de 10 MB. Suena en bucle con el reproductor de la portada.
           - label: Segundos que suena en bucle
             name: previewSeconds
             widget: number
@@ -102,12 +100,20 @@ collections:
             max: 600
             default: 59
             hint: Al llegar a este segundo, la canción vuelve a empezar. Útil para mostrar solo un fragmento.
-          - label: Video (MP4)
+          # --- Campos del tipo «Video» ---
+          - label: Video de fondo (MP4)
             name: video
             widget: file
             choose_url: false
             required: false
-            hint: Solo para el tipo «Video». MP4 comprimido de menos de 25 MB. Se reproduce sin sonido hasta que el visitante lo activa.
+            hint: Ocupa toda la pantalla detrás del texto, en bucle y sin sonido hasta que el visitante lo activa. MP4 horizontal y comprimido, de menos de 25 MB.
+          - label: Imagen mientras carga el video
+            name: videoPoster
+            widget: image
+            choose_url: false
+            required: false
+            hint: Opcional. Se ve un instante mientras el video carga. Ideal un fotograma del video (1920×1080).
+          # --- Común ---
           - label: Enlace del botón «Ver en YouTube»
             name: youtubeUrl
             widget: string
@@ -172,14 +178,13 @@ collections:
             widget: guia
             required: false
             text: >-
-              Las publicaciones se muestran en un carrusel que avanza solo.
-              Todas se recortan al mismo tamaño (vertical 4:5).
+              Solo necesitas el enlace de cada publicación. Al publicar, la
+              imagen se descarga sola y en 2-3 minutos aparece en la página.
             steps:
               - En Instagram, abre la publicación y pulsa ••• → Copiar enlace.
               - Pulsa «Agregar publicación» y pega el enlace.
-              - Sube la imagen de la publicación (vertical, ideal 1080×1350).
-              - Si la publicó otra cuenta (colaboración), escribe su usuario.
-              - Indica si es Reel, Carrusel o Foto para mostrar la etiqueta correcta.
+              - La vista previa muestra la publicación real para confirmar que es la correcta.
+              - Arrastra para cambiar el orden y pulsa Publicar.
           - label: Publicaciones
             name: posts
             widget: list
@@ -194,25 +199,6 @@ collections:
                 widget: string
                 hint: "Ejemplo: https://www.instagram.com/p/… o https://www.instagram.com/reel/…"
                 pattern: ['^https://(www\.)?instagram\.com/([\w.]+/)?(p|reel|reels|tv)/[\w-]{5,40}', "Pega un enlace de publicación de Instagram válido"]
-              - label: Imagen de la publicación
-                name: image
-                widget: image
-                choose_url: false
-                required: false
-                hint: Recomendado. Si la dejas vacía se usa la imagen descargada con «npm run instagram»; si no existe, se muestra una tarjeta con el logo de Instagram.
-              - label: Usuario que publicó
-                name: username
-                widget: string
-                required: false
-                hint: Sin @. Déjalo vacío si la publicó hunterxoficial.
-              - label: Tipo de publicación
-                name: type
-                widget: select
-                required: false
-                options:
-                  - { label: Reel, value: reel }
-                  - { label: Carrusel, value: carousel }
-                  - { label: Foto, value: photo }
 
       # ------------------------------------------------------------------
       - name: platforms

@@ -1,9 +1,12 @@
-/* global CMS, h */
+/* global CMS, h, createClass */
 /**
  * Panel de administración de HUNTERX.
  *
  * - Vistas previas en vivo de cada sección, con el mismo estilo de la página.
  * - Widget «guia»: caja de ayuda al inicio de cada sección (no guarda datos).
+ * - Widget «hero-mode»: elige Canción o Video y muestra solo los campos de
+ *   ese tipo (los demás se ocultan con CSS, ver admin.css).
+ * - Avisos propios (salir sin guardar, eliminar…) en lugar de los del navegador.
  * - Arranque manual: el panel SIEMPRE pide iniciar sesión con GitHub.
  *   El modo de prueba local (sin cuenta, guarda en los archivos de la PC)
  *   solo se activa si se cumplen las dos condiciones:
@@ -14,12 +17,16 @@
 (function () {
   "use strict";
 
-  // ---------- Utilidades ----------
-
   var GOLD = "#fbbf24";
+  var isLocalhost = ["localhost", "127.0.0.1", "[::1]"].indexOf(location.hostname) !== -1;
+  var localMode = isLocalhost && new URLSearchParams(location.search).get("modo") === "local";
 
-  /** Datos descargados con `npm run instagram` (usuario, tipo) por código. */
+  /** Datos descargados automáticamente (usuario, tipo, imagen) por código. */
   var downloadedPosts = {};
+
+  // =====================================================================
+  // Utilidades
+  // =====================================================================
 
   function youtubeId(value) {
     var s = String(value || "").trim();
@@ -45,7 +52,6 @@
     }
   }
 
-  /** Datos de la entrada como objeto plano. */
   function dataOf(props) {
     var data = props.entry.get("data");
     return data && data.toJS ? data.toJS() : {};
@@ -57,6 +63,29 @@
     var asset = props.getAsset(path);
     return asset ? String(asset) : path;
   }
+
+  function icon(paths, className) {
+    return h(
+      "svg",
+      {
+        className: className || "hx-icon",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: 2,
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        "aria-hidden": true,
+      },
+      paths.map(function (d, i) {
+        return h("path", { d: d, key: i });
+      }),
+    );
+  }
+
+  var ICON_MUSIC = ["M9 18V5l12-2v13", "M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0z", "M21 16a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"];
+  var ICON_VIDEO = ["M23 7l-7 5 7 5V7z", "M3 5h11a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"];
+  var ICON_PLAY = ["M6 4l14 8-14 8V4z"];
 
   function Frame(title, subtitle, children) {
     return h(
@@ -73,94 +102,109 @@
     );
   }
 
-  function Warning(text) {
-    return h("div", { className: "hx-warning" }, text);
+  function Warning(text, key) {
+    return h("div", { className: "hx-warning", key: key }, text);
+  }
+
+  function Info(text, key) {
+    return h("div", { className: "hx-info", key: key }, text);
   }
 
   function Empty(text) {
     return h("div", { className: "hx-empty" }, text);
   }
 
+  // =====================================================================
+  // Vistas previas
+  // =====================================================================
+
   // ---------- 1 · Portada principal ----------
+
+  function HeroText(d, centered) {
+    return h(
+      "div",
+      { className: "hx-hero__text" + (centered ? " is-centered" : "") },
+      d.badge ? h("span", { className: "hx-badge" }, d.badge) : null,
+      h("div", { className: "hx-hero__name" }, "HUNTER", h("span", { className: "hx-gold" }, "X")),
+      centered
+        ? null
+        : h(
+            "div",
+            { className: "hx-hero__song" },
+            h("span", { className: "hx-script" }, d.title || "Nombre de la canción"),
+            d.producer ? h("small", null, d.producer) : null,
+          ),
+      h("p", { className: "hx-muted" }, "Aquí va la descripción (se edita en «5 · Datos del artista»)."),
+      h(
+        "div",
+        { className: "hx-hero__buttons" },
+        h("span", { className: "hx-btn hx-btn--gold" }, icon(ICON_PLAY, "hx-icon hx-icon--sm"), "Ver en YouTube"),
+        h("span", { className: "hx-btn" }, "Escuchar en Spotify"),
+      ),
+    );
+  }
 
   function HeroPreview(props) {
     var d = dataOf(props);
     var isVideo = d.mode === "video";
     var cover = assetUrl(props, d.cover);
-    var media;
+    var notes = [];
 
     if (isVideo) {
-      media = d.video
-        ? h("video", {
-            className: "hx-hero__media",
-            src: assetUrl(props, d.video),
-            poster: cover,
-            autoPlay: true,
-            muted: true,
-            loop: true,
-            playsInline: true,
-          })
-        : Empty("Sube un video MP4 para verlo aquí.");
-    } else {
-      media = cover
-        ? h("img", { className: "hx-hero__media", src: cover, alt: "" })
-        : Empty("Sube una portada para verla aquí.");
-    }
-
-    var notes = [];
-    if (isVideo && !d.video) notes.push(Warning("Elegiste «Video» pero no hay ningún video subido. Se mostrará la portada."));
-    if (!isVideo && !d.audio) notes.push(Warning("No hay canción (MP3): el reproductor no sonará."));
-    if (!cover) notes.push(Warning("Falta la portada."));
-
-    return Frame(
-      "Portada principal",
-      "Así se verá la parte superior de la página.",
-      [
+      var video = assetUrl(props, d.video);
+      var poster = assetUrl(props, d.videoPoster) || cover;
+      if (!d.video) notes.push(Warning("Falta el video: mientras no subas uno, la página mostrará la portada de la canción.", "v"));
+      notes.push(Info("En la página, el video se reproduce en bucle y sin sonido; el visitante puede activar el sonido con un botón.", "i"));
+      return Frame("Portada principal · Video", "El video ocupa toda la pantalla detrás del texto.", [
         h(
           "div",
-          { className: "hx-hero", key: "hero" },
-          cover ? h("img", { className: "hx-hero__bg", src: cover, alt: "" }) : null,
+          { className: "hx-hero hx-hero--video", key: "hero" },
+          video
+            ? h("video", { className: "hx-hero__video", src: video, poster: poster, autoPlay: true, muted: true, loop: true, playsInline: true })
+            : poster
+              ? h("img", { className: "hx-hero__video", src: poster, alt: "" })
+              : null,
+          h("div", { className: "hx-hero__shade" }),
+          HeroText(d, true),
+          h("span", { className: "hx-sound" }, "Activar sonido"),
+        ),
+        h("div", { className: "hx-notes", key: "notes" }, notes),
+      ]);
+    }
+
+    if (!d.title) notes.push(Warning("Falta el nombre de la canción.", "t"));
+    if (!cover) notes.push(Warning("Falta la portada de la canción.", "c"));
+    if (!d.audio) notes.push(Warning("No hay canción (MP3): el reproductor no sonará.", "a"));
+
+    return Frame("Portada principal · Canción", "Así se verá la parte superior de la página.", [
+      h(
+        "div",
+        { className: "hx-hero", key: "hero" },
+        cover ? h("img", { className: "hx-hero__bg", src: cover, alt: "" }) : null,
+        HeroText(d, false),
+        h(
+          "div",
+          { className: "hx-hero__side" },
           h(
             "div",
-            { className: "hx-hero__text" },
-            d.badge ? h("span", { className: "hx-badge" }, d.badge) : null,
-            h("div", { className: "hx-hero__name" }, "HUNTER", h("span", { className: "hx-gold" }, "X")),
-            h(
-              "div",
-              { className: "hx-hero__song" },
-              h("span", { className: "hx-script" }, d.title || "Nombre de la canción"),
-              d.producer ? h("small", null, d.producer) : null,
-            ),
-            h("p", { className: "hx-muted" }, "La descripción se edita en «5 · Datos del artista»."),
-            h(
-              "div",
-              { className: "hx-hero__buttons" },
-              h("span", { className: "hx-btn hx-btn--gold" }, "▶  Ver en YouTube"),
-              h("span", { className: "hx-btn" }, "Escuchar en Spotify"),
-            ),
+            { className: "hx-hero__frame" },
+            cover ? h("img", { className: "hx-hero__media", src: cover, alt: "" }) : Empty("Sube una portada para verla aquí."),
           ),
           h(
             "div",
-            { className: "hx-hero__side" },
-            h("div", { className: "hx-hero__frame" }, media),
-            isVideo
-              ? h("p", { className: "hx-muted hx-center" }, "El video se reproduce sin sonido hasta que el visitante lo activa.")
-              : h(
-                  "div",
-                  { className: "hx-player" },
-                  h("span", { className: "hx-player__btn" }, "▶"),
-                  h(
-                    "div",
-                    null,
-                    h("strong", null, d.title || "Nombre de la canción"),
-                    h("small", null, "Suena en bucle " + (d.previewSeconds || 59) + " segundos"),
-                  ),
-                ),
+            { className: "hx-player" },
+            h("span", { className: "hx-player__btn" }, icon(ICON_PLAY, "hx-icon hx-icon--sm")),
+            h(
+              "div",
+              null,
+              h("strong", null, d.title || "Nombre de la canción"),
+              h("small", null, "Suena en bucle " + (d.previewSeconds || 59) + " segundos"),
+            ),
           ),
         ),
-        notes.length ? h("div", { className: "hx-notes", key: "notes" }, notes) : null,
-      ],
-    );
+      ),
+      notes.length ? h("div", { className: "hx-notes", key: "notes" }, notes) : null,
+    ]);
   }
 
   // ---------- 2 · Videos de YouTube ----------
@@ -189,69 +233,88 @@
     var invalid = videos.filter(function (v) {
       return !youtubeId(v.url);
     }).length;
-    return Frame(
-      "Videos de YouTube",
-      "El primero es el destacado. Si ves la miniatura, el enlace es correcto.",
-      [
-        videos.length
-          ? h("div", { className: "hx-videos", key: "list" }, videos.map(VideoCard))
-          : Empty("Agrega al menos un video."),
-        invalid
-          ? h("div", { className: "hx-notes", key: "notes" }, Warning(invalid + " video(s) con enlace no válido: no se mostrarán en la página."))
-          : null,
-      ],
-    );
+    return Frame("Videos de YouTube", "El primero es el destacado. Si ves la miniatura, el enlace es correcto.", [
+      videos.length ? h("div", { className: "hx-videos", key: "list" }, videos.map(VideoCard)) : Empty("Agrega al menos un video."),
+      invalid
+        ? h("div", { className: "hx-notes", key: "notes" }, Warning(invalid + " video(s) con enlace no válido: no se mostrarán en la página."))
+        : null,
+    ]);
   }
 
   // ---------- 3 · Instagram ----------
 
-  function PostCard(props, post, index) {
-    var code = instagramCode(post.url);
-    var downloaded = (code && downloadedPosts[code]) || {};
-    var src = post.image ? assetUrl(props, post.image) : downloaded.image || "";
-    var type = { reel: "Reel", carousel: "Carrusel", photo: "Foto" }[post.type || downloaded.type];
-    var username = post.username || downloaded.username || "hunterxoficial";
+  function PostCard(post, index) {
+    var type = { reel: "Reel", carousel: "Carrusel", photo: "Foto" }[post.type];
     return h(
       "div",
       { className: "hx-post", key: index },
-      src
-        ? h("img", {
-            src: src,
-            alt: "",
-            onError: function (e) {
-              e.currentTarget.style.display = "none";
-            },
-          })
-        : null,
-      h("div", { className: "hx-post__placeholder" }, code ? "Sin imagen: se verá el logo de Instagram" : "Enlace no válido"),
-      h("div", { className: "hx-post__top" }, h("span", { className: "hx-post__avatar" }), username),
+      h("img", { src: post.image, alt: "" }),
+      h("div", { className: "hx-post__top" }, h("span", { className: "hx-post__avatar" }), post.username || "hunterxoficial"),
       type ? h("span", { className: "hx-post__type" }, type) : null,
+      h("span", { className: "hx-post__index" }, String(index + 1)),
     );
   }
 
   function InstagramPreview(props) {
     var posts = dataOf(props).posts || [];
-    var invalid = posts.filter(function (p) {
-      return !instagramCode(p.url);
-    }).length;
-    return Frame(
-      "Publicaciones de Instagram",
-      "Todas se recortan al mismo tamaño (4:5) y avanzan solas en un carrusel.",
-      [
-        posts.length
-          ? h(
+    var ready = [];
+    var pending = [];
+    var invalid = 0;
+
+    posts.forEach(function (p, i) {
+      var code = instagramCode(p.url);
+      if (!code) {
+        invalid += 1;
+        return;
+      }
+      if (downloadedPosts[code]) ready.push({ post: downloadedPosts[code], index: i });
+      else pending.push({ code: code, index: i });
+    });
+
+    return Frame("Publicaciones de Instagram", "Todas se recortan al mismo tamaño (4:5) y avanzan solas en un carrusel.", [
+      ready.length
+        ? h(
+            "div",
+            { className: "hx-posts", key: "ready" },
+            ready.map(function (r) {
+              return PostCard(r.post, r.index);
+            }),
+          )
+        : null,
+      pending.length
+        ? h(
+            "section",
+            { className: "hx-pending", key: "pending" },
+            h("h2", null, "Publicaciones nuevas"),
+            h(
+              "p",
+              { className: "hx-muted" },
+              "Así se ven en Instagram. Al pulsar Publicar, su imagen se descarga automáticamente y en 2-3 minutos aparecen en el carrusel con el mismo formato que las demás.",
+            ),
+            h(
               "div",
-              { className: "hx-posts", key: "list" },
-              posts.map(function (p, i) {
-                return PostCard(props, p, i);
+              { className: "hx-pending__list" },
+              pending.map(function (p) {
+                return h(
+                  "div",
+                  { className: "hx-embed", key: p.code },
+                  h("span", { className: "hx-post__index" }, String(p.index + 1)),
+                  h("iframe", {
+                    src: "https://www.instagram.com/p/" + p.code + "/embed/",
+                    title: "Publicación de Instagram",
+                    scrolling: "no",
+                    loading: "lazy",
+                  }),
+                );
               }),
-            )
-          : Empty("Agrega al menos una publicación."),
-        invalid
-          ? h("div", { className: "hx-notes", key: "notes" }, Warning(invalid + " publicación(es) con enlace no válido: no se mostrarán."))
-          : null,
-      ],
-    );
+            ),
+          )
+        : null,
+      !posts.length ? Empty("Agrega al menos una publicación.") : null,
+      invalid
+        ? h("div", { className: "hx-notes", key: "notes" }, Warning(invalid + " enlace(s) no válidos: no se mostrarán. Copia el enlace desde Instagram con ••• → Copiar enlace."))
+        : null,
+    ]);
   }
 
   // ---------- 4 · Plataformas ----------
@@ -267,12 +330,13 @@
             { className: "hx-platforms" },
             list.map(function (p, i) {
               var ok = isHttps(p.url);
+              var color = p.color || GOLD;
               return h(
                 "div",
                 {
                   className: "hx-platform" + (ok ? "" : " hx-platform--bad"),
                   key: i,
-                  style: { borderColor: p.color || GOLD, boxShadow: "0 0 0 1px " + (p.color || GOLD) + "33, 0 10px 30px -15px " + (p.color || GOLD) },
+                  style: { borderColor: color, boxShadow: "0 0 0 1px " + color + "33, 0 10px 30px -15px " + color },
                 },
                 h("span", { className: "hx-platform__icon" }, p.icon ? h("img", { src: assetUrl(props, p.icon), alt: "" }) : null),
                 h(
@@ -293,41 +357,22 @@
 
   function ArtistPreview(props) {
     var d = dataOf(props);
+    function block(label, content) {
+      return h("section", { key: label }, h("span", { className: "hx-label" }, label), content);
+    }
     return Frame(
       "Datos del artista y textos",
       "Dónde aparece cada dato en la página.",
-      h(
-        "div",
-        { className: "hx-artist" },
-        h(
-          "section",
-          null,
-          h("span", { className: "hx-label" }, "Portada principal"),
-          h("div", { className: "hx-hero__name hx-hero__name--sm" }, d.name || "Nombre"),
-          h("p", null, d.bio || "Descripción"),
-        ),
-        h(
-          "section",
-          null,
-          h("span", { className: "hx-label" }, "Pantalla de carga"),
-          h("p", { className: "hx-caps" }, d.tagline || "Frase corta"),
-        ),
-        h(
-          "section",
-          null,
-          h("span", { className: "hx-label" }, "Pie de página"),
-          h("p", null, d.footerText || "Texto del pie de página"),
-        ),
-        h(
-          "section",
-          null,
-          h("span", { className: "hx-label" }, "Al compartir"),
-          h("div", { className: "hx-share" }, h("p", null, d.shareText || "Mensaje"), h("small", null, d.siteUrl || "")),
-        ),
-        h(
-          "section",
-          null,
-          h("span", { className: "hx-label" }, "Enlaces principales"),
+      h("div", { className: "hx-artist" }, [
+        block("Portada principal", [
+          h("div", { className: "hx-hero__name hx-hero__name--sm", key: "n" }, d.name || "Nombre"),
+          h("p", { key: "b" }, d.bio || "Descripción"),
+        ]),
+        block("Pantalla de carga", h("p", { className: "hx-caps" }, d.tagline || "Frase corta")),
+        block("Pie de página", h("p", null, d.footerText || "Texto del pie de página")),
+        block("Al compartir", h("div", { className: "hx-share" }, h("p", null, d.shareText || "Mensaje"), h("small", null, d.siteUrl || ""))),
+        block(
+          "Enlaces principales",
           h(
             "ul",
             { className: "hx-links" },
@@ -336,20 +381,19 @@
               ["YouTube", d.youtubeUrl],
               ["Spotify", d.spotifyUrl],
             ].map(function (l) {
-              return h(
-                "li",
-                { key: l[0] },
-                h("strong", null, l[0]),
-                h("span", { className: isHttps(l[1]) ? "" : "hx-bad" }, l[1] || "Sin enlace"),
-              );
+              return h("li", { key: l[0] }, h("strong", null, l[0]), h("span", { className: isHttps(l[1]) ? "" : "hx-bad" }, l[1] || "Sin enlace"));
             }),
           ),
         ),
-      ),
+      ]),
     );
   }
 
-  // ---------- Widget de guía (no guarda ningún dato) ----------
+  // =====================================================================
+  // Widgets propios
+  // =====================================================================
+
+  // ---------- Guía (no guarda ningún dato) ----------
 
   function GuideControl(props) {
     var field = props.field;
@@ -379,20 +423,189 @@
     );
   }
 
-  // ---------- Registro ----------
+  // ---------- Tipo de portada: tarjetas Canción / Video ----------
 
-  CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Anton&family=Caveat+Brush&family=Manrope:wght@400;600;700&display=swap");
-  CMS.registerPreviewStyle("/admin/preview.css");
-  CMS.registerPreviewTemplate("hero", HeroPreview);
-  CMS.registerPreviewTemplate("videos", VideosPreview);
-  CMS.registerPreviewTemplate("instagram", InstagramPreview);
-  CMS.registerPreviewTemplate("platforms", PlatformsPreview);
-  CMS.registerPreviewTemplate("artist", ArtistPreview);
-  CMS.registerWidget("guia", GuideControl, function () {
-    return null;
+  var HERO_MODES = [
+    {
+      value: "audio",
+      title: "Canción",
+      icon: ICON_MUSIC,
+      text: "Portada cuadrada con reproductor. La canción suena en bucle.",
+      fields: "Nombre, créditos, portada y MP3",
+    },
+    {
+      value: "video",
+      title: "Video",
+      icon: ICON_VIDEO,
+      text: "Video a pantalla completa detrás del texto, como un videoclip.",
+      fields: "Video MP4 e imagen de carga",
+    },
+  ];
+
+  var HeroModeControl = createClass({
+    componentDidMount: function () {
+      this.sync();
+    },
+    componentDidUpdate: function () {
+      this.sync();
+    },
+    componentWillUnmount: function () {
+      delete document.body.dataset.heroMode;
+    },
+    sync: function () {
+      document.body.dataset.heroMode = this.props.value === "video" ? "video" : "audio";
+    },
+    render: function () {
+      var self = this;
+      var value = this.props.value === "video" ? "video" : "audio";
+      return h(
+        "div",
+        { className: "hx-mode", role: "radiogroup", "aria-label": "Tipo de portada" },
+        HERO_MODES.map(function (mode) {
+          var active = value === mode.value;
+          return h(
+            "button",
+            {
+              key: mode.value,
+              type: "button",
+              role: "radio",
+              "aria-checked": active,
+              className: "hx-mode__card" + (active ? " is-active" : ""),
+              onClick: function () {
+                self.props.onChange(mode.value);
+              },
+            },
+            h("span", { className: "hx-mode__check" }, active ? "Seleccionado" : "Elegir"),
+            h("span", { className: "hx-mode__icon" }, icon(mode.icon)),
+            h("strong", { className: "hx-mode__title" }, mode.title),
+            h("span", { className: "hx-mode__text" }, mode.text),
+            h("span", { className: "hx-mode__fields" }, "Campos: " + mode.fields),
+          );
+        }),
+      );
+    },
   });
 
-  // ---------- Traducciones que faltan en el español de Decap ----------
+  // =====================================================================
+  // Avisos propios en lugar de window.confirm / window.alert
+  // =====================================================================
+  //
+  // Decap pide confirmación con window.confirm, que es sincrónico. Para usar
+  // un aviso con diseño: se cancela la acción, se muestra el aviso y, si la
+  // persona confirma, se repite la misma acción (el mismo clic) ya aprobada.
+  // El aviso al CERRAR o RECARGAR la pestaña lo muestra el navegador y no se
+  // puede rediseñar (es una protección de los navegadores).
+
+  var approved = false;
+  var lastClick = { el: null, time: 0 };
+  document.addEventListener(
+    "click",
+    function (e) {
+      if (!e.target.closest || !e.target.closest(".hx-dialog")) lastClick = { el: e.target, time: Date.now() };
+    },
+    true,
+  );
+
+  function describeConfirm(message) {
+    var es = (CMS.getLocale("es") || {}).editor || {};
+    var editor = es.editor || {};
+    var text = String(message || "");
+    if (text === editor.onLeavePage || /dejar esta página|salir de esta página|leave this page/i.test(text)) {
+      return {
+        title: "Tienes cambios sin publicar",
+        body: "Si sales ahora, se perderán los cambios que hiciste en esta sección. Para conservarlos, quédate y pulsa Publicar.",
+        confirm: "Salir sin guardar",
+        cancel: "Seguir editando",
+        danger: true,
+      };
+    }
+    if (/eliminar|borrar|delete/i.test(text)) {
+      return {
+        title: "¿Eliminar definitivamente?",
+        body: text + " Esta acción se publica en la página y no se puede deshacer desde aquí.",
+        confirm: "Sí, eliminar",
+        cancel: "Cancelar",
+        danger: true,
+      };
+    }
+    return { title: "Confirmar acción", body: text, confirm: "Continuar", cancel: "Cancelar" };
+  }
+
+  function showDialog(opts) {
+    return new Promise(function (resolve) {
+      var previousFocus = document.activeElement;
+      var overlay = document.createElement("div");
+      overlay.className = "hx-dialog";
+      overlay.setAttribute("role", "alertdialog");
+      overlay.setAttribute("aria-modal", "true");
+      overlay.innerHTML =
+        '<div class="hx-dialog__card' + (opts.danger ? " is-danger" : "") + '">' +
+        '<div class="hx-dialog__icon" aria-hidden="true">!</div>' +
+        '<h2 class="hx-dialog__title"></h2>' +
+        '<p class="hx-dialog__body"></p>' +
+        '<div class="hx-dialog__actions">' +
+        (opts.cancel ? '<button type="button" class="hx-dialog__btn" data-act="cancel"></button>' : "") +
+        '<button type="button" class="hx-dialog__btn hx-dialog__btn--primary" data-act="ok"></button>' +
+        "</div></div>";
+      overlay.querySelector(".hx-dialog__title").textContent = opts.title;
+      overlay.querySelector(".hx-dialog__body").textContent = opts.body;
+      overlay.querySelector('[data-act="ok"]').textContent = opts.confirm || "Entendido";
+      if (opts.cancel) overlay.querySelector('[data-act="cancel"]').textContent = opts.cancel;
+
+      function close(result) {
+        document.removeEventListener("keydown", onKey, true);
+        overlay.classList.add("is-leaving");
+        setTimeout(function () {
+          overlay.remove();
+          if (previousFocus && previousFocus.focus) previousFocus.focus();
+        }, 160);
+        resolve(result);
+      }
+      function onKey(e) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          close(false);
+        }
+      }
+      overlay.addEventListener("click", function (e) {
+        var act = e.target.getAttribute && e.target.getAttribute("data-act");
+        if (act === "ok") close(true);
+        else if (act === "cancel" || e.target === overlay) close(false);
+      });
+      document.addEventListener("keydown", onKey, true);
+      document.body.appendChild(overlay);
+      var focusTarget = overlay.querySelector('[data-act="cancel"]') || overlay.querySelector('[data-act="ok"]');
+      setTimeout(function () {
+        focusTarget.focus();
+      }, 30);
+    });
+  }
+
+  window.confirm = function (message) {
+    if (approved) {
+      approved = false;
+      return true;
+    }
+    var target = lastClick.el && Date.now() - lastClick.time < 2000 ? lastClick.el : null;
+    showDialog(describeConfirm(message)).then(function (ok) {
+      if (!ok) return;
+      approved = true;
+      if (target && document.contains(target)) target.click();
+      else history.back();
+      setTimeout(function () {
+        approved = false;
+      }, 1500);
+    });
+    return false;
+  };
+
+  window.alert = function (message) {
+    showDialog({ title: "Aviso", body: String(message || ""), confirm: "Entendido" });
+  };
+
+  // =====================================================================
+  // Traducciones que faltan en el español de Decap
+  // =====================================================================
 
   function fillMissing(target, extra) {
     Object.keys(extra).forEach(function (key) {
@@ -421,16 +634,13 @@
     );
   }
 
-  // ---------- Arranque ----------
-
-  var isLocalhost = ["localhost", "127.0.0.1", "[::1]"].indexOf(location.hostname) !== -1;
-  var localMode = isLocalhost && new URLSearchParams(location.search).get("modo") === "local";
-
-  // ---------- Pantalla de inicio de sesión con la marca ----------
+  // =====================================================================
+  // Pantalla de inicio de sesión con la marca
+  // =====================================================================
 
   function decorateLogin() {
     var button = Array.prototype.find.call(document.querySelectorAll("button"), function (b) {
-      return /Iniciar sesión/.test(b.textContent || "");
+      return /Iniciar sesión/.test(b.textContent || "") && !b.closest(".hx-dialog");
     });
     document.body.classList.toggle("hx-login", !!button);
     if (!button || document.querySelector(".hx-login-copy")) return;
@@ -449,11 +659,28 @@
   }
   new MutationObserver(decorateLogin).observe(document.body, { childList: true, subtree: true });
 
+  // =====================================================================
+  // Registro y arranque
+  // =====================================================================
+
+  CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Anton&family=Caveat+Brush&family=Manrope:wght@400;600;700&display=swap");
+  CMS.registerPreviewStyle("/admin/preview.css");
+  CMS.registerPreviewTemplate("hero", HeroPreview);
+  CMS.registerPreviewTemplate("videos", VideosPreview);
+  CMS.registerPreviewTemplate("instagram", InstagramPreview);
+  CMS.registerPreviewTemplate("platforms", PlatformsPreview);
+  CMS.registerPreviewTemplate("artist", ArtistPreview);
+  CMS.registerWidget("guia", GuideControl, function () {
+    return null;
+  });
+  CMS.registerWidget("hero-mode", HeroModeControl, function () {
+    return null;
+  });
+
   if (localMode) {
     var banner = document.createElement("div");
     banner.className = "hx-local-banner";
-    banner.textContent =
-      "Modo de prueba local: los cambios se guardan en los archivos de esta PC y NO se publican.";
+    banner.textContent = "Modo de prueba local: los cambios se guardan en los archivos de esta PC y NO se publican.";
     document.body.appendChild(banner);
   }
 
@@ -461,7 +688,7 @@
     CMS.init({ config: { local_backend: localMode } });
   }
 
-  // Primero carga los datos descargados de Instagram (para las vistas previas)
+  // Primero carga los datos de Instagram ya descargados (para las vistas previas)
   fetch("/instagram/index.json", { cache: "no-cache" })
     .then(function (r) {
       return r.ok ? r.json() : [];

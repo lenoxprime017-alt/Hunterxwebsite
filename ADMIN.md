@@ -55,9 +55,8 @@ Abre `https://linktreehunterx.netlify.app/admin` y pulsa **Iniciar sesión con G
 ## Consejos de uso
 
 - **Videos de YouTube:** pega el link tal cual (`youtube.com/watch?v=…` o `youtu.be/…`). El primero de la lista es el destacado. Arrastra para cambiar el orden.
-- **Instagram:** pega el link del post (••• → Copiar enlace) y **sube la imagen del post** en el mismo formulario, vertical e idealmente de 1080×1350. Si no subes imagen:
-  - Se usa la descargada con `npm run instagram` desde la PC, que necesita Chrome instalado.
-  - Si tampoco hay imagen descargada, se muestra una tarjeta con el logo de Instagram.
+- **Portada principal:** arriba eliges **Canción** (portada cuadrada con reproductor) o **Video** (video a pantalla completa detrás del texto). El formulario muestra solo los campos del tipo elegido.
+- **Instagram:** solo pega el enlace de la publicación (••• → Copiar enlace). Al pulsar Publicar, GitHub descarga la imagen automáticamente y en 2-3 minutos aparece en el carrusel. Puedes ver el proceso en la pestaña **Actions** del repositorio («Imágenes de Instagram»). Si Instagram bloqueara la descarga, la publicación se muestra con el logo de Instagram; en ese caso se puede ejecutar `npm run instagram` desde la PC.
 - **Archivos pesados:** usa MP3 de menos de 10 MB y MP4 comprimido de menos de 25 MB. Los archivos grandes pueden fallar al subir y hacen más lenta la página.
 - **Vista previa:** a la derecha de cada sección se ve en vivo cómo quedará, con el diseño real de la página. Los avisos en rojo indican algo que falta o un enlace no válido.
 - **Probar el panel en la PC sin publicar nada (modo de prueba local):**

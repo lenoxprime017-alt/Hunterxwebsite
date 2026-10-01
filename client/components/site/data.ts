@@ -82,6 +82,8 @@ export const LATEST_RELEASE = {
   cover: safeAsset(heroJson.cover, "/InmensoAmor.jpg"),
   audio: safeAsset(heroJson.audio),
   video: safeAsset(heroJson.video),
+  /** Imagen que se ve mientras carga el video (si no hay, se usa la portada) */
+  videoPoster: safeAsset((heroJson as { videoPoster?: string }).videoPoster),
   youtubeUrl: safeUrl(heroJson.youtubeUrl, ARTIST.youtubeUrl),
   /** Duración (en segundos) del fragmento que suena en bucle en la página */
   previewSeconds: Math.max(10, Math.min(600, Number(heroJson.previewSeconds) || 59)),

@@ -41,47 +41,48 @@ export function Hero({ ready }: { ready: boolean }) {
 
   const letters = ARTIST.name.split("");
 
+  // Modo video (se elige en el panel /admin): el video ocupa todo el fondo,
+  // como el diseño original. Suena solo si el visitante lo activa.
+  const isVideoHero = LATEST_RELEASE.mode === "video" && !!LATEST_RELEASE.video;
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [muted, setMuted] = useState(true);
+
   return (
     <section
       id="top"
       ref={sectionRef}
       className="relative flex min-h-[100svh] items-center overflow-hidden pb-16 pt-28 sm:pt-32"
     >
-      {/* Fondo: portada desenfocada + brillos */}
+      {/* Fondo: video a pantalla completa (modo video) o portada desenfocada */}
       <motion.div
         aria-hidden
         className="absolute inset-0 -z-10"
         style={{ scale: bgScale }}
       >
-        <img
-          src={LATEST_RELEASE.cover}
-          alt=""
-          className="h-full w-full object-cover opacity-40 blur-3xl saturate-150"
-        />
+        {isVideoHero ? (
+          <>
+            <video
+              ref={videoRef}
+              className="h-full w-full object-cover"
+              src={LATEST_RELEASE.video}
+              poster={LATEST_RELEASE.videoPoster || LATEST_RELEASE.cover}
+              autoPlay
+              loop
+              muted={muted}
+              playsInline
+              preload="metadata"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/45 to-black/30" />
+          </>
+        ) : (
+          <img
+            src={LATEST_RELEASE.cover}
+            alt=""
+            className="h-full w-full object-cover opacity-40 blur-3xl saturate-150"
+          />
+        )}
       </motion.div>
 
-      {/* COMENTADO TEMPORALMENTE - Fondo con video (/hunterx.mp4)
-          Para activarlo: descomenta este bloque y comenta el <motion.div> de
-          arriba (el de la portada desenfocada). Si el video no debe ir detrás
-          del texto sino en lugar de la portada, avísame y lo adapto.
-      <motion.div
-        aria-hidden
-        className="absolute inset-0 -z-10"
-        style={{ scale: bgScale }}
-      >
-        <video
-          className="h-full w-full object-cover opacity-60"
-          src="/hunterx.mp4"
-          poster={LATEST_RELEASE.cover}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30" />
-      </motion.div>
-      */}
       <div
         aria-hidden
         className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,transparent_0%,hsl(var(--background)/0.7)_55%,hsl(var(--background))_100%)]"
@@ -97,14 +98,22 @@ export function Hero({ ready }: { ready: boolean }) {
 
       <motion.div
         style={isDesktop ? { y: contentY, opacity: fade } : undefined}
-        className="container grid items-center gap-14 px-4 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:gap-10"
+        className={cn(
+          "container grid items-center gap-14 px-4 sm:px-6",
+          !isVideoHero && "lg:grid-cols-[1.1fr_1fr] lg:gap-10",
+        )}
       >
         {/* Texto */}
         <motion.div
           variants={container}
           initial="hidden"
           animate={ready ? "show" : "hidden"}
-          className="order-2 text-center lg:order-1 lg:text-left"
+          className={cn(
+            "text-center",
+            isVideoHero
+              ? "mx-auto max-w-4xl"
+              : "order-2 lg:order-1 lg:text-left",
+          )}
         >
           <motion.div variants={item}>
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary backdrop-blur">
@@ -117,7 +126,10 @@ export function Hero({ ready }: { ready: boolean }) {
           </motion.div>
 
           <h1
-            className="font-display mt-6 flex justify-center overflow-hidden text-[22vw] uppercase leading-[0.85] tracking-tight text-foreground sm:text-[9rem] lg:justify-start xl:text-[11rem]"
+            className={cn(
+              "font-display mt-6 flex justify-center overflow-hidden text-[22vw] uppercase leading-[0.85] tracking-tight text-foreground sm:text-[9rem] xl:text-[11rem]",
+              !isVideoHero && "lg:justify-start",
+            )}
             aria-label={ARTIST.name}
           >
             {letters.map((letter, i) => (
@@ -146,28 +158,36 @@ export function Hero({ ready }: { ready: boolean }) {
             ))}
           </h1>
 
-          <motion.p
-            variants={item}
-            className="mt-4 text-2xl font-light text-foreground/90 sm:text-3xl"
-          >
-            <span className="font-script text-4xl text-rose-400 sm:text-5xl">
-              {LATEST_RELEASE.title}
-            </span>
-            <span className="ml-3 align-middle text-xs uppercase tracking-[0.3em] text-muted-foreground">
-              {LATEST_RELEASE.producer}
-            </span>
-          </motion.p>
+          {!isVideoHero && LATEST_RELEASE.title && (
+            <motion.p
+              variants={item}
+              className="mt-4 text-2xl font-light text-foreground/90 sm:text-3xl"
+            >
+              <span className="font-script text-4xl text-rose-400 sm:text-5xl">
+                {LATEST_RELEASE.title}
+              </span>
+              <span className="ml-3 align-middle text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                {LATEST_RELEASE.producer}
+              </span>
+            </motion.p>
+          )}
 
           <motion.p
             variants={item}
-            className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg lg:mx-0"
+            className={cn(
+              "mx-auto mt-5 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg",
+              isVideoHero ? "text-white/85" : "lg:mx-0",
+            )}
           >
             {ARTIST.bio}
           </motion.p>
 
           <motion.div
             variants={item}
-            className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center lg:justify-start"
+            className={cn(
+              "mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center",
+              !isVideoHero && "lg:justify-start",
+            )}
           >
             <a
               href={LATEST_RELEASE.youtubeUrl}
@@ -200,23 +220,41 @@ export function Hero({ ready }: { ready: boolean }) {
           </motion.div>
         </motion.div>
 
-        {/* Portada */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 40 }}
-          animate={ready ? { opacity: 1, scale: 1, y: 0 } : {}}
-          transition={{ duration: 1.2, delay: 0.25, ease: EASE_OUT }}
-          className="order-1 mx-auto w-full max-w-[18rem] sm:max-w-md lg:order-2 lg:max-w-lg"
-        >
-          {LATEST_RELEASE.mode === "video" && LATEST_RELEASE.video ? (
-            <HeroVideo />
-          ) : (
-            <>
-              <CoverArt />
-              <HeroPlayer />
-            </>
-          )}
-        </motion.div>
+        {/* Portada con reproductor (solo en modo canción) */}
+        {!isVideoHero && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 40 }}
+            animate={ready ? { opacity: 1, scale: 1, y: 0 } : {}}
+            transition={{ duration: 1.2, delay: 0.25, ease: EASE_OUT }}
+            className="order-1 mx-auto w-full max-w-[18rem] sm:max-w-md lg:order-2 lg:max-w-lg"
+          >
+            <CoverArt />
+            <HeroPlayer />
+          </motion.div>
+        )}
       </motion.div>
+
+      {isVideoHero && (
+        <motion.button
+          type="button"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={ready ? { opacity: 1, scale: 1 } : {}}
+          transition={{ delay: 1.2 }}
+          onClick={() => {
+            setMuted((m) => !m);
+            videoRef.current?.play().catch(() => {});
+          }}
+          aria-label={muted ? "Activar sonido del video" : "Silenciar video"}
+          className="tap-press absolute bottom-6 right-6 z-10 flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-4 py-2.5 text-sm font-semibold text-white backdrop-blur transition-colors hover:bg-primary hover:text-primary-foreground"
+        >
+          {muted ? (
+            <VolumeX className="h-4 w-4" />
+          ) : (
+            <Volume2 className="h-4 w-4" />
+          )}
+          {muted ? "Activar sonido" : "Silenciar"}
+        </motion.button>
+      )}
 
       <motion.a
         href="#videos"
@@ -333,54 +371,6 @@ function CoverArt() {
         </motion.div>
       </div>
     </motion.div>
-  );
-}
-
-/**
- * Modo video (se elige en el panel /admin): el video se reproduce en bucle y
- * silenciado (los navegadores no permiten autoplay con sonido); el botón
- * activa el sonido.
- */
-function HeroVideo() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [muted, setMuted] = useState(true);
-
-  return (
-    <div className="group relative overflow-hidden rounded-2xl bg-card shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)] ring-1 ring-white/10">
-      <video
-        ref={videoRef}
-        className="aspect-[4/5] w-full object-cover sm:aspect-square"
-        src={LATEST_RELEASE.video}
-        poster={LATEST_RELEASE.cover}
-        autoPlay
-        loop
-        muted={muted}
-        playsInline
-        preload="metadata"
-      />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-5 pt-16">
-        <p className="font-display text-2xl uppercase tracking-tight text-white">
-          {LATEST_RELEASE.title}
-        </p>
-        {LATEST_RELEASE.producer && (
-          <p className="text-xs uppercase tracking-[0.25em] text-white/70">
-            {LATEST_RELEASE.producer}
-          </p>
-        )}
-      </div>
-      <button
-        type="button"
-        onClick={() => {
-          const video = videoRef.current;
-          setMuted((m) => !m);
-          video?.play().catch(() => {});
-        }}
-        aria-label={muted ? "Activar sonido del video" : "Silenciar video"}
-        className="tap-press absolute bottom-5 right-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105"
-      >
-        {muted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
-      </button>
-    </div>
   );
 }
 

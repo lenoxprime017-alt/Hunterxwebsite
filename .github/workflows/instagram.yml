@@ -1,0 +1,52 @@
+# Descarga automáticamente las imágenes de las publicaciones de Instagram
+# cada vez que se publican cambios en esa sección desde el panel /admin.
+# Guarda las imágenes en el repositorio y Netlify vuelve a publicar la página.
+
+name: Imágenes de Instagram
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - client/content/instagram.json
+  workflow_dispatch: # permite ejecutarlo a mano desde la pestaña Actions
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instagram-images
+  cancel-in-progress: false
+
+jobs:
+  descargar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Descargar imágenes nuevas
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: npm run instagram
+
+      - name: Guardar imágenes en el repositorio
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/instagram client/components/site/instagram.generated.json
+          if git diff --cached --quiet; then
+            echo "No hay imágenes nuevas."
+          else
+            git commit -m "Imágenes de Instagram actualizadas automáticamente"
+            git pull --rebase origin main
+            git push
+          fi
