@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-10-01T01:24:36.006Z",
+  "createdAt": "2026-10-01T01:43:01.088Z",
   "files": {
     "client/content/artist.json": "{\n  \"name\": \"HUNTERX\",\n  \"tagline\": \"Música Urbana Cristiana\",\n  \"bio\": \"Música urbana con propósito. Llevando esperanza y fe a las calles a través de letras que transforman vidas.\",\n  \"footerText\": \"Llevando el mensaje de Cristo a través de la música urbana.\",\n  \"instagramHandle\": \"@hunterxoficial\",\n  \"instagramUrl\": \"https://www.instagram.com/hunterxoficial/\",\n  \"youtubeUrl\": \"https://www.youtube.com/@EHUNTERX\",\n  \"spotifyUrl\": \"https://open.spotify.com/artist/0S8UiJTjzt86hM9wolenDG\",\n  \"siteUrl\": \"https://linktreehunterx.netlify.app/\",\n  \"shareText\": \"¡Descubre la música urbana con propósito de HUNTERX! 🎵✨\"\n}\n",
     "client/content/hero.json": "{\n  \"mode\": \"audio\",\n  \"badge\": \"Nuevo sencillo\",\n  \"youtubeUrl\": \"https://www.youtube.com/watch?v=2b2HiphJnAw\",\n  \"producer\": \"Prod. Latrenzha\",\n  \"audio\": \"/InmensoAmor.mp3\",\n  \"previewSeconds\": 59,\n  \"cover\": \"/InmensoAmor.jpg\",\n  \"title\": \"Inmenso Amor\",\n  \"video\": \"/hunterx.mp4\"\n}\n",
