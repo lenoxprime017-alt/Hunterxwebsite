@@ -282,7 +282,7 @@
   /* ---------- Franja de canciones: pincelada con brocha seca ---------- */
 
   .brush-stroke {
-    height: 220px;
+    height: 270px;
     /* degradado como pintura: más luminoso al centro, naranja hacia los bordes */
     background:
       radial-gradient(ellipse 55% 70% at 50% 50%, #fff36a 0%, #ffe100 28%, transparent 70%),
@@ -299,7 +299,7 @@
   }
   @media (max-width: 639px) {
     .brush-stroke {
-      height: 150px;
+      height: 180px;
     }
   }
   /* Sombra solo en PC (en celular costaría redibujarla con el movimiento) */
@@ -401,6 +401,23 @@
 @keyframes ig-progress {
   to {
     transform: scaleX(1);
+  }
+}
+
+.scroll-wheel {
+  animation: scroll-wheel 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes scroll-wheel {
+  0% {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(12px);
   }
 }
 

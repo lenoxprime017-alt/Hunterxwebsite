@@ -6,7 +6,7 @@ import {
   useTransform,
   type Variants,
 } from "framer-motion";
-import { ArrowDown, Instagram, Play, Volume2, VolumeX } from "lucide-react";
+import { Instagram, Play, Volume2, VolumeX } from "lucide-react";
 import { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useAudioPlayer } from "@/hooks/use-audio-player";
@@ -51,7 +51,7 @@ export function Hero({ ready }: { ready: boolean }) {
     <section
       id="top"
       ref={sectionRef}
-      className="relative flex min-h-[100svh] items-center overflow-hidden pb-16 pt-28 sm:pt-32"
+      className="relative flex min-h-[100svh] items-center overflow-hidden pb-14 pt-28 sm:pb-40 sm:pt-32"
     >
       {/* Fondo: video a pantalla completa (modo video) o portada desenfocada */}
       <motion.div
@@ -94,6 +94,11 @@ export function Hero({ ready }: { ready: boolean }) {
       <div
         aria-hidden
         className="glow-orb glow-orb--blue -right-32 bottom-10 h-[28rem] w-[28rem] animate-drift-slow opacity-40"
+      />
+      {/* Fundido inferior: el fondo del hero se funde con el resto de la página */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-48 bg-gradient-to-b from-transparent via-background/70 to-background sm:h-64"
       />
 
       <motion.div
@@ -262,10 +267,13 @@ export function Hero({ ready }: { ready: boolean }) {
         initial={{ opacity: 0 }}
         animate={ready ? { opacity: 1 } : {}}
         transition={{ delay: 1.4 }}
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground transition-colors hover:text-foreground sm:flex"
+        className="group absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.35em] text-muted-foreground transition-colors hover:text-primary sm:flex"
       >
-        Scroll
-        <ArrowDown className="h-4 w-4 animate-bounce" />
+        {/* Indicador tipo mouse con la rueda animada */}
+        <span className="flex h-10 w-6 justify-center rounded-full border-2 border-current pt-2 transition-colors">
+          <span className="scroll-wheel h-2 w-1 rounded-full bg-current" />
+        </span>
+        Desliza
       </motion.a>
     </section>
   );
