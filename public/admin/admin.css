@@ -361,3 +361,111 @@ label[for^="mode-field"] {
     transform: translateY(12px) scale(0.96);
   }
 }
+
+/* =====================================================================
+   Botón «Restablecer página»
+   ===================================================================== */
+
+.hx-restore-btn {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 9000;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 999px;
+  background: #10131c;
+  color: #f7f3ea;
+  font: 600 13px system-ui, -apple-system, "Segoe UI", sans-serif;
+  box-shadow: 0 14px 30px -12px rgb(0 0 0 / 0.55);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.hx-restore-btn:hover {
+  background: #1a1f2c;
+  transform: translateY(-2px);
+}
+.hx-restore-btn:focus-visible {
+  outline: 3px solid rgb(251 191 36 / 0.5);
+  outline-offset: 2px;
+}
+.hx-restore-btn svg {
+  width: 16px;
+  height: 16px;
+  color: #fbbf24;
+  transition: transform 0.4s ease;
+}
+.hx-restore-btn:hover svg {
+  transform: rotate(-200deg);
+}
+body.hx-login .hx-restore-btn {
+  display: none;
+}
+/* Encima de la barra del modo local */
+.hx-local-banner ~ .hx-restore-btn,
+body:has(.hx-local-banner) .hx-restore-btn {
+  bottom: 52px;
+}
+
+/* Ventana de restablecer */
+.hx-dialog__card--wide {
+  width: min(480px, 100%);
+}
+.hx-dialog__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.hx-restore__list {
+  display: grid;
+  gap: 8px;
+  margin: -6px 0 16px;
+  text-align: left;
+}
+.hx-restore__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 0.03);
+  color: #f7f3ea;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.hx-restore__item:has(input:checked) {
+  border-color: rgb(251 191 36 / 0.5);
+  background: rgb(251 191 36 / 0.08);
+}
+.hx-restore__item input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #fbbf24;
+}
+.hx-restore__note {
+  margin: 0 0 20px;
+  color: #a8a397;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+/* Indicador de progreso */
+.hx-spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 16px;
+  border: 3px solid rgb(251 191 36 / 0.2);
+  border-top-color: #fbbf24;
+  border-radius: 999px;
+  animation: hx-spin 0.8s linear infinite;
+}
+@keyframes hx-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

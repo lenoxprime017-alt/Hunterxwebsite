@@ -20,7 +20,8 @@
     "format.fix": "prettier --write .",
     "typecheck": "tsc",
     "instagram": "node scripts/instagram-thumbs.mjs",
-    "cms": "npx --yes decap-server@3.11.3"
+    "cms": "npx --yes decap-server@3.11.3",
+    "punto-restauracion": "node scripts/restore-point.mjs"
   },
   "dependencies": {
     "express": "^4.18.2",

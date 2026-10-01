@@ -604,6 +604,256 @@
   };
 
   // =====================================================================
+  // Restablecer la página al punto de restauración
+  // =====================================================================
+  //
+  // public/admin/restore-point.json guarda el contenido de la página en el
+  // momento elegido (se crea con `npm run punto-restauracion`). El botón vuelve
+  // a escribir esos archivos en UN SOLO cambio:
+  //   - Sitio real: commit en GitHub con la misma sesión del panel (solo
+  //     funciona para cuentas con permiso de escritura en el repositorio).
+  //   - Modo de prueba local: se escriben los archivos de la PC.
+
+  var SECTION_LABELS = {
+    "client/content/hero.json": "Portada principal",
+    "client/content/videos.json": "Videos de YouTube",
+    "client/content/instagram.json": "Publicaciones de Instagram",
+    "client/content/platforms.json": "Plataformas y redes",
+    "client/content/artist.json": "Datos del artista y textos",
+  };
+
+  function readBackendConfig() {
+    return fetch("/admin/config.yml", { cache: "no-cache" })
+      .then(function (r) {
+        return r.text();
+      })
+      .then(function (text) {
+        var repo = (text.match(/^\s*repo:\s*([\w.-]+\/[\w.-]+)/m) || [])[1];
+        var branch = (text.match(/^\s*branch:\s*([\w./-]+)/m) || [])[1] || "main";
+        if (!repo) throw new Error("No se encontró el repositorio en config.yml");
+        return { repo: repo, branch: branch };
+      });
+  }
+
+  function githubRequest(token, method, url, body) {
+    return fetch("https://api.github.com" + url, {
+      method: method,
+      headers: {
+        Authorization: "Bearer " + token,
+        Accept: "application/vnd.github+json",
+        "Content-Type": "application/json",
+      },
+      body: body ? JSON.stringify(body) : undefined,
+    }).then(function (r) {
+      if (r.status === 401) throw new Error("La sesión de GitHub expiró. Cierra sesión y vuelve a entrar.");
+      if (r.status === 403 || r.status === 404)
+        throw new Error("Tu cuenta de GitHub no tiene permiso para modificar el repositorio de la página.");
+      if (!r.ok) throw new Error("GitHub respondió con un error (" + r.status + "). Inténtalo de nuevo en unos minutos.");
+      return r.json();
+    });
+  }
+
+  /** Un solo commit con todos los archivos (si algo falla, no se cambia nada). */
+  function restoreOnGitHub(files) {
+    var user = JSON.parse(localStorage.getItem("decap-cms-user") || "null");
+    if (!user || !user.token) return Promise.reject(new Error("No hay una sesión de GitHub activa. Vuelve a iniciar sesión."));
+    var token = user.token;
+    return readBackendConfig().then(function (cfg) {
+      var base = "/repos/" + cfg.repo + "/git";
+      var headSha;
+      return githubRequest(token, "GET", base + "/ref/heads/" + cfg.branch)
+        .then(function (ref) {
+          headSha = ref.object.sha;
+          return githubRequest(token, "GET", base + "/commits/" + headSha);
+        })
+        .then(function (commit) {
+          return githubRequest(token, "POST", base + "/trees", {
+            base_tree: commit.tree.sha,
+            tree: Object.keys(files).map(function (path) {
+              return { path: path, mode: "100644", type: "blob", content: files[path] };
+            }),
+          });
+        })
+        .then(function (tree) {
+          return githubRequest(token, "POST", base + "/commits", {
+            message: "Panel: restablece la página al punto de restauración",
+            tree: tree.sha,
+            parents: [headSha],
+          });
+        })
+        .then(function (newCommit) {
+          return githubRequest(token, "PATCH", base + "/refs/heads/" + cfg.branch, { sha: newCommit.sha });
+        });
+    });
+  }
+
+  function restoreLocally(files) {
+    return fetch("http://localhost:8081/api/v1", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "persistEntry",
+        params: {
+          branch: "main",
+          dataFiles: Object.keys(files).map(function (path) {
+            return { slug: path.split("/").pop().replace(".json", ""), path: path, raw: files[path] };
+          }),
+          assets: [],
+          options: { collectionName: "contenido", commitMessage: "Restablecer", useWorkflow: false, status: "draft" },
+        },
+      }),
+    }).then(function (r) {
+      if (!r.ok) throw new Error("No se pudo escribir en la PC. Revisa que esté corriendo «npm run cms».");
+    });
+  }
+
+  function formatDate(iso) {
+    try {
+      return new Date(iso).toLocaleDateString("es", { day: "numeric", month: "long", year: "numeric" });
+    } catch (e) {
+      return "";
+    }
+  }
+
+  /** Ventana para elegir qué secciones restablecer. */
+  function showRestoreDialog(snapshot) {
+    return new Promise(function (resolve) {
+      var paths = Object.keys(snapshot.files);
+      var overlay = document.createElement("div");
+      overlay.className = "hx-dialog";
+      overlay.setAttribute("role", "dialog");
+      overlay.setAttribute("aria-modal", "true");
+      overlay.innerHTML =
+        '<div class="hx-dialog__card hx-dialog__card--wide is-danger">' +
+        '<div class="hx-dialog__icon" aria-hidden="true">↺</div>' +
+        '<h2 class="hx-dialog__title">Restablecer la página</h2>' +
+        '<p class="hx-dialog__body"></p>' +
+        '<div class="hx-restore__list"></div>' +
+        '<p class="hx-restore__note">Los cambios que hiciste en las secciones marcadas se reemplazan. Si te arrepientes, el estado anterior queda guardado en el historial de GitHub.</p>' +
+        '<div class="hx-dialog__actions">' +
+        '<button type="button" class="hx-dialog__btn" data-act="cancel">Cancelar</button>' +
+        '<button type="button" class="hx-dialog__btn hx-dialog__btn--primary" data-act="ok">Restablecer</button>' +
+        "</div></div>";
+      overlay.querySelector(".hx-dialog__body").textContent =
+        "Vuelve a dejar la página como estaba en el punto de restauración" +
+        (snapshot.createdAt ? " del " + formatDate(snapshot.createdAt) : "") +
+        ". Elige qué secciones restablecer:";
+      var list = overlay.querySelector(".hx-restore__list");
+      paths.forEach(function (path) {
+        var label = document.createElement("label");
+        label.className = "hx-restore__item";
+        var box = document.createElement("input");
+        box.type = "checkbox";
+        box.checked = true;
+        box.value = path;
+        var text = document.createElement("span");
+        text.textContent = SECTION_LABELS[path] || path;
+        label.appendChild(box);
+        label.appendChild(text);
+        list.appendChild(label);
+      });
+      var okBtn = overlay.querySelector('[data-act="ok"]');
+      list.addEventListener("change", function () {
+        okBtn.disabled = !list.querySelector("input:checked");
+      });
+
+      function close(result) {
+        document.removeEventListener("keydown", onKey, true);
+        overlay.classList.add("is-leaving");
+        setTimeout(function () {
+          overlay.remove();
+        }, 160);
+        resolve(result);
+      }
+      function onKey(e) {
+        if (e.key === "Escape") close(null);
+      }
+      overlay.addEventListener("click", function (e) {
+        var act = e.target.getAttribute && e.target.getAttribute("data-act");
+        if (act === "ok") {
+          close(
+            Array.prototype.map.call(list.querySelectorAll("input:checked"), function (b) {
+              return b.value;
+            }),
+          );
+        } else if (act === "cancel" || e.target === overlay) close(null);
+      });
+      document.addEventListener("keydown", onKey, true);
+      document.body.appendChild(overlay);
+      setTimeout(function () {
+        overlay.querySelector('[data-act="cancel"]').focus();
+      }, 30);
+    });
+  }
+
+  function showProgress(text) {
+    var overlay = document.createElement("div");
+    overlay.className = "hx-dialog";
+    overlay.innerHTML =
+      '<div class="hx-dialog__card"><div class="hx-spinner" aria-hidden="true"></div>' +
+      '<h2 class="hx-dialog__title"></h2><p class="hx-dialog__body">No cierres esta página.</p></div>';
+    overlay.querySelector(".hx-dialog__title").textContent = text;
+    document.body.appendChild(overlay);
+    return function () {
+      overlay.remove();
+    };
+  }
+
+  function startRestore() {
+    fetch("/admin/restore-point.json", { cache: "no-cache" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("No se encontró el punto de restauración.");
+        return r.json();
+      })
+      .then(function (snapshot) {
+        return showRestoreDialog(snapshot).then(function (selected) {
+          if (!selected || !selected.length) return;
+          var files = {};
+          selected.forEach(function (p) {
+            files[p] = snapshot.files[p];
+          });
+          var hide = showProgress("Restableciendo la página…");
+          return (localMode ? restoreLocally(files) : restoreOnGitHub(files))
+            .then(function () {
+              hide();
+              return showDialog({
+                title: "Página restablecida",
+                body: localMode
+                  ? "Se restablecieron los archivos de esta PC. El panel se recargará para mostrar el contenido."
+                  : "Listo. La página publicada vuelve a ese estado en 1-2 minutos. El panel se recargará para mostrar el contenido restablecido.",
+                confirm: "Entendido",
+              }).then(function () {
+                location.hash = "#/collections/contenido";
+                location.reload();
+              });
+            })
+            .catch(function (err) {
+              hide();
+              throw err;
+            });
+        });
+      })
+      .catch(function (err) {
+        showDialog({ title: "No se pudo restablecer", body: err.message + " No se cambió nada en la página.", confirm: "Entendido", danger: true });
+      });
+  }
+
+  /** Botón fijo en el panel (no aparece en la pantalla de inicio de sesión). */
+  function mountRestoreButton() {
+    if (document.querySelector(".hx-restore-btn")) return;
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "hx-restore-btn";
+    button.innerHTML =
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 4v5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      "<span>Restablecer página</span>";
+    button.title = "Volver al punto de restauración";
+    button.addEventListener("click", startRestore);
+    document.body.appendChild(button);
+  }
+  mountRestoreButton();
+
+  // =====================================================================
   // Traducciones que faltan en el español de Decap
   // =====================================================================
 
