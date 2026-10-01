@@ -59,7 +59,10 @@ Abre `https://linktreehunterx.netlify.app/admin` y pulsa **Iniciar sesión con G
   - Se usa la descargada con `npm run instagram` desde la PC, que necesita Chrome instalado.
   - Si tampoco hay imagen descargada, se muestra una tarjeta con el logo de Instagram.
 - **Archivos pesados:** usa MP3 de menos de 10 MB y MP4 comprimido de menos de 25 MB. Los archivos grandes pueden fallar al subir y hacen más lenta la página.
-- **Probar el panel en la PC sin publicar nada:**
+- **Vista previa:** a la derecha de cada sección se ve en vivo cómo quedará, con el diseño real de la página. Los avisos en rojo indican algo que falta o un enlace no válido.
+- **Probar el panel en la PC sin publicar nada (modo de prueba local):**
   1. Ejecuta `npm run dev` en una terminal y `npm run cms` en otra.
-  2. Abre `http://localhost:8080/admin` y pulsa **Iniciar sesión**. En la PC no pide cuenta.
-  3. Los cambios se guardan en los archivos locales; hay que hacer commit para publicarlos.
+  2. Abre `http://localhost:8080/admin/?modo=local`. Aparece una barra naranja abajo que lo indica.
+  3. Los cambios se guardan en los archivos de la PC, sin publicarse. Para publicarlos hay que hacer commit y push.
+
+  Sin `?modo=local`, el panel pide iniciar sesión con GitHub **también en la PC**, y lo que guardes ahí sí se publica. El modo local solo funciona en `localhost`: en la página publicada no se puede activar.

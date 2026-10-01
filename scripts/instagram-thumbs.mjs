@@ -110,6 +110,8 @@ async function main() {
 
   await browser.close();
   await writeFile(manifestFile, JSON.stringify(manifest, null, 2) + "\n");
+  // Copia pública para las vistas previas del panel /admin
+  await writeFile(path.join(outDir, "index.json"), JSON.stringify(manifest, null, 2) + "\n");
   console.log(`\nListo: ${manifest.length}/${codes.length} publicaciones guardadas en public/instagram/`);
 }
 

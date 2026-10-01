@@ -1,0 +1,130 @@
+/* Estilos propios del panel (fuera de la vista previa). */
+
+/* Caja de guía al inicio de cada sección */
+.hx-guide {
+  padding: 18px 20px;
+  border: 1px solid #f5d77a;
+  border-left: 4px solid #d99a06;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #fffbeb, #fff7dc);
+  color: #3f3a2c;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.hx-guide__text {
+  margin: 0 0 10px;
+  font-weight: 600;
+}
+.hx-guide__steps {
+  margin: 0;
+  padding-left: 20px;
+}
+.hx-guide__steps li {
+  margin: 4px 0;
+}
+.hx-guide__foot {
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid #f1dfa3;
+  color: #6b6249;
+  font-size: 13px;
+}
+
+/* Aviso del modo de prueba local */
+.hx-local-banner {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 99999;
+  padding: 8px 16px;
+  background: #b45309;
+  color: #fff;
+  font: 600 13px/1.4 system-ui, sans-serif;
+  text-align: center;
+}
+
+/* La caja de guía ya tiene su título: se oculta la etiqueta del campo
+   (Decap le agrega "(opcional)" automáticamente) */
+label[for^="_guia-field"] {
+  display: none !important;
+}
+.hx-guide__title {
+  margin: 0 0 6px;
+  color: #92400e;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ---------- Pantalla de inicio de sesión con la marca ---------- */
+
+body.hx-login {
+  background:
+    radial-gradient(60% 50% at 50% 0%, rgb(251 191 36 / 0.16), transparent 70%),
+    radial-gradient(50% 40% at 100% 100%, rgb(59 130 246 / 0.12), transparent 70%),
+    #090b12 !important;
+}
+body.hx-login #nc-root,
+body.hx-login #nc-root > div,
+body.hx-login section {
+  background: transparent !important;
+}
+body.hx-login section img {
+  border-radius: 22px;
+  box-shadow: 0 25px 60px -20px rgb(251 191 36 / 0.45);
+}
+.hx-login-copy {
+  max-width: 420px;
+  margin: 8px auto 28px;
+  color: #f7f3ea;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  text-align: center;
+}
+.hx-login-copy__eyebrow {
+  margin: 0;
+  color: #fbbf24;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+}
+.hx-login-copy h1 {
+  margin: 8px 0 10px;
+  font-size: 26px;
+  font-weight: 700;
+}
+.hx-login-copy p {
+  margin: 0 0 8px;
+  color: #c9c3b6;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.hx-login-copy .hx-login-copy__note {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 0.04);
+  color: #a8a397;
+  font-size: 12.5px;
+}
+body.hx-login section button {
+  padding: 12px 22px !important;
+  border-radius: 999px !important;
+  background: #fbbf24 !important;
+  color: #111 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 15px 35px -12px rgb(251 191 36 / 0.7) !important;
+}
+body.hx-login section button svg {
+  fill: #111;
+}
+body.hx-login section a {
+  color: #a8a397 !important;
+}
+.hx-login-copy h1 {
+  color: #f7f3ea !important;
+}
+body.hx-login a[href*="decapcms"] {
+  opacity: 0.5;
+  filter: grayscale(1) brightness(2.2);
+}

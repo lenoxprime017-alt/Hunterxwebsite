@@ -15,14 +15,16 @@
     -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; media-src 'self' data: blob: https:; connect-src 'self' https://api.github.com https://api.netlify.com https://raw.githubusercontent.com https://*.githubusercontent.com http://localhost:8081; frame-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'"
+      content="default-src 'self'; script-src 'self' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' data: blob: https:; connect-src 'self' https://api.github.com https://api.netlify.com https://raw.githubusercontent.com https://*.githubusercontent.com http://localhost:8081; frame-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'"
     />
     <title>Panel · HUNTERX</title>
     <!-- Ruta absoluta: funciona entrando por /admin o /admin/ -->
     <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
     <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+    <link rel="stylesheet" href="/admin/admin.css" />
   </head>
   <body>
+    <script src="/admin/boot.js"></script>
     <!-- Decap CMS fijado a 3.16.3 con verificación de integridad (SRI):
          si el archivo del CDN fuera alterado, el navegador no lo ejecuta. -->
     <script
@@ -30,5 +32,7 @@
       integrity="sha384-A/Gdn928CNLufmnGWGs9RM4Q9o8bSNLeJERqBFrBjwzL7FRpoLT3MPF8Tl0+Wd2p"
       crossorigin="anonymous"
     ></script>
+    <!-- Vistas previas, guías y arranque del panel -->
+    <script src="/admin/admin.js"></script>
   </body>
 </html>

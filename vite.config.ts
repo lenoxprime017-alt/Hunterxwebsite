@@ -29,8 +29,9 @@ function adminPanelPlugin(): Plugin {
     apply: "serve",
     configureServer(server) {
       server.middlewares.use((req, _res, next) => {
-        if (req.url === "/admin" || req.url === "/admin/") {
-          req.url = "/admin/index.html";
+        const [pathname, query] = (req.url ?? "").split("?");
+        if (pathname === "/admin" || pathname === "/admin/") {
+          req.url = "/admin/index.html" + (query ? `?${query}` : "");
         }
         next();
       });

@@ -4,8 +4,12 @@
 # client/content/*.json en GitHub y Netlify vuelve a publicar la página
 # sola (1-2 minutos). No hay base de datos.
 #
-# Seguridad: el inicio de sesión lo hace GitHub. Solo las cuentas con
-# permiso de escritura en el repositorio pueden guardar cambios.
+# Seguridad: el inicio de sesión lo hace GitHub (siempre, también en la PC).
+# Solo las cuentas con permiso de escritura en el repositorio pueden guardar.
+# El modo de prueba local sin cuenta solo se activa a propósito: ver
+# public/admin/admin.js y ADMIN.md.
+#
+# Las vistas previas y las guías de cada sección están en public/admin/admin.js.
 
 backend:
   name: github
@@ -20,10 +24,6 @@ backend:
     uploadMedia: "Panel: sube archivo «{{path}}»"
     deleteMedia: "Panel: elimina archivo «{{path}}»"
 
-# Solo se usa en tu PC (localhost) con `npm run cms`: permite probar el
-# panel sin iniciar sesión. En la página publicada se ignora.
-local_backend: true
-
 locale: es
 site_url: https://linktreehunterx.netlify.app
 display_url: https://linktreehunterx.netlify.app
@@ -33,55 +33,67 @@ logo_url: /apple-touch-icon.png?v=2
 media_folder: public/uploads
 public_folder: /uploads
 
-editor:
-  preview: false
-
 collections:
   - name: contenido
     label: Contenido de la página
     label_singular: Sección
-    description: Todo lo que se ve en la página. Al guardar, la página se actualiza en 1-2 minutos.
-    editor:
-      preview: false
+    description: >-
+      Elige la sección que quieres cambiar. Están en el mismo orden en que
+      aparecen en la página. A la derecha verás una vista previa en vivo, y al
+      pulsar Publicar la página se actualiza en 1-2 minutos.
     format: json
     files:
       # ------------------------------------------------------------------
       - name: hero
-        label: "🎵 Portada principal (lo primero que se ve)"
+        label: "1 · Portada principal"
         file: client/content/hero.json
+        description: Lo primero que ve el visitante al entrar.
         fields:
-          - label: ¿Qué se muestra?
+          - label: Cómo usar esta sección
+            name: _guia
+            widget: guia
+            required: false
+            text: >-
+              Es la parte superior de la página. Puedes destacar una canción
+              (portada + reproductor) o un video.
+            steps:
+              - Elige qué mostrar en «Tipo de portada».
+              - Escribe el nombre de la canción y los créditos.
+              - Sube la portada (cuadrada, 1080×1080).
+              - Sube la canción en MP3 o el video en MP4, según el tipo elegido.
+              - Revisa la vista previa de la derecha y pulsa Publicar.
+          - label: Tipo de portada
             name: mode
             widget: select
             default: audio
             options:
-              - { label: "Canción con su portada (con reproductor)", value: audio }
+              - { label: "Canción con portada y reproductor", value: audio }
               - { label: "Video", value: video }
-            hint: Con "Canción" se ve la portada y suena la canción. Con "Video" se reproduce el video en lugar de la portada.
-          - label: Etiqueta
+            hint: Con «Canción» se ve la portada y suena la canción en bucle. Con «Video» se reproduce el video en lugar de la portada.
+          - label: Etiqueta superior
             name: badge
             widget: string
             default: Nuevo sencillo
-            hint: "Texto pequeño arriba del nombre. Ej: Nuevo sencillo, Ya disponible."
+            hint: "Texto corto que aparece sobre el nombre del artista. Ejemplos: Nuevo sencillo, Ya disponible, Estreno."
           - label: Nombre de la canción
             name: title
             widget: string
-          - label: Productor / créditos
+          - label: Productor o créditos
             name: producer
             widget: string
             required: false
-            hint: "Ej: Prod. Latrenzha"
+            hint: "Ejemplo: Prod. Latrenzha"
           - label: Portada
             name: cover
             widget: image
             choose_url: false
-            hint: Imagen cuadrada (ideal 1080×1080, JPG). Se usa también de fondo y en el reproductor.
+            hint: Imagen cuadrada en JPG, ideal 1080×1080. También se usa como fondo, en el reproductor y al compartir.
           - label: Canción (MP3)
             name: audio
             widget: file
             choose_url: false
             required: false
-            hint: Solo para el modo "Canción". Archivo MP3 de menos de 10 MB.
+            hint: Solo para el tipo «Canción». MP3 de menos de 10 MB.
           - label: Segundos que suena en bucle
             name: previewSeconds
             widget: number
@@ -89,23 +101,38 @@ collections:
             min: 10
             max: 600
             default: 59
-            hint: La canción vuelve a empezar al llegar a este segundo.
+            hint: Al llegar a este segundo, la canción vuelve a empezar. Útil para mostrar solo un fragmento.
           - label: Video (MP4)
             name: video
             widget: file
             choose_url: false
             required: false
-            hint: Solo para el modo "Video". MP4 comprimido de menos de 25 MB (los archivos grandes pueden fallar al subir).
-          - label: Link del botón "Ver en YouTube"
+            hint: Solo para el tipo «Video». MP4 comprimido de menos de 25 MB. Se reproduce sin sonido hasta que el visitante lo activa.
+          - label: Enlace del botón «Ver en YouTube»
             name: youtubeUrl
             widget: string
-            pattern: ['^https://(www\.|m\.|music\.)?(youtube\.com|youtu\.be)/.+', "Debe ser un link de YouTube que empiece con https://"]
+            hint: Enlace al que lleva el botón principal. Normalmente, el video de esta canción.
+            pattern: ['^https://(www\.|m\.|music\.)?(youtube\.com|youtu\.be)/.+', "Debe ser un enlace de YouTube que empiece con https://"]
 
       # ------------------------------------------------------------------
       - name: videos
-        label: "▶️ Videos de YouTube"
+        label: "2 · Videos de YouTube"
         file: client/content/videos.json
+        description: Los videos de la sección «Últimos videos».
         fields:
+          - label: Cómo usar esta sección
+            name: _guia
+            widget: guia
+            required: false
+            text: >-
+              Los videos aparecen como tarjetas apiladas. El primero de la
+              lista es el destacado.
+            steps:
+              - En YouTube, abre el video y pulsa Compartir → Copiar.
+              - Pulsa «Agregar video» y pega el enlace.
+              - Escribe el nombre de la canción, los artistas y el tipo.
+              - Arrastra los videos (icono ═) para cambiar el orden.
+              - La miniatura de la vista previa confirma que el enlace es correcto.
           - label: Videos
             name: videos
             widget: list
@@ -113,13 +140,13 @@ collections:
             summary: "{{fields.title}} · {{fields.kind}}"
             min: 1
             max: 12
-            hint: El primero de la lista es el destacado. Arrastra para cambiar el orden.
+            hint: Mínimo 1 y máximo 12 videos.
             fields:
-              - label: Link del video
+              - label: Enlace del video
                 name: url
                 widget: string
-                hint: "Copia el link desde YouTube (Compartir → Copiar). Ej: https://www.youtube.com/watch?v=… o https://youtu.be/…"
-                pattern: ['^https://(www\.|m\.|music\.)?(youtube\.com/(watch\?.*v=|shorts/|live/)|youtu\.be/)[\w-]{11}', "Pega un link de video de YouTube válido"]
+                hint: "Formatos válidos: https://www.youtube.com/watch?v=… o https://youtu.be/…"
+                pattern: ['^https://(www\.|m\.|music\.)?(youtube\.com/(watch\?.*v=|shorts/|live/)|youtu\.be/)[\w-]{11}', "Pega un enlace de video de YouTube válido"]
               - label: Nombre de la canción
                 name: title
                 widget: string
@@ -127,8 +154,8 @@ collections:
                 name: artists
                 widget: string
                 default: HUNTERX
-                hint: "Ej: HUNTERX ft. Julia Javier"
-              - label: Tipo
+                hint: "Ejemplo: HUNTERX ft. Julia Javier"
+              - label: Tipo de video
                 name: kind
                 widget: select
                 default: Video Oficial
@@ -136,9 +163,23 @@ collections:
 
       # ------------------------------------------------------------------
       - name: instagram
-        label: "📸 Publicaciones de Instagram"
+        label: "3 · Publicaciones de Instagram"
         file: client/content/instagram.json
+        description: El carrusel automático de Instagram.
         fields:
+          - label: Cómo usar esta sección
+            name: _guia
+            widget: guia
+            required: false
+            text: >-
+              Las publicaciones se muestran en un carrusel que avanza solo.
+              Todas se recortan al mismo tamaño (vertical 4:5).
+            steps:
+              - En Instagram, abre la publicación y pulsa ••• → Copiar enlace.
+              - Pulsa «Agregar publicación» y pega el enlace.
+              - Sube la imagen de la publicación (vertical, ideal 1080×1350).
+              - Si la publicó otra cuenta (colaboración), escribe su usuario.
+              - Indica si es Reel, Carrusel o Foto para mostrar la etiqueta correcta.
           - label: Publicaciones
             name: posts
             widget: list
@@ -146,25 +187,25 @@ collections:
             summary: "{{fields.url}}"
             min: 1
             max: 12
-            hint: Se muestran en el carrusel en este orden.
+            hint: Se muestran en este orden. Mínimo 1 y máximo 12.
             fields:
-              - label: Link de la publicación
+              - label: Enlace de la publicación
                 name: url
                 widget: string
-                hint: "En Instagram: ••• → Copiar enlace. Ej: https://www.instagram.com/p/…"
-                pattern: ['^https://(www\.)?instagram\.com/([\w.]+/)?(p|reel|reels|tv)/[\w-]{5,40}', "Pega un link de publicación de Instagram válido"]
+                hint: "Ejemplo: https://www.instagram.com/p/… o https://www.instagram.com/reel/…"
+                pattern: ['^https://(www\.)?instagram\.com/([\w.]+/)?(p|reel|reels|tv)/[\w-]{5,40}', "Pega un enlace de publicación de Instagram válido"]
               - label: Imagen de la publicación
                 name: image
                 widget: image
                 choose_url: false
                 required: false
-                hint: Sube una captura o la imagen del post (vertical, ideal 1080×1350). Si la dejas vacía se usa la descargada con `npm run instagram`; si no hay ninguna, se muestra una tarjeta con el logo de Instagram.
+                hint: Recomendado. Si la dejas vacía se usa la imagen descargada con «npm run instagram»; si no existe, se muestra una tarjeta con el logo de Instagram.
               - label: Usuario que publicó
                 name: username
                 widget: string
                 required: false
-                hint: "Sin @. Déjalo vacío si es hunterxoficial."
-              - label: Tipo
+                hint: Sin @. Déjalo vacío si la publicó hunterxoficial.
+              - label: Tipo de publicación
                 name: type
                 widget: select
                 required: false
@@ -175,9 +216,23 @@ collections:
 
       # ------------------------------------------------------------------
       - name: platforms
-        label: "🎧 Plataformas de música y redes"
+        label: "4 · Plataformas y redes"
         file: client/content/platforms.json
+        description: Los botones de la sección «Conecta conmigo».
         fields:
+          - label: Cómo usar esta sección
+            name: _guia
+            widget: guia
+            required: false
+            text: >-
+              Cada plataforma es un botón con su ícono, nombre y una frase
+              corta. Al pasar el cursor se ilumina con el color de la marca.
+            steps:
+              - Pulsa «Agregar plataforma» o abre una existente.
+              - Pega el enlace a tu perfil de artista (debe empezar con https://).
+              - Sube el ícono (PNG cuadrado con fondo transparente).
+              - Elige el color de la marca.
+              - Arrastra para cambiar el orden.
           - label: Plataformas
             name: platforms
             widget: list
@@ -186,39 +241,51 @@ collections:
             max: 20
             fields:
               - { label: Nombre, name: name, widget: string }
-              - { label: Descripción, name: description, widget: string, hint: "Ej: Escucha mi música completa" }
-              - label: Link
+              - { label: Frase corta, name: description, widget: string, hint: "Ejemplo: Escucha mi música completa" }
+              - label: Enlace
                 name: url
                 widget: string
-                pattern: ['^https://.+', "El link debe empezar con https://"]
-              - { label: Ícono, name: icon, widget: image, choose_url: false, hint: "PNG cuadrado con fondo transparente (192×192)" }
-              - { label: Color de la marca, name: color, widget: color, default: "#fbbf24", hint: Se usa para el brillo al pasar el cursor. }
+                pattern: ['^https://.+', "El enlace debe empezar con https://"]
+              - { label: Ícono, name: icon, widget: image, choose_url: false, hint: "PNG cuadrado con fondo transparente, ideal 192×192." }
+              - { label: Color de la marca, name: color, widget: color, default: "#fbbf24", hint: Color del brillo al pasar el cursor. }
 
       # ------------------------------------------------------------------
       - name: artist
-        label: "👤 Datos del artista y textos"
+        label: "5 · Datos del artista y textos"
         file: client/content/artist.json
+        description: Nombre, descripción, enlaces principales y textos generales.
         fields:
+          - label: Cómo usar esta sección
+            name: _guia
+            widget: guia
+            required: false
+            text: >-
+              Estos datos se usan en varias partes de la página: la portada
+              principal, el pie de página, el menú y el botón Compartir.
+            steps:
+              - Revisa que el nombre y la frase corta estén bien escritos.
+              - La descripción aparece debajo del nombre en la portada principal.
+              - Los enlaces de Instagram, YouTube y Spotify se usan en los botones principales.
           - { label: Nombre artístico, name: name, widget: string }
-          - { label: Frase corta, name: tagline, widget: string, hint: "Ej: Música Urbana Cristiana" }
-          - { label: Descripción (hero), name: bio, widget: text }
+          - { label: Frase corta, name: tagline, widget: string, hint: "Aparece en la pantalla de carga. Ejemplo: Música Urbana Cristiana" }
+          - { label: Descripción, name: bio, widget: text, hint: "Una o dos frases. Se muestra debajo del nombre en la portada principal." }
           - { label: Texto del pie de página, name: footerText, widget: string }
-          - { label: Usuario de Instagram, name: instagramHandle, widget: string, hint: "Ej: @hunterxoficial" }
-          - label: Link de Instagram
+          - { label: Usuario de Instagram, name: instagramHandle, widget: string, hint: "Con @. Ejemplo: @hunterxoficial" }
+          - label: Enlace de Instagram
             name: instagramUrl
             widget: string
-            pattern: ['^https://(www\.)?instagram\.com/.+', "Debe ser un link de Instagram"]
-          - label: Link del canal de YouTube
+            pattern: ['^https://(www\.)?instagram\.com/.+', "Debe ser un enlace de Instagram"]
+          - label: Enlace del canal de YouTube
             name: youtubeUrl
             widget: string
-            pattern: ['^https://(www\.)?youtube\.com/.+', "Debe ser un link de YouTube"]
-          - label: Link de Spotify
+            pattern: ['^https://(www\.)?youtube\.com/.+', "Debe ser un enlace de YouTube"]
+          - label: Enlace de Spotify
             name: spotifyUrl
             widget: string
-            pattern: ['^https://open\.spotify\.com/.+', "Debe ser un link de Spotify"]
+            pattern: ['^https://open\.spotify\.com/.+', "Debe ser un enlace de Spotify"]
           - label: Dirección de la página
             name: siteUrl
             widget: string
-            hint: Se usa en el botón Compartir.
+            hint: El enlace que se copia al pulsar Compartir.
             pattern: ['^https://.+', "Debe empezar con https://"]
-          - { label: Mensaje al compartir, name: shareText, widget: string }
+          - { label: Mensaje al compartir, name: shareText, widget: string, hint: Texto que acompaña al enlace al compartir por WhatsApp, X, etc. }
